@@ -1,10 +1,12 @@
 using BookingServices.Infrastructure;
+using BookingServices.Persistance;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddInfrastructure(builder.Configuration);
+builder.Services.AddPersistance(builder.Configuration);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -16,26 +18,29 @@ builder.Services.AddCors(options => options.AddPolicy(name: "MyAllowSpecificOrig
        builder.AllowAnyOrigin(); // stosujemy, jeœli chcemy upubliczniæ API
    }));
 
-builder.Services.AddSwaggerGen(c => c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
+builder.Services.AddSwaggerGen(c =>
 {
-    Title = "TestWebApplication",
-    Version = "v1",
-    Description = "My first Web API",
-    TermsOfService = new Uri("https://github.com/iendrus/BookingServices"),
-    Contact = new Microsoft.OpenApi.Models.OpenApiContact
+    c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
     {
-        Name = "Andrzej",
-        Email = "iendrus@gmail.com",
-        Url = new Uri("https://github.com/iendrus/BookingServices")
-    },
-    License = new Microsoft.OpenApi.Models.OpenApiLicense
-    {
-        Name = "Used License",
-        Url = new Uri("https://github.com/iendrus/BookingServices")
-    }
-}));
-
-builder.Services.AddHealthChecks();
+        Title = "BookingServices",
+        Version = "v1",
+        Description = "The API is used to book various services with one or more providers.",
+        TermsOfService = new Uri("https://github.com/iendrus/BookingServices"),
+        Contact = new Microsoft.OpenApi.Models.OpenApiContact
+        {
+            Name = "Andrzej",
+            Email = "iendrus@gmail.com",
+            Url = new Uri("https://github.com/iendrus/BookingServices")
+        },
+        License = new Microsoft.OpenApi.Models.OpenApiLicense
+        {
+            Name = "Used License",
+            Url = new Uri("https://github.com/iendrus/BookingServices")
+        }
+    });
+    var filePath = Path.Combine(AppContext.BaseDirectory, "BookingServices.API.xml");
+    c.IncludeXmlComments(filePath);
+});
 
 var app = builder.Build();
 
@@ -48,7 +53,7 @@ if (app.Environment.IsDevelopment())
     app.UseDeveloperExceptionPage();
 }
 
-app.UseHealthChecks("/hc");
+//app.UseHealthChecks("/hc");
 
 app.UseHttpsRedirection();
 

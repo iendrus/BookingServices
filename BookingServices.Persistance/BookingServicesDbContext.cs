@@ -1,8 +1,10 @@
 ﻿using BookingServices.Domain.Common;
+using BookingServices.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,9 +19,22 @@ namespace BookingServices.Persistance
 
         }
 
+
+        public DbSet <Service> Services { get; set; }
+        public DbSet <PersonPerforming> PersonPerformings { get; set; }
+        public DbSet <ServiceProvider> ServiceProviders { get; set; }
+
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
+
         {
+            modelBuilder.Entity<PersonPerforming>().OwnsOne(p => p.FullName);
+            modelBuilder.Entity<ServiceProvider>().OwnsOne(p => p.Email);
+            modelBuilder.Entity<ServiceProvider>().OwnsOne(p => p.ContactPerson);
+            modelBuilder.Entity<PersonPerforming>().OwnsOne(p => p.Email);
+            //modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }
+
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {

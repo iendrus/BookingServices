@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BookingServices.APII.Controllers
 {
+
     [ApiController]
     [Route("[controller]")]
     [EnableCors("MyAllowSpecificOrigins")]
@@ -20,7 +21,9 @@ namespace BookingServices.APII.Controllers
         {
             _logger = logger;
         }
-
+        /// <summary>
+        /// This is WeatherForecast Controller
+        /// </summary>
         [HttpGet(Name = "GetWeatherForecast")]
         public IEnumerable<WeatherForecast> Get()
         {

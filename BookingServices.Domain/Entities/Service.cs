@@ -9,10 +9,10 @@ namespace BookingServices.Domain.Entities
 {
     public class Service : AuditableEntity
     {
-
         public string Name { get; set; }
         public string Description { get; set; }
         public int ServicePorviderId { get; set; }
-        public ServiceProvider serviceProvider { get; set; }
+        public ServiceProvider ServiceProvider { get; set; }
+        public ICollection<PersonPerforming>  PersonPerformings { get; set; }
     }
 }

@@ -1,11 +1,6 @@
 ﻿using BookingServices.Domain.Common;
 using BookingServices.Domain.Exceptions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Metadata;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace BookingServices.Domain.ValueObjects
 {
@@ -33,7 +28,8 @@ namespace BookingServices.Domain.ValueObjects
 
         protected override IEnumerable<object> GetEqualityComponents()
         {
-            throw new NotImplementedException();
+            yield return UserName;
+            yield return DomainName;
         }
     }
 }
