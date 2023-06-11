@@ -1,13 +1,7 @@
 ﻿using BookingServices.Domain.Common;
 using BookingServices.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Reflection.Metadata.Ecma335;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace BookingServices.Persistance
 {
@@ -20,9 +14,12 @@ namespace BookingServices.Persistance
         }
 
 
-        public DbSet <Service> Services { get; set; }
-        public DbSet <PersonPerforming> PersonPerformings { get; set; }
-        public DbSet <ServiceProvider> ServiceProviders { get; set; }
+        public DbSet<Service> Services { get; set; }
+        public DbSet<PersonPerforming> PersonPerformings { get; set; }
+        public DbSet<ServiceProvider> ServiceProviders { get; set; }
+        public DbSet<ServicePerformance> ServicePerformances { get; set; }
+        public DbSet<Industry> Industries { get; set; }
+        public DbSet<ServiceRecipient> ServiceRecipients { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -32,6 +29,8 @@ namespace BookingServices.Persistance
             modelBuilder.Entity<ServiceProvider>().OwnsOne(p => p.Email);
             modelBuilder.Entity<ServiceProvider>().OwnsOne(p => p.ContactPerson);
             modelBuilder.Entity<PersonPerforming>().OwnsOne(p => p.Email);
+            modelBuilder.Entity<ServiceRecipient>().OwnsOne(p => p.FullName);
+            modelBuilder.Entity<ServiceRecipient>().OwnsOne(p => p.Email);
             //modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }
 
