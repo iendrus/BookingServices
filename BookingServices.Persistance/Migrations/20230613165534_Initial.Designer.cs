@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookingServices.Persistance.Migrations
 {
     [DbContext(typeof(BookingServicesDbContext))]
-    [Migration("20230611163417_initial")]
-    partial class initial
+    [Migration("20230613165534_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -268,7 +268,7 @@ namespace BookingServices.Persistance.Migrations
                     b.ToTable("ServiceRecipients");
                 });
 
-            modelBuilder.Entity("PersonPerformingService", b =>
+            modelBuilder.Entity("ServicePersonPerforming", b =>
                 {
                     b.Property<int>("PersonPerformingsId")
                         .HasColumnType("int");
@@ -280,7 +280,7 @@ namespace BookingServices.Persistance.Migrations
 
                     b.HasIndex("ServicesId");
 
-                    b.ToTable("PersonPerformingService");
+                    b.ToTable("ServicePersonPerforming");
                 });
 
             modelBuilder.Entity("BookingServices.Domain.Entities.PersonPerforming", b =>
@@ -364,7 +364,7 @@ namespace BookingServices.Persistance.Migrations
                     b.HasOne("BookingServices.Domain.Entities.Service", "Service")
                         .WithMany("ServicePerformances")
                         .HasForeignKey("ServiceId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("BookingServices.Domain.Entities.ServiceRecipient", "ServiceRecipient")
@@ -490,18 +490,18 @@ namespace BookingServices.Persistance.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("PersonPerformingService", b =>
+            modelBuilder.Entity("ServicePersonPerforming", b =>
                 {
                     b.HasOne("BookingServices.Domain.Entities.PersonPerforming", null)
                         .WithMany()
                         .HasForeignKey("PersonPerformingsId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("BookingServices.Domain.Entities.Service", null)
                         .WithMany()
                         .HasForeignKey("ServicesId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 

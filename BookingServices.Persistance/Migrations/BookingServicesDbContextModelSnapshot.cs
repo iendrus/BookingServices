@@ -54,7 +54,7 @@ namespace BookingServices.Persistance.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Industries");
+                    b.ToTable("Industries", (string)null);
                 });
 
             modelBuilder.Entity("BookingServices.Domain.Entities.PersonPerforming", b =>
@@ -90,7 +90,7 @@ namespace BookingServices.Persistance.Migrations
 
                     b.HasIndex("ServiceProviderId");
 
-                    b.ToTable("PersonPerformings");
+                    b.ToTable("PersonPerformings", (string)null);
                 });
 
             modelBuilder.Entity("BookingServices.Domain.Entities.Service", b =>
@@ -133,7 +133,7 @@ namespace BookingServices.Persistance.Migrations
 
                     b.HasIndex("ServiceProviderId");
 
-                    b.ToTable("Services");
+                    b.ToTable("Services", (string)null);
                 });
 
             modelBuilder.Entity("BookingServices.Domain.Entities.ServicePerformance", b =>
@@ -188,7 +188,7 @@ namespace BookingServices.Persistance.Migrations
 
                     b.HasIndex("ServiceRecipientId");
 
-                    b.ToTable("ServicePerformances");
+                    b.ToTable("ServicePerformances", (string)null);
                 });
 
             modelBuilder.Entity("BookingServices.Domain.Entities.ServiceProvider", b =>
@@ -231,7 +231,7 @@ namespace BookingServices.Persistance.Migrations
 
                     b.HasIndex("IndustryId");
 
-                    b.ToTable("ServiceProviders");
+                    b.ToTable("ServiceProviders", (string)null);
                 });
 
             modelBuilder.Entity("BookingServices.Domain.Entities.ServiceRecipient", b =>
@@ -262,10 +262,10 @@ namespace BookingServices.Persistance.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ServiceRecipients");
+                    b.ToTable("ServiceRecipients", (string)null);
                 });
 
-            modelBuilder.Entity("PersonPerformingService", b =>
+            modelBuilder.Entity("ServicePersonPerforming", b =>
                 {
                     b.Property<int>("PersonPerformingsId")
                         .HasColumnType("int");
@@ -277,7 +277,7 @@ namespace BookingServices.Persistance.Migrations
 
                     b.HasIndex("ServicesId");
 
-                    b.ToTable("PersonPerformingService");
+                    b.ToTable("ServicePersonPerforming", (string)null);
                 });
 
             modelBuilder.Entity("BookingServices.Domain.Entities.PersonPerforming", b =>
@@ -288,7 +288,7 @@ namespace BookingServices.Persistance.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.OwnsOne("BookingServices.Domain.ValueObjects.Email", "Email", b1 =>
+                    b.OwnsOne("BookingServices.Domain.Entities.PersonPerforming.Email#BookingServices.Domain.ValueObjects.Email", "Email", b1 =>
                         {
                             b1.Property<int>("PersonPerformingId")
                                 .HasColumnType("int");
@@ -303,13 +303,13 @@ namespace BookingServices.Persistance.Migrations
 
                             b1.HasKey("PersonPerformingId");
 
-                            b1.ToTable("PersonPerformings");
+                            b1.ToTable("PersonPerformings", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("PersonPerformingId");
                         });
 
-                    b.OwnsOne("BookingServices.Domain.ValueObjects.PersonName", "FullName", b1 =>
+                    b.OwnsOne("BookingServices.Domain.Entities.PersonPerforming.FullName#BookingServices.Domain.ValueObjects.PersonName", "FullName", b1 =>
                         {
                             b1.Property<int>("PersonPerformingId")
                                 .HasColumnType("int");
@@ -324,7 +324,7 @@ namespace BookingServices.Persistance.Migrations
 
                             b1.HasKey("PersonPerformingId");
 
-                            b1.ToTable("PersonPerformings");
+                            b1.ToTable("PersonPerformings", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("PersonPerformingId");
@@ -361,7 +361,7 @@ namespace BookingServices.Persistance.Migrations
                     b.HasOne("BookingServices.Domain.Entities.Service", "Service")
                         .WithMany("ServicePerformances")
                         .HasForeignKey("ServiceId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("BookingServices.Domain.Entities.ServiceRecipient", "ServiceRecipient")
@@ -385,7 +385,7 @@ namespace BookingServices.Persistance.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.OwnsOne("BookingServices.Domain.ValueObjects.PersonName", "ContactPerson", b1 =>
+                    b.OwnsOne("BookingServices.Domain.Entities.ServiceProvider.ContactPerson#BookingServices.Domain.ValueObjects.PersonName", "ContactPerson", b1 =>
                         {
                             b1.Property<int>("ServiceProviderId")
                                 .HasColumnType("int");
@@ -400,13 +400,13 @@ namespace BookingServices.Persistance.Migrations
 
                             b1.HasKey("ServiceProviderId");
 
-                            b1.ToTable("ServiceProviders");
+                            b1.ToTable("ServiceProviders", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("ServiceProviderId");
                         });
 
-                    b.OwnsOne("BookingServices.Domain.ValueObjects.Email", "Email", b1 =>
+                    b.OwnsOne("BookingServices.Domain.Entities.ServiceProvider.Email#BookingServices.Domain.ValueObjects.Email", "Email", b1 =>
                         {
                             b1.Property<int>("ServiceProviderId")
                                 .HasColumnType("int");
@@ -421,7 +421,7 @@ namespace BookingServices.Persistance.Migrations
 
                             b1.HasKey("ServiceProviderId");
 
-                            b1.ToTable("ServiceProviders");
+                            b1.ToTable("ServiceProviders", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("ServiceProviderId");
@@ -438,7 +438,7 @@ namespace BookingServices.Persistance.Migrations
 
             modelBuilder.Entity("BookingServices.Domain.Entities.ServiceRecipient", b =>
                 {
-                    b.OwnsOne("BookingServices.Domain.ValueObjects.Email", "Email", b1 =>
+                    b.OwnsOne("BookingServices.Domain.Entities.ServiceRecipient.Email#BookingServices.Domain.ValueObjects.Email", "Email", b1 =>
                         {
                             b1.Property<int>("ServiceRecipientId")
                                 .HasColumnType("int");
@@ -453,13 +453,13 @@ namespace BookingServices.Persistance.Migrations
 
                             b1.HasKey("ServiceRecipientId");
 
-                            b1.ToTable("ServiceRecipients");
+                            b1.ToTable("ServiceRecipients", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("ServiceRecipientId");
                         });
 
-                    b.OwnsOne("BookingServices.Domain.ValueObjects.PersonName", "FullName", b1 =>
+                    b.OwnsOne("BookingServices.Domain.Entities.ServiceRecipient.FullName#BookingServices.Domain.ValueObjects.PersonName", "FullName", b1 =>
                         {
                             b1.Property<int>("ServiceRecipientId")
                                 .HasColumnType("int");
@@ -474,7 +474,7 @@ namespace BookingServices.Persistance.Migrations
 
                             b1.HasKey("ServiceRecipientId");
 
-                            b1.ToTable("ServiceRecipients");
+                            b1.ToTable("ServiceRecipients", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("ServiceRecipientId");
@@ -487,18 +487,18 @@ namespace BookingServices.Persistance.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("PersonPerformingService", b =>
+            modelBuilder.Entity("ServicePersonPerforming", b =>
                 {
                     b.HasOne("BookingServices.Domain.Entities.PersonPerforming", null)
                         .WithMany()
                         .HasForeignKey("PersonPerformingsId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("BookingServices.Domain.Entities.Service", null)
                         .WithMany()
                         .HasForeignKey("ServicesId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 

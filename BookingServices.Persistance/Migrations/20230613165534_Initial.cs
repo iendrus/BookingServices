@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace BookingServices.Persistance.Migrations
 {
     /// <inheritdoc />
-    public partial class initial : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -140,30 +140,6 @@ namespace BookingServices.Persistance.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "PersonPerformingService",
-                columns: table => new
-                {
-                    PersonPerformingsId = table.Column<int>(type: "int", nullable: false),
-                    ServicesId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_PersonPerformingService", x => new { x.PersonPerformingsId, x.ServicesId });
-                    table.ForeignKey(
-                        name: "FK_PersonPerformingService_PersonPerformings_PersonPerformingsId",
-                        column: x => x.PersonPerformingsId,
-                        principalTable: "PersonPerformings",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_PersonPerformingService_Services_ServicesId",
-                        column: x => x.ServicesId,
-                        principalTable: "Services",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "ServicePerformances",
                 columns: table => new
                 {
@@ -202,18 +178,37 @@ namespace BookingServices.Persistance.Migrations
                         column: x => x.ServiceId,
                         principalTable: "Services",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ServicePersonPerforming",
+                columns: table => new
+                {
+                    PersonPerformingsId = table.Column<int>(type: "int", nullable: false),
+                    ServicesId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ServicePersonPerforming", x => new { x.PersonPerformingsId, x.ServicesId });
+                    table.ForeignKey(
+                        name: "FK_ServicePersonPerforming_PersonPerformings_PersonPerformingsId",
+                        column: x => x.PersonPerformingsId,
+                        principalTable: "PersonPerformings",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_ServicePersonPerforming_Services_ServicesId",
+                        column: x => x.ServicesId,
+                        principalTable: "Services",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_PersonPerformings_ServiceProviderId",
                 table: "PersonPerformings",
                 column: "ServiceProviderId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_PersonPerformingService_ServicesId",
-                table: "PersonPerformingService",
-                column: "ServicesId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ServicePerformances_PersonPerformingId",
@@ -231,6 +226,11 @@ namespace BookingServices.Persistance.Migrations
                 column: "ServiceRecipientId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_ServicePersonPerforming_ServicesId",
+                table: "ServicePersonPerforming",
+                column: "ServicesId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ServiceProviders_IndustryId",
                 table: "ServiceProviders",
                 column: "IndustryId");
@@ -245,16 +245,16 @@ namespace BookingServices.Persistance.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "PersonPerformingService");
-
-            migrationBuilder.DropTable(
                 name: "ServicePerformances");
 
             migrationBuilder.DropTable(
-                name: "PersonPerformings");
+                name: "ServicePersonPerforming");
 
             migrationBuilder.DropTable(
                 name: "ServiceRecipients");
+
+            migrationBuilder.DropTable(
+                name: "PersonPerformings");
 
             migrationBuilder.DropTable(
                 name: "Services");

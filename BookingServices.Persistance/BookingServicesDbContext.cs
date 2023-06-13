@@ -1,6 +1,7 @@
 ﻿using BookingServices.Domain.Common;
 using BookingServices.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection.Metadata;
 
 
 namespace BookingServices.Persistance
@@ -32,6 +33,33 @@ namespace BookingServices.Persistance
             modelBuilder.Entity<ServiceRecipient>().OwnsOne(p => p.FullName);
             modelBuilder.Entity<ServiceRecipient>().OwnsOne(p => p.Email);
             //modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+
+            // --- configure many-to-many 
+            modelBuilder.Entity<PersonPerforming>()
+                .HasMany(p => p.Services)
+                .WithMany(s => s.PersonPerformings)
+                .UsingEntity<Dictionary<string, object>>(
+                    "ServicePersonPerforming",
+                    x => x
+                        .HasOne<Service>()
+                        .WithMany()
+                        .HasForeignKey("ServicesId")
+                        .OnDelete(DeleteBehavior.Restrict),
+                    x => x
+                        .HasOne<PersonPerforming>()
+                        .WithMany()
+                        .HasForeignKey("PersonPerformingsId")
+                        .OnDelete(DeleteBehavior.Restrict)
+            );
+
+            // --- configure one-to-many 
+            modelBuilder.Entity<Service>()
+                .HasMany(x => x.ServicePerformances)
+                .WithOne(x => x.Service)
+                .HasForeignKey(x => x.ServiceId)
+                .OnDelete(DeleteBehavior.Restrict)
+                .IsRequired();
+
         }
 
 
