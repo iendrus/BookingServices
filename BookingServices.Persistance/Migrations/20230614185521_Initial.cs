@@ -120,7 +120,6 @@ namespace BookingServices.Persistance.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ServicePorviderId = table.Column<int>(type: "int", nullable: false),
                     ServiceProviderId = table.Column<int>(type: "int", nullable: false),
                     CreatedBy = table.Column<int>(type: "int", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -204,6 +203,16 @@ namespace BookingServices.Persistance.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
+
+            migrationBuilder.InsertData(
+                table: "Industries",
+                columns: new[] { "Id", "CreatedAt", "CreatedBy", "Description", "IsActive", "ModifiedAt", "ModifiedBy", "Name" },
+                values: new object[] { 1, new DateTime(2023, 6, 14, 20, 55, 21, 426, DateTimeKind.Local).AddTicks(1942), 1, "Uroda; Styl życia", true, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, "Beauty" });
+
+            migrationBuilder.InsertData(
+                table: "ServiceProviders",
+                columns: new[] { "Id", "CreatedAt", "CreatedBy", "Description", "IndustryId", "IsActive", "ModifiedAt", "ModifiedBy", "Name", "Phone", "ContactPerson_FirstName", "ContactPerson_LastName", "Email_DomainName", "Email_UserName" },
+                values: new object[] { 1, new DateTime(2023, 6, 14, 20, 55, 21, 426, DateTimeKind.Local).AddTicks(2212), 1, null, 1, true, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, "Prześwietny Salon Art-Design", null, "Bob", "Kaminski", "op.pl", "art-design" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_PersonPerformings_ServiceProviderId",

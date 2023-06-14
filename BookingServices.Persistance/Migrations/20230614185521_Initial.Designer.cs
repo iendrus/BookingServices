@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookingServices.Persistance.Migrations
 {
     [DbContext(typeof(BookingServicesDbContext))]
-    [Migration("20230613165534_Initial")]
+    [Migration("20230614185521_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -58,6 +58,19 @@ namespace BookingServices.Persistance.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Industries");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedAt = new DateTime(2023, 6, 14, 20, 55, 21, 426, DateTimeKind.Local).AddTicks(1942),
+                            CreatedBy = 1,
+                            Description = "Uroda; Styl życia",
+                            IsActive = true,
+                            ModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ModifiedBy = 0,
+                            Name = "Beauty"
+                        });
                 });
 
             modelBuilder.Entity("BookingServices.Domain.Entities.PersonPerforming", b =>
@@ -125,9 +138,6 @@ namespace BookingServices.Persistance.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ServicePorviderId")
-                        .HasColumnType("int");
 
                     b.Property<int>("ServiceProviderId")
                         .HasColumnType("int");
@@ -235,6 +245,19 @@ namespace BookingServices.Persistance.Migrations
                     b.HasIndex("IndustryId");
 
                     b.ToTable("ServiceProviders");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedAt = new DateTime(2023, 6, 14, 20, 55, 21, 426, DateTimeKind.Local).AddTicks(2212),
+                            CreatedBy = 1,
+                            IndustryId = 1,
+                            IsActive = true,
+                            ModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ModifiedBy = 0,
+                            Name = "Prześwietny Salon Art-Design"
+                        });
                 });
 
             modelBuilder.Entity("BookingServices.Domain.Entities.ServiceRecipient", b =>
@@ -407,6 +430,14 @@ namespace BookingServices.Persistance.Migrations
 
                             b1.WithOwner()
                                 .HasForeignKey("ServiceProviderId");
+
+                            b1.HasData(
+                                new
+                                {
+                                    ServiceProviderId = 1,
+                                    FirstName = "Bob",
+                                    LastName = "Kaminski"
+                                });
                         });
 
                     b.OwnsOne("BookingServices.Domain.ValueObjects.Email", "Email", b1 =>
@@ -428,6 +459,14 @@ namespace BookingServices.Persistance.Migrations
 
                             b1.WithOwner()
                                 .HasForeignKey("ServiceProviderId");
+
+                            b1.HasData(
+                                new
+                                {
+                                    ServiceProviderId = 1,
+                                    DomainName = "op.pl",
+                                    UserName = "art-design"
+                                });
                         });
 
                     b.Navigation("ContactPerson")

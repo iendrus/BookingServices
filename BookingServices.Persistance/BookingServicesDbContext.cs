@@ -34,7 +34,7 @@ namespace BookingServices.Persistance
             modelBuilder.Entity<ServiceRecipient>().OwnsOne(p => p.Email);
             //modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
-            // --- configure many-to-many 
+            //--configure many - to - many
             modelBuilder.Entity<PersonPerforming>()
                 .HasMany(p => p.Services)
                 .WithMany(s => s.PersonPerformings)
@@ -52,13 +52,15 @@ namespace BookingServices.Persistance
                         .OnDelete(DeleteBehavior.Restrict)
             );
 
-            // --- configure one-to-many 
+            //// --- configure one-to-many 
             modelBuilder.Entity<Service>()
                 .HasMany(x => x.ServicePerformances)
                 .WithOne(x => x.Service)
                 .HasForeignKey(x => x.ServiceId)
                 .OnDelete(DeleteBehavior.Restrict)
                 .IsRequired();
+
+            modelBuilder.SeedData();
 
         }
 
