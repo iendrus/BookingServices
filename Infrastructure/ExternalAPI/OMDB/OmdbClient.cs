@@ -37,7 +37,7 @@ namespace BookingServices.Infrastructure.ExternalAPI.OMDB
         public async Task<string> GetMovie(string searchFilter, CancellationToken cancellationToken)
         {
             var urlBuilder = new StringBuilder();
-            urlBuilder.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("?apikey=c15e33a0");
+            urlBuilder.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("?apikey=ad7c7082");
             urlBuilder.Append("&t=").Append(searchFilter);
             var client = _httpClient;
             try
