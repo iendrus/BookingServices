@@ -4,6 +4,7 @@ using BookingServices.Persistance;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookingServices.Persistance.Migrations
 {
     [DbContext(typeof(BookingServicesDbContext))]
-    partial class BookingServicesDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230616072439_Initial")]
+    partial class Initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -61,7 +64,7 @@ namespace BookingServices.Persistance.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2023, 6, 20, 16, 45, 7, 379, DateTimeKind.Local).AddTicks(10),
+                            CreatedAt = new DateTime(2023, 6, 16, 9, 24, 39, 694, DateTimeKind.Local).AddTicks(3143),
                             CreatedBy = 1,
                             Description = "Uroda; Styl życia",
                             IsActive = true,
@@ -104,35 +107,6 @@ namespace BookingServices.Persistance.Migrations
                     b.HasIndex("ServiceProviderId");
 
                     b.ToTable("PersonPerformings");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CreatedAt = new DateTime(2023, 6, 20, 16, 45, 7, 379, DateTimeKind.Local).AddTicks(1423),
-                            CreatedBy = 1,
-                            IsActive = true,
-                            Phone = "200300400",
-                            ServiceProviderId = 2
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CreatedAt = new DateTime(2023, 6, 20, 16, 45, 7, 379, DateTimeKind.Local).AddTicks(1435),
-                            CreatedBy = 1,
-                            IsActive = true,
-                            Phone = "500666444",
-                            ServiceProviderId = 1
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CreatedAt = new DateTime(2023, 6, 20, 16, 45, 7, 379, DateTimeKind.Local).AddTicks(1439),
-                            CreatedBy = 1,
-                            IsActive = true,
-                            Phone = "505606707",
-                            ServiceProviderId = 1
-                        });
                 });
 
             modelBuilder.Entity("BookingServices.Domain.Entities.Service", b =>
@@ -178,7 +152,7 @@ namespace BookingServices.Persistance.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2023, 6, 20, 16, 45, 7, 379, DateTimeKind.Local).AddTicks(898),
+                            CreatedAt = new DateTime(2023, 6, 16, 9, 24, 39, 694, DateTimeKind.Local).AddTicks(4076),
                             CreatedBy = 1,
                             Description = "Beauty",
                             IsActive = true,
@@ -188,22 +162,12 @@ namespace BookingServices.Persistance.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2023, 6, 20, 16, 45, 7, 379, DateTimeKind.Local).AddTicks(910),
+                            CreatedAt = new DateTime(2023, 6, 16, 9, 24, 39, 694, DateTimeKind.Local).AddTicks(4093),
                             CreatedBy = 1,
                             Description = "",
                             IsActive = true,
                             Name = "Golenie jak złoto",
                             ServiceProviderId = 1
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CreatedAt = new DateTime(2023, 6, 20, 16, 45, 7, 379, DateTimeKind.Local).AddTicks(914),
-                            CreatedBy = 1,
-                            Description = "",
-                            IsActive = true,
-                            Name = "Kolor za zeta",
-                            ServiceProviderId = 2
                         });
                 });
 
@@ -293,8 +257,7 @@ namespace BookingServices.Persistance.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Nip")
                         .HasMaxLength(20)
@@ -314,20 +277,11 @@ namespace BookingServices.Persistance.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2023, 6, 20, 16, 45, 7, 379, DateTimeKind.Local).AddTicks(440),
+                            CreatedAt = new DateTime(2023, 6, 16, 9, 24, 39, 694, DateTimeKind.Local).AddTicks(3558),
                             CreatedBy = 1,
                             IndustryId = 1,
                             IsActive = true,
                             Name = "Prześwietny Salon Art-Design"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CreatedAt = new DateTime(2023, 6, 20, 16, 45, 7, 379, DateTimeKind.Local).AddTicks(450),
-                            CreatedBy = 1,
-                            IndustryId = 1,
-                            IsActive = true,
-                            Name = "Colormix"
                         });
                 });
 
@@ -361,24 +315,6 @@ namespace BookingServices.Persistance.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ServiceRecipients");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CreatedAt = new DateTime(2023, 6, 20, 16, 45, 7, 379, DateTimeKind.Local).AddTicks(947),
-                            CreatedBy = 1,
-                            IsActive = true,
-                            Phone = "500500500"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CreatedAt = new DateTime(2023, 6, 20, 16, 45, 7, 379, DateTimeKind.Local).AddTicks(952),
-                            CreatedBy = 1,
-                            IsActive = true,
-                            Phone = "603604605"
-                        });
                 });
 
             modelBuilder.Entity("ServicePersonPerforming", b =>
@@ -425,26 +361,6 @@ namespace BookingServices.Persistance.Migrations
 
                             b1.WithOwner()
                                 .HasForeignKey("PersonPerformingId");
-
-                            b1.HasData(
-                                new
-                                {
-                                    PersonPerformingId = 1,
-                                    DomainName = "op.pl",
-                                    UserName = "kaska"
-                                },
-                                new
-                                {
-                                    PersonPerformingId = 2,
-                                    DomainName = "wp.pl",
-                                    UserName = "janko"
-                                },
-                                new
-                                {
-                                    PersonPerformingId = 3,
-                                    DomainName = "zix.com",
-                                    UserName = "zenobio"
-                                });
                         });
 
                     b.OwnsOne("BookingServices.Domain.ValueObjects.PersonName", "FullName", b1 =>
@@ -470,26 +386,6 @@ namespace BookingServices.Persistance.Migrations
 
                             b1.WithOwner()
                                 .HasForeignKey("PersonPerformingId");
-
-                            b1.HasData(
-                                new
-                                {
-                                    PersonPerformingId = 1,
-                                    FirstName = "Kasia",
-                                    LastName = "Łaskawa"
-                                },
-                                new
-                                {
-                                    PersonPerformingId = 2,
-                                    FirstName = "Janusz",
-                                    LastName = "Obeznany"
-                                },
-                                new
-                                {
-                                    PersonPerformingId = 3,
-                                    FirstName = "Zenon",
-                                    LastName = "Gruszka"
-                                });
                         });
 
                     b.Navigation("Email")
@@ -577,12 +473,6 @@ namespace BookingServices.Persistance.Migrations
                                     ServiceProviderId = 1,
                                     FirstName = "Bob",
                                     LastName = "Kaminski"
-                                },
-                                new
-                                {
-                                    ServiceProviderId = 2,
-                                    FirstName = "Lukas",
-                                    LastName = "Kolorowy"
                                 });
                         });
 
@@ -614,12 +504,6 @@ namespace BookingServices.Persistance.Migrations
                                     ServiceProviderId = 1,
                                     DomainName = "op.pl",
                                     UserName = "art-design"
-                                },
-                                new
-                                {
-                                    ServiceProviderId = 2,
-                                    DomainName = "wp.pl",
-                                    UserName = "color"
                                 });
                         });
 
@@ -655,20 +539,6 @@ namespace BookingServices.Persistance.Migrations
 
                             b1.WithOwner()
                                 .HasForeignKey("ServiceRecipientId");
-
-                            b1.HasData(
-                                new
-                                {
-                                    ServiceRecipientId = 1,
-                                    DomainName = "dw.pl",
-                                    UserName = "rob"
-                                },
-                                new
-                                {
-                                    ServiceRecipientId = 2,
-                                    DomainName = "pkp.pl",
-                                    UserName = "asiaf"
-                                });
                         });
 
                     b.OwnsOne("BookingServices.Domain.ValueObjects.PersonName", "FullName", b1 =>
@@ -694,20 +564,6 @@ namespace BookingServices.Persistance.Migrations
 
                             b1.WithOwner()
                                 .HasForeignKey("ServiceRecipientId");
-
-                            b1.HasData(
-                                new
-                                {
-                                    ServiceRecipientId = 1,
-                                    FirstName = "Robert",
-                                    LastName = "Laskowski"
-                                },
-                                new
-                                {
-                                    ServiceRecipientId = 2,
-                                    FirstName = "Joanna",
-                                    LastName = "Ferdel"
-                                });
                         });
 
                     b.Navigation("Email")

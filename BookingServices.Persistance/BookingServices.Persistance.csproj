@@ -19,7 +19,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Application\BookingServices.Application.csproj" />
     <ProjectReference Include="..\BookingServices.Domain\BookingServices.Domain.csproj" />
+    <ProjectReference Include="..\Infrastructure\BookingServices.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -7,6 +7,7 @@ namespace BookingServices.Domain.Entities
     public class ServiceProvider : AuditableEntity
     {
         public string Name { get; set; }
+        public string? Nip { get; set; }
         public PersonName ContactPerson { get; set; }
         public Email Email { get; set; }
         public string? Phone { get; set; }

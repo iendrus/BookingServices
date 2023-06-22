@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookingServices.Persistance.Migrations
 {
     [DbContext(typeof(BookingServicesDbContext))]
-    [Migration("20230614190750_Initial_SD")]
-    partial class Initial_SD
+    [Migration("20230616083646_SD_2")]
+    partial class SD_2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -42,18 +42,19 @@ namespace BookingServices.Persistance.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("IsActive")
+                    b.Property<bool?>("IsActive")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("ModifiedAt")
+                    b.Property<DateTime?>("ModifiedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("ModifiedBy")
+                    b.Property<int?>("ModifiedBy")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
 
                     b.HasKey("Id");
 
@@ -63,12 +64,10 @@ namespace BookingServices.Persistance.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2023, 6, 14, 21, 7, 50, 439, DateTimeKind.Local).AddTicks(482),
+                            CreatedAt = new DateTime(2023, 6, 16, 10, 36, 45, 789, DateTimeKind.Local).AddTicks(5279),
                             CreatedBy = 1,
                             Description = "Uroda; Styl życia",
                             IsActive = true,
-                            ModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ModifiedBy = 0,
                             Name = "Beauty"
                         });
                 });
@@ -87,17 +86,18 @@ namespace BookingServices.Persistance.Migrations
                     b.Property<int>("CreatedBy")
                         .HasColumnType("int");
 
-                    b.Property<bool>("IsActive")
+                    b.Property<bool?>("IsActive")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("ModifiedAt")
+                    b.Property<DateTime?>("ModifiedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("ModifiedBy")
+                    b.Property<int?>("ModifiedBy")
                         .HasColumnType("int");
 
                     b.Property<string>("Phone")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<int>("ServiceProviderId")
                         .HasColumnType("int");
@@ -107,6 +107,26 @@ namespace BookingServices.Persistance.Migrations
                     b.HasIndex("ServiceProviderId");
 
                     b.ToTable("PersonPerformings");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedAt = new DateTime(2023, 6, 16, 10, 36, 45, 789, DateTimeKind.Local).AddTicks(7817),
+                            CreatedBy = 1,
+                            IsActive = true,
+                            Phone = "200300400",
+                            ServiceProviderId = 2
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedAt = new DateTime(2023, 6, 16, 10, 36, 45, 789, DateTimeKind.Local).AddTicks(7847),
+                            CreatedBy = 1,
+                            IsActive = true,
+                            Phone = "500666444",
+                            ServiceProviderId = 1
+                        });
                 });
 
             modelBuilder.Entity("BookingServices.Domain.Entities.Service", b =>
@@ -126,13 +146,13 @@ namespace BookingServices.Persistance.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("IsActive")
+                    b.Property<bool?>("IsActive")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("ModifiedAt")
+                    b.Property<DateTime?>("ModifiedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("ModifiedBy")
+                    b.Property<int?>("ModifiedBy")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -152,13 +172,21 @@ namespace BookingServices.Persistance.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2023, 6, 14, 21, 7, 50, 439, DateTimeKind.Local).AddTicks(1251),
+                            CreatedAt = new DateTime(2023, 6, 16, 10, 36, 45, 789, DateTimeKind.Local).AddTicks(6161),
                             CreatedBy = 1,
                             Description = "Beauty",
                             IsActive = true,
-                            ModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ModifiedBy = 0,
                             Name = "Idealny Makeup",
+                            ServiceProviderId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedAt = new DateTime(2023, 6, 16, 10, 36, 45, 789, DateTimeKind.Local).AddTicks(6174),
+                            CreatedBy = 1,
+                            Description = "",
+                            IsActive = true,
+                            Name = "Golenie jak złoto",
                             ServiceProviderId = 1
                         });
                 });
@@ -180,13 +208,13 @@ namespace BookingServices.Persistance.Migrations
                     b.Property<DateTime>("EndOfService")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool>("IsActive")
+                    b.Property<bool?>("IsActive")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("ModifiedAt")
+                    b.Property<DateTime?>("ModifiedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("ModifiedBy")
+                    b.Property<int?>("ModifiedBy")
                         .HasColumnType("int");
 
                     b.Property<int>("PersonPerformingId")
@@ -238,21 +266,26 @@ namespace BookingServices.Persistance.Migrations
                     b.Property<int>("IndustryId")
                         .HasColumnType("int");
 
-                    b.Property<bool>("IsActive")
+                    b.Property<bool?>("IsActive")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("ModifiedAt")
+                    b.Property<DateTime?>("ModifiedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("ModifiedBy")
+                    b.Property<int?>("ModifiedBy")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Nip")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
                     b.Property<string>("Phone")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.HasKey("Id");
 
@@ -264,13 +297,20 @@ namespace BookingServices.Persistance.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2023, 6, 14, 21, 7, 50, 439, DateTimeKind.Local).AddTicks(709),
+                            CreatedAt = new DateTime(2023, 6, 16, 10, 36, 45, 789, DateTimeKind.Local).AddTicks(5653),
                             CreatedBy = 1,
                             IndustryId = 1,
                             IsActive = true,
-                            ModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ModifiedBy = 0,
                             Name = "Prześwietny Salon Art-Design"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedAt = new DateTime(2023, 6, 16, 10, 36, 45, 789, DateTimeKind.Local).AddTicks(5663),
+                            CreatedBy = 1,
+                            IndustryId = 1,
+                            IsActive = true,
+                            Name = "Colormix"
                         });
                 });
 
@@ -288,21 +328,40 @@ namespace BookingServices.Persistance.Migrations
                     b.Property<int>("CreatedBy")
                         .HasColumnType("int");
 
-                    b.Property<bool>("IsActive")
+                    b.Property<bool?>("IsActive")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("ModifiedAt")
+                    b.Property<DateTime?>("ModifiedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("ModifiedBy")
+                    b.Property<int?>("ModifiedBy")
                         .HasColumnType("int");
 
                     b.Property<string>("Phone")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.HasKey("Id");
 
                     b.ToTable("ServiceRecipients");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedAt = new DateTime(2023, 6, 16, 10, 36, 45, 789, DateTimeKind.Local).AddTicks(6208),
+                            CreatedBy = 1,
+                            IsActive = true,
+                            Phone = "500500500"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedAt = new DateTime(2023, 6, 16, 10, 36, 45, 789, DateTimeKind.Local).AddTicks(6214),
+                            CreatedBy = 1,
+                            IsActive = true,
+                            Phone = "603604605"
+                        });
                 });
 
             modelBuilder.Entity("ServicePersonPerforming", b =>
@@ -335,11 +394,13 @@ namespace BookingServices.Persistance.Migrations
 
                             b1.Property<string>("DomainName")
                                 .IsRequired()
-                                .HasColumnType("nvarchar(max)");
+                                .HasMaxLength(100)
+                                .HasColumnType("nvarchar(100)");
 
                             b1.Property<string>("UserName")
                                 .IsRequired()
-                                .HasColumnType("nvarchar(max)");
+                                .HasMaxLength(100)
+                                .HasColumnType("nvarchar(100)");
 
                             b1.HasKey("PersonPerformingId");
 
@@ -347,6 +408,20 @@ namespace BookingServices.Persistance.Migrations
 
                             b1.WithOwner()
                                 .HasForeignKey("PersonPerformingId");
+
+                            b1.HasData(
+                                new
+                                {
+                                    PersonPerformingId = 1,
+                                    DomainName = "op.pl",
+                                    UserName = "kaska"
+                                },
+                                new
+                                {
+                                    PersonPerformingId = 2,
+                                    DomainName = "wp.pl",
+                                    UserName = "janko"
+                                });
                         });
 
                     b.OwnsOne("BookingServices.Domain.ValueObjects.PersonName", "FullName", b1 =>
@@ -356,11 +431,15 @@ namespace BookingServices.Persistance.Migrations
 
                             b1.Property<string>("FirstName")
                                 .IsRequired()
-                                .HasColumnType("nvarchar(max)");
+                                .HasMaxLength(100)
+                                .HasColumnType("nvarchar(100)")
+                                .HasColumnName("FirstName");
 
                             b1.Property<string>("LastName")
                                 .IsRequired()
-                                .HasColumnType("nvarchar(max)");
+                                .HasMaxLength(100)
+                                .HasColumnType("nvarchar(100)")
+                                .HasColumnName("LastName");
 
                             b1.HasKey("PersonPerformingId");
 
@@ -368,6 +447,20 @@ namespace BookingServices.Persistance.Migrations
 
                             b1.WithOwner()
                                 .HasForeignKey("PersonPerformingId");
+
+                            b1.HasData(
+                                new
+                                {
+                                    PersonPerformingId = 1,
+                                    FirstName = "Kasia",
+                                    LastName = "Łaskawa"
+                                },
+                                new
+                                {
+                                    PersonPerformingId = 2,
+                                    FirstName = "Janusz",
+                                    LastName = "Obeznany"
+                                });
                         });
 
                     b.Navigation("Email")
@@ -432,11 +525,15 @@ namespace BookingServices.Persistance.Migrations
 
                             b1.Property<string>("FirstName")
                                 .IsRequired()
-                                .HasColumnType("nvarchar(max)");
+                                .HasMaxLength(100)
+                                .HasColumnType("nvarchar(100)")
+                                .HasColumnName("FirstName");
 
                             b1.Property<string>("LastName")
                                 .IsRequired()
-                                .HasColumnType("nvarchar(max)");
+                                .HasMaxLength(100)
+                                .HasColumnType("nvarchar(100)")
+                                .HasColumnName("LastName");
 
                             b1.HasKey("ServiceProviderId");
 
@@ -451,6 +548,12 @@ namespace BookingServices.Persistance.Migrations
                                     ServiceProviderId = 1,
                                     FirstName = "Bob",
                                     LastName = "Kaminski"
+                                },
+                                new
+                                {
+                                    ServiceProviderId = 2,
+                                    FirstName = "Lukas",
+                                    LastName = "Kolorowy"
                                 });
                         });
 
@@ -461,11 +564,13 @@ namespace BookingServices.Persistance.Migrations
 
                             b1.Property<string>("DomainName")
                                 .IsRequired()
-                                .HasColumnType("nvarchar(max)");
+                                .HasMaxLength(100)
+                                .HasColumnType("nvarchar(100)");
 
                             b1.Property<string>("UserName")
                                 .IsRequired()
-                                .HasColumnType("nvarchar(max)");
+                                .HasMaxLength(100)
+                                .HasColumnType("nvarchar(100)");
 
                             b1.HasKey("ServiceProviderId");
 
@@ -480,6 +585,12 @@ namespace BookingServices.Persistance.Migrations
                                     ServiceProviderId = 1,
                                     DomainName = "op.pl",
                                     UserName = "art-design"
+                                },
+                                new
+                                {
+                                    ServiceProviderId = 2,
+                                    DomainName = "wp.pl",
+                                    UserName = "color"
                                 });
                         });
 
@@ -501,11 +612,13 @@ namespace BookingServices.Persistance.Migrations
 
                             b1.Property<string>("DomainName")
                                 .IsRequired()
-                                .HasColumnType("nvarchar(max)");
+                                .HasMaxLength(100)
+                                .HasColumnType("nvarchar(100)");
 
                             b1.Property<string>("UserName")
                                 .IsRequired()
-                                .HasColumnType("nvarchar(max)");
+                                .HasMaxLength(100)
+                                .HasColumnType("nvarchar(100)");
 
                             b1.HasKey("ServiceRecipientId");
 
@@ -513,6 +626,20 @@ namespace BookingServices.Persistance.Migrations
 
                             b1.WithOwner()
                                 .HasForeignKey("ServiceRecipientId");
+
+                            b1.HasData(
+                                new
+                                {
+                                    ServiceRecipientId = 1,
+                                    DomainName = "dw.pl",
+                                    UserName = "rob"
+                                },
+                                new
+                                {
+                                    ServiceRecipientId = 2,
+                                    DomainName = "pkp.pl",
+                                    UserName = "asiaf"
+                                });
                         });
 
                     b.OwnsOne("BookingServices.Domain.ValueObjects.PersonName", "FullName", b1 =>
@@ -522,11 +649,15 @@ namespace BookingServices.Persistance.Migrations
 
                             b1.Property<string>("FirstName")
                                 .IsRequired()
-                                .HasColumnType("nvarchar(max)");
+                                .HasMaxLength(100)
+                                .HasColumnType("nvarchar(100)")
+                                .HasColumnName("FirstName");
 
                             b1.Property<string>("LastName")
                                 .IsRequired()
-                                .HasColumnType("nvarchar(max)");
+                                .HasMaxLength(100)
+                                .HasColumnType("nvarchar(100)")
+                                .HasColumnName("LastName");
 
                             b1.HasKey("ServiceRecipientId");
 
@@ -534,6 +665,20 @@ namespace BookingServices.Persistance.Migrations
 
                             b1.WithOwner()
                                 .HasForeignKey("ServiceRecipientId");
+
+                            b1.HasData(
+                                new
+                                {
+                                    ServiceRecipientId = 1,
+                                    FirstName = "Robert",
+                                    LastName = "Laskowski"
+                                },
+                                new
+                                {
+                                    ServiceRecipientId = 2,
+                                    FirstName = "Joanna",
+                                    LastName = "Ferdel"
+                                });
                         });
 
                     b.Navigation("Email")
