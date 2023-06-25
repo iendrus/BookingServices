@@ -1,5 +1,4 @@
 ﻿using BookingServices.Application.Common.Interfaces;
-using BookingServices.Application.Interfaces;
 using BookingServices.Infrastructure.ExternalAPI.OMDB;
 using BookingServices.Infrastructure.FileStore;
 using BookingServices.Infrastructure.Services;

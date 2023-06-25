@@ -1,4 +1,4 @@
-﻿using BookingServices.Application.Interfaces;
+﻿using BookingServices.Application.Common.Interfaces;
 using System;
 using System.IO;
 

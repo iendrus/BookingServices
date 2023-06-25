@@ -1,7 +1,7 @@
 ﻿using System;
 
 
-namespace BookingServices.Application.Interfaces
+namespace BookingServices.Application.Common.Interfaces
 {
     public interface IFileStore
     {
