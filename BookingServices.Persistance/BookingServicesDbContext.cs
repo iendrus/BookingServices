@@ -3,11 +3,12 @@ using BookingServices.Domain.Common;
 using BookingServices.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
+using System.Threading;
 
 
 namespace BookingServices.Persistance
 {
-    public class BookingServicesDbContext : DbContext
+    public class BookingServicesDbContext : DbContext, IBookingServicesDbContext
     {
         private readonly IDateTime _dateTime;
         public BookingServicesDbContext(DbContextOptions<BookingServicesDbContext> options, IDateTime dateTime) : base(options)
@@ -21,7 +22,7 @@ namespace BookingServices.Persistance
         public DbSet<ServicePerformance> ServicePerformances { get; set; }
         public DbSet<Industry> Industries { get; set; }
         public DbSet<ServiceRecipient> ServiceRecipients { get; set; }
-
+      
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
 

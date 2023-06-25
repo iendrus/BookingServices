@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using BookingServices.Application.Common.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -15,6 +16,7 @@ namespace BookingServices.Persistance
         public static  IServiceCollection AddPersistance(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<BookingServicesDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("BookingServicesDatabase")));
+            services.AddScoped<IBookingServicesDbContext, BookingServicesDbContext>();
             return services;
         }
     }

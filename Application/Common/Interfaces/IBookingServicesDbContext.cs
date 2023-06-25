@@ -1,12 +1,22 @@
-﻿using System;
+﻿using BookingServices.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+
 
 namespace BookingServices.Application.Common.Interfaces
 {
-    internal interface IBookingServicesDbContext
+    public interface IBookingServicesDbContext
     {
+        DbSet<Service> Services { get; set; }
+        DbSet<PersonPerforming> PersonPerformings { get; set; }
+        DbSet<ServiceProvider> ServiceProviders { get; set; }
+        DbSet<ServicePerformance> ServicePerformances { get; set; }
+        DbSet<Industry> Industries { get; set; }
+        DbSet<ServiceRecipient> ServiceRecipients { get; set; }
+
+
+        Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }
 }
