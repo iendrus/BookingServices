@@ -18,11 +18,7 @@ namespace BookingServices.Application.ServiceProviders.Queries.GetServiceProvide
         public void Mapping(Profile profile)
         {
             profile.CreateMap<ServiceProvider, ServiceProviderDatailVm>()
-                .ForMember(s => s.Email, m => m.MapFrom(src => src.Email.ToString()))
-                .ForMember(s => s.IndustryName, m => m.MapFrom(src => src.Industry.Name));
-
+                .ForMember(s => s.Email, m => m.MapFrom(src => src.Email.ToString()));
         }
     }
-
-
 }

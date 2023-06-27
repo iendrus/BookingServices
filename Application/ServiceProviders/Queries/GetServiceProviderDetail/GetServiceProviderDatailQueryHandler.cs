@@ -23,6 +23,7 @@ namespace BookingServices.Application.ServiceProviders.Queries.GetServiceProvide
         public async Task<ServiceProviderDatailVm> Handle(GetServiceProviderDatailQuery request, CancellationToken cancellationToken)
         {
             var serviceProvider = await _context.ServiceProviders.Where(s => s.Id == request.ServiceProviderId)
+                .Include(s => s.Industry)
                 .FirstOrDefaultAsync(cancellationToken);
 
             var serviceProviderVm = _mapper.Map<ServiceProviderDatailVm>(serviceProvider); 
