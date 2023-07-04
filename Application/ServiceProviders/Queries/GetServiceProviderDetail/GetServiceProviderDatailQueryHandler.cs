@@ -3,10 +3,6 @@ using BookingServices.Application.Common.Interfaces;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BookingServices.Application.ServiceProviders.Queries.GetServiceProviderDetail
 {
@@ -22,7 +18,7 @@ namespace BookingServices.Application.ServiceProviders.Queries.GetServiceProvide
         }
         public async Task<ServiceProviderDatailVm> Handle(GetServiceProviderDatailQuery request, CancellationToken cancellationToken)
         {
-            var serviceProvider = await _context.ServiceProviders.Where(s => s.Id == request.ServiceProviderId)
+            var serviceProvider = await _context.ServiceProviders.Where(s => s.Id == request.ServiceProviderId && s.IsActive == true)
                 .Include(s => s.Industry)
                 .FirstOrDefaultAsync(cancellationToken);
 

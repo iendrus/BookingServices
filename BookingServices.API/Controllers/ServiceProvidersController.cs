@@ -1,4 +1,5 @@
-﻿using BookingServices.Application.ServiceProviders.Queries.GetServiceProviderDetail;
+﻿using BookingServices.Application.ServiceProviders.Commands.CreateServiceProvider;
+using BookingServices.Application.ServiceProviders.Queries.GetServiceProviderDetail;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,5 +15,11 @@ namespace BookingServices.API.Controllers
             return vm;
         }
 
+        [HttpPost]
+        public async Task<IActionResult> CreateServiceProvider(CreateServiceProviderCommand command)
+        {
+            var result = await Mediator.Send(command);
+            return Ok(result);
+        }
     }
 }

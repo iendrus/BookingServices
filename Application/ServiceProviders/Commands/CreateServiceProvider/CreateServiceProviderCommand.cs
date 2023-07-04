@@ -1,25 +1,27 @@
-﻿using BookingServices.Domain.Entities;
+﻿using AutoMapper;
+using BookingServices.Application.Common.Mappings;
+using BookingServices.Application.ServiceProviders.Queries.GetServiceProviderDetail;
+using BookingServices.Domain.Entities;
 using BookingServices.Domain.ValueObjects;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BookingServices.Application.ServiceProviders.Commands.CreateServiceProvider
 {
-    public class CreateServiceProviderCommand : IRequest<int>
+    public class CreateServiceProviderCommand : IRequest<int>, IMapFrom<CreateServiceProviderCommand>
     {
         public string Name { get; set; }
         public string? Nip { get; set; }
-        public string ContactFirstName { get; set; }
-        public string ContactLastName { get; set; }
-        public string EmailDomainName { get; set; }
-        public string EmailUserName { get; set; }
+        public PersonName ContactPerson { get; set; }
+        public Email Email { get; set; }
         public string? Phone { get; set; }
         public string? Description { get; set; }
         public int IndustryId { get; set; }
-        
+
+        public void Mapping(Profile profile)
+        {
+            profile.CreateMap<CreateServiceProviderCommand, ServiceProvider>();
+
+        }
+
     }
 }

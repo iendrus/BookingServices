@@ -2,8 +2,7 @@
 using BookingServices.Application.Common.Mappings;
 using BookingServices.Domain.Entities;
 using System;
-using System.Collections.Generic;
-using System.Linq;
+
 
 
 namespace BookingServices.Application.ServiceProviders.Queries.GetServiceProviderDetail
@@ -19,6 +18,7 @@ namespace BookingServices.Application.ServiceProviders.Queries.GetServiceProvide
         {
             profile.CreateMap<ServiceProvider, ServiceProviderDatailVm>()
                 .ForMember(s => s.Email, m => m.MapFrom(src => src.Email.ToString()));
+                
         }
     }
 }
