@@ -1,4 +1,5 @@
 ﻿using BookingServices.Application.ServiceProviders.Commands.CreateServiceProvider;
+using BookingServices.Application.ServiceProviders.Commands.DeleteServiceProvider;
 using BookingServices.Application.ServiceProviders.Queries.GetServiceProviderDetail;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -21,5 +22,14 @@ namespace BookingServices.API.Controllers
             var result = await Mediator.Send(command);
             return Ok(result);
         }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteServiceProvider(int id)
+        {
+            var command = new DeleteServiceProviderCommand { ServiceProviderId = id };
+            await Mediator.Send(command);
+            return NoContent();
+        }
+
     }
 }

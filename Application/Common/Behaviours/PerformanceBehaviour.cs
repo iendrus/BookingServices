@@ -33,7 +33,7 @@ namespace BookingServices.Application.Common.Behaviours
             {
                 var requestName = typeof(TRequest).Name;
 
-                _logger.LogInformation("MovieManagement Long Running Request: {Name} ({elapsed} ms) {@Request}",
+                _logger.LogInformation("BookingServices Long Running Request: {Name} ({elapsed} ms) {@Request}",
                     requestName, elapsed, request);
             }
 

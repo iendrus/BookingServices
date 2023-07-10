@@ -1,8 +1,28 @@
 using BookingServices.Application;
 using BookingServices.Infrastructure;
 using BookingServices.Persistance;
+using Serilog;
+
+var configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
+
+Log.Logger = new LoggerConfiguration().ReadFrom.Configuration(configuration).CreateLogger();
+
+Log.Information("Application is starting up.");
 
 var builder = WebApplication.CreateBuilder(args);
+
+try
+{
+    builder.Host.UseSerilog((context, configuration) => configuration.ReadFrom.Configuration(context.Configuration));
+}
+catch (Exception ex)
+{
+    Log.Fatal(ex, "An unexpected error occurred while starting the application.");
+}
+finally
+{
+    Log.CloseAndFlush();
+}
 
 // Add services to the container.
 builder.Services.AddApplication();

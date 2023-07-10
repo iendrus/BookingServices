@@ -13,12 +13,13 @@ namespace BookingServices.Application.ServiceProviders.Queries.GetServiceProvide
         public string Description { get; set; }
         public string IndustryName { get; set; }
         public string Email { get; set; }
+        public string ContactPerson { get; set; }
 
         public void Mapping(Profile profile)
         {
             profile.CreateMap<ServiceProvider, ServiceProviderDatailVm>()
-                .ForMember(s => s.Email, m => m.MapFrom(src => src.Email.ToString()));
-                
-        }
+                .ForMember(s => s.Email, m => m.MapFrom(src => src.Email.ToString()))
+                .ForMember(s => s.ContactPerson, m => m.MapFrom(src => src.ContactPerson.ToString()));
+         }
     }
 }
