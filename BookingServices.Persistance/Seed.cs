@@ -32,7 +32,7 @@ namespace BookingServices.Persistance
                     Name = "Prześwietny Salon Art-Design",
                     CreatedAt = DateTime.Now,
                     CreatedBy = 1,
-                    IsActive = true
+                    IsActive = true,
                 },
                 new ServiceProvider()
                 {
@@ -53,12 +53,16 @@ namespace BookingServices.Persistance
                     new { ServiceProviderId = 1, FirstName = "Bob", LastName = "Kaminski" },
                     new { ServiceProviderId = 2, FirstName = "Lukas", LastName = "Kolorowy" }
                     );
+                s.OwnsOne(s => s.Address).HasData(
+                    new { ServiceProviderId = 1, City = "Dulcza", Street = "Miła", ZipCode ="33-220", Number="14" },
+                    new { ServiceProviderId = 2, City = "Flismanowa", ZipCode = "32-120", Number = "234A" }
+                    );
             });
 
-            modelBuilder.Entity<Service>(s =>
+            modelBuilder.Entity<Product>(s =>
             {
                 s.HasData(
-                new Service()
+                new Product()
                 {
                     Id = 1,
                     ServiceProviderId = 1,
@@ -68,7 +72,7 @@ namespace BookingServices.Persistance
                     CreatedBy = 1,
                     IsActive = true
                 },
-                new Service()
+                new Product()
                 {
                     Id = 2,
                     ServiceProviderId = 1,
@@ -78,7 +82,7 @@ namespace BookingServices.Persistance
                     CreatedBy = 1,
                     IsActive = true
                 },
-                new Service()
+                new Product()
                 {
                     Id = 3,
                     ServiceProviderId = 2,

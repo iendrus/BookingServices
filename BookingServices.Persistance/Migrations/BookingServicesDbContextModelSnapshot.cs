@@ -17,7 +17,7 @@ namespace BookingServices.Persistance.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.5")
+                .HasAnnotation("ProductVersion", "7.0.8")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -61,7 +61,7 @@ namespace BookingServices.Persistance.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2023, 6, 20, 16, 45, 7, 379, DateTimeKind.Local).AddTicks(10),
+                            CreatedAt = new DateTime(2023, 8, 5, 18, 49, 13, 791, DateTimeKind.Local).AddTicks(4237),
                             CreatedBy = 1,
                             Description = "Uroda; Styl życia",
                             IsActive = true,
@@ -109,7 +109,7 @@ namespace BookingServices.Persistance.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2023, 6, 20, 16, 45, 7, 379, DateTimeKind.Local).AddTicks(1423),
+                            CreatedAt = new DateTime(2023, 8, 5, 18, 49, 13, 791, DateTimeKind.Local).AddTicks(5837),
                             CreatedBy = 1,
                             IsActive = true,
                             Phone = "200300400",
@@ -118,7 +118,7 @@ namespace BookingServices.Persistance.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2023, 6, 20, 16, 45, 7, 379, DateTimeKind.Local).AddTicks(1435),
+                            CreatedAt = new DateTime(2023, 8, 5, 18, 49, 13, 791, DateTimeKind.Local).AddTicks(5849),
                             CreatedBy = 1,
                             IsActive = true,
                             Phone = "500666444",
@@ -127,7 +127,7 @@ namespace BookingServices.Persistance.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2023, 6, 20, 16, 45, 7, 379, DateTimeKind.Local).AddTicks(1439),
+                            CreatedAt = new DateTime(2023, 8, 5, 18, 49, 13, 791, DateTimeKind.Local).AddTicks(5852),
                             CreatedBy = 1,
                             IsActive = true,
                             Phone = "505606707",
@@ -135,7 +135,7 @@ namespace BookingServices.Persistance.Migrations
                         });
                 });
 
-            modelBuilder.Entity("BookingServices.Domain.Entities.Service", b =>
+            modelBuilder.Entity("BookingServices.Domain.Entities.Product", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -172,13 +172,13 @@ namespace BookingServices.Persistance.Migrations
 
                     b.HasIndex("ServiceProviderId");
 
-                    b.ToTable("Services");
+                    b.ToTable("Products");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2023, 6, 20, 16, 45, 7, 379, DateTimeKind.Local).AddTicks(898),
+                            CreatedAt = new DateTime(2023, 8, 5, 18, 49, 13, 791, DateTimeKind.Local).AddTicks(5436),
                             CreatedBy = 1,
                             Description = "Beauty",
                             IsActive = true,
@@ -188,7 +188,7 @@ namespace BookingServices.Persistance.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2023, 6, 20, 16, 45, 7, 379, DateTimeKind.Local).AddTicks(910),
+                            CreatedAt = new DateTime(2023, 8, 5, 18, 49, 13, 791, DateTimeKind.Local).AddTicks(5450),
                             CreatedBy = 1,
                             Description = "",
                             IsActive = true,
@@ -198,7 +198,7 @@ namespace BookingServices.Persistance.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2023, 6, 20, 16, 45, 7, 379, DateTimeKind.Local).AddTicks(914),
+                            CreatedAt = new DateTime(2023, 8, 5, 18, 49, 13, 791, DateTimeKind.Local).AddTicks(5454),
                             CreatedBy = 1,
                             Description = "",
                             IsActive = true,
@@ -236,7 +236,7 @@ namespace BookingServices.Persistance.Migrations
                     b.Property<int>("PersonPerformingId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ServiceId")
+                    b.Property<int>("ProductId")
                         .HasColumnType("int");
 
                     b.Property<string>("ServiceRecipientComments")
@@ -255,7 +255,7 @@ namespace BookingServices.Persistance.Migrations
 
                     b.HasIndex("PersonPerformingId");
 
-                    b.HasIndex("ServiceId");
+                    b.HasIndex("ProductId");
 
                     b.HasIndex("ServiceRecipientId");
 
@@ -314,7 +314,7 @@ namespace BookingServices.Persistance.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2023, 6, 20, 16, 45, 7, 379, DateTimeKind.Local).AddTicks(440),
+                            CreatedAt = new DateTime(2023, 8, 5, 18, 49, 13, 791, DateTimeKind.Local).AddTicks(4734),
                             CreatedBy = 1,
                             IndustryId = 1,
                             IsActive = true,
@@ -323,7 +323,7 @@ namespace BookingServices.Persistance.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2023, 6, 20, 16, 45, 7, 379, DateTimeKind.Local).AddTicks(450),
+                            CreatedAt = new DateTime(2023, 8, 5, 18, 49, 13, 791, DateTimeKind.Local).AddTicks(4745),
                             CreatedBy = 1,
                             IndustryId = 1,
                             IsActive = true,
@@ -366,7 +366,7 @@ namespace BookingServices.Persistance.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2023, 6, 20, 16, 45, 7, 379, DateTimeKind.Local).AddTicks(947),
+                            CreatedAt = new DateTime(2023, 8, 5, 18, 49, 13, 791, DateTimeKind.Local).AddTicks(5489),
                             CreatedBy = 1,
                             IsActive = true,
                             Phone = "500500500"
@@ -374,7 +374,7 @@ namespace BookingServices.Persistance.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2023, 6, 20, 16, 45, 7, 379, DateTimeKind.Local).AddTicks(952),
+                            CreatedAt = new DateTime(2023, 8, 5, 18, 49, 13, 791, DateTimeKind.Local).AddTicks(5495),
                             CreatedBy = 1,
                             IsActive = true,
                             Phone = "603604605"
@@ -386,12 +386,12 @@ namespace BookingServices.Persistance.Migrations
                     b.Property<int>("PersonPerformingsId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ServicesId")
+                    b.Property<int>("ProductsId")
                         .HasColumnType("int");
 
-                    b.HasKey("PersonPerformingsId", "ServicesId");
+                    b.HasKey("PersonPerformingsId", "ProductsId");
 
-                    b.HasIndex("ServicesId");
+                    b.HasIndex("ProductsId");
 
                     b.ToTable("ServicePersonPerforming");
                 });
@@ -501,10 +501,10 @@ namespace BookingServices.Persistance.Migrations
                     b.Navigation("ServiceProvider");
                 });
 
-            modelBuilder.Entity("BookingServices.Domain.Entities.Service", b =>
+            modelBuilder.Entity("BookingServices.Domain.Entities.Product", b =>
                 {
                     b.HasOne("BookingServices.Domain.Entities.ServiceProvider", "ServiceProvider")
-                        .WithMany("Services")
+                        .WithMany("Products")
                         .HasForeignKey("ServiceProviderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -520,9 +520,9 @@ namespace BookingServices.Persistance.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("BookingServices.Domain.Entities.Service", "Service")
+                    b.HasOne("BookingServices.Domain.Entities.Product", "Product")
                         .WithMany("ServicePerformances")
-                        .HasForeignKey("ServiceId")
+                        .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
@@ -534,7 +534,7 @@ namespace BookingServices.Persistance.Migrations
 
                     b.Navigation("PersonPerforming");
 
-                    b.Navigation("Service");
+                    b.Navigation("Product");
 
                     b.Navigation("ServiceRecipient");
                 });
@@ -622,6 +622,62 @@ namespace BookingServices.Persistance.Migrations
                                     UserName = "color"
                                 });
                         });
+
+                    b.OwnsOne("BookingServices.Domain.ValueObjects.Address", "Address", b1 =>
+                        {
+                            b1.Property<int>("ServiceProviderId")
+                                .HasColumnType("int");
+
+                            b1.Property<string>("City")
+                                .IsRequired()
+                                .HasMaxLength(100)
+                                .HasColumnType("nvarchar(100)")
+                                .HasColumnName("City");
+
+                            b1.Property<string>("Number")
+                                .IsRequired()
+                                .HasMaxLength(10)
+                                .HasColumnType("nvarchar(10)")
+                                .HasColumnName("Number");
+
+                            b1.Property<string>("Street")
+                                .HasMaxLength(100)
+                                .HasColumnType("nvarchar(100)")
+                                .HasColumnName("Street");
+
+                            b1.Property<string>("ZipCode")
+                                .IsRequired()
+                                .HasMaxLength(10)
+                                .HasColumnType("nvarchar(10)")
+                                .HasColumnName("ZipCode");
+
+                            b1.HasKey("ServiceProviderId");
+
+                            b1.ToTable("ServiceProviders");
+
+                            b1.WithOwner()
+                                .HasForeignKey("ServiceProviderId");
+
+                            b1.HasData(
+                                new
+                                {
+                                    ServiceProviderId = 1,
+                                    City = "Dulcza",
+                                    Number = "14",
+                                    Street = "Miła",
+                                    ZipCode = "33-220"
+                                },
+                                new
+                                {
+                                    ServiceProviderId = 2,
+                                    City = "Flismanowa",
+                                    Number = "234A",
+                                    ZipCode = "32-120"
+                                });
+                        });
+
+                    b.Navigation("Address")
+                        .IsRequired();
 
                     b.Navigation("ContactPerson")
                         .IsRequired();
@@ -725,9 +781,9 @@ namespace BookingServices.Persistance.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("BookingServices.Domain.Entities.Service", null)
+                    b.HasOne("BookingServices.Domain.Entities.Product", null)
                         .WithMany()
-                        .HasForeignKey("ServicesId")
+                        .HasForeignKey("ProductsId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
@@ -742,7 +798,7 @@ namespace BookingServices.Persistance.Migrations
                     b.Navigation("ServicePerformances");
                 });
 
-            modelBuilder.Entity("BookingServices.Domain.Entities.Service", b =>
+            modelBuilder.Entity("BookingServices.Domain.Entities.Product", b =>
                 {
                     b.Navigation("ServicePerformances");
                 });
@@ -751,7 +807,7 @@ namespace BookingServices.Persistance.Migrations
                 {
                     b.Navigation("PersonPerformings");
 
-                    b.Navigation("Services");
+                    b.Navigation("Products");
                 });
 
             modelBuilder.Entity("BookingServices.Domain.Entities.ServiceRecipient", b =>

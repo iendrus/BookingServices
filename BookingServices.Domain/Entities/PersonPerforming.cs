@@ -11,7 +11,7 @@ namespace BookingServices.Domain.Entities
         public string? Phone { get; set; }
         public ServiceProvider ServiceProvider { get; set; }
         public int ServiceProviderId { get; set; }
-        public List<Service> Services { get; private set; } = new();
+        public List<Product> Products { get; private set; } = new();
         public List<ServicePerformance> ServicePerformances { get; private set; } = new();
     }
 }

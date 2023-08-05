@@ -10,17 +10,17 @@ using System.Threading.Tasks;
 
 namespace BookingServices.Persistance.Configurations
 {
-    public class ServiceConfiguration : IEntityTypeConfiguration<Service>
+    public class ProductConfiguration : IEntityTypeConfiguration<Product>
     {
 
-        public void Configure(EntityTypeBuilder<Service> builder)
+        public void Configure(EntityTypeBuilder<Product> builder)
         {
 
             //// --- configure one-to-many 
             builder
                 .HasMany(x => x.ServicePerformances)
-                .WithOne(x => x.Service)
-                .HasForeignKey(x => x.ServiceId)
+                .WithOne(x => x.Product)
+                .HasForeignKey(x => x.ProductId)
                 .OnDelete(DeleteBehavior.Restrict)
                 .IsRequired();
         }

@@ -23,6 +23,21 @@ namespace BookingServices.Persistance.Configurations
                 .HasColumnName("LastName")
                 .IsRequired()
                 .HasMaxLength(100);
+            builder.OwnsOne(p => p.Address).Property(p => p.City)
+                .HasColumnName("City")
+                .IsRequired()
+                .HasMaxLength(100);
+            builder.OwnsOne(p => p.Address).Property(p => p.Street)
+                .HasColumnName("Street")
+                .HasMaxLength(100);
+            builder.OwnsOne(p => p.Address).Property(p => p.ZipCode)
+                .HasColumnName("ZipCode")
+                .IsRequired()
+                .HasMaxLength(10);
+            builder.OwnsOne(p => p.Address).Property(p => p.Number)
+                .HasColumnName("Number")
+                .IsRequired()
+                .HasMaxLength(10);
             builder.Property(p=>p.Nip).HasMaxLength(20);
             builder.Property(p=>p.Phone).HasMaxLength(20);
             builder.Property(p=>p.Name).HasMaxLength(255).IsRequired();

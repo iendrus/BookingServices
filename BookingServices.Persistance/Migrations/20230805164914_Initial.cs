@@ -60,8 +60,12 @@ namespace BookingServices.Persistance.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     Nip = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
+                    Street = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    City = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    ZipCode = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
+                    Number = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
                     FirstName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Email_UserName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
@@ -116,7 +120,7 @@ namespace BookingServices.Persistance.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Services",
+                name: "Products",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -132,9 +136,9 @@ namespace BookingServices.Persistance.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Services", x => x.Id);
+                    table.PrimaryKey("PK_Products", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Services_ServiceProviders_ServiceProviderId",
+                        name: "FK_Products_ServiceProviders_ServiceProviderId",
                         column: x => x.ServiceProviderId,
                         principalTable: "ServiceProviders",
                         principalColumn: "Id",
@@ -149,7 +153,7 @@ namespace BookingServices.Persistance.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ServiceRecipientId = table.Column<int>(type: "int", nullable: false),
                     PersonPerformingId = table.Column<int>(type: "int", nullable: false),
-                    ServiceId = table.Column<int>(type: "int", nullable: false),
+                    ProductId = table.Column<int>(type: "int", nullable: false),
                     StatusId = table.Column<int>(type: "int", nullable: false),
                     ServiceRecipientComments = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     StartOfService = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -170,17 +174,17 @@ namespace BookingServices.Persistance.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
+                        name: "FK_ServicePerformances_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
                         name: "FK_ServicePerformances_ServiceRecipients_ServiceRecipientId",
                         column: x => x.ServiceRecipientId,
                         principalTable: "ServiceRecipients",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_ServicePerformances_Services_ServiceId",
-                        column: x => x.ServiceId,
-                        principalTable: "Services",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -188,11 +192,11 @@ namespace BookingServices.Persistance.Migrations
                 columns: table => new
                 {
                     PersonPerformingsId = table.Column<int>(type: "int", nullable: false),
-                    ServicesId = table.Column<int>(type: "int", nullable: false)
+                    ProductsId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ServicePersonPerforming", x => new { x.PersonPerformingsId, x.ServicesId });
+                    table.PrimaryKey("PK_ServicePersonPerforming", x => new { x.PersonPerformingsId, x.ProductsId });
                     table.ForeignKey(
                         name: "FK_ServicePersonPerforming_PersonPerformings_PersonPerformingsId",
                         column: x => x.PersonPerformingsId,
@@ -200,9 +204,9 @@ namespace BookingServices.Persistance.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_ServicePersonPerforming_Services_ServicesId",
-                        column: x => x.ServicesId,
-                        principalTable: "Services",
+                        name: "FK_ServicePersonPerforming_Products_ProductsId",
+                        column: x => x.ProductsId,
+                        principalTable: "Products",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -210,20 +214,44 @@ namespace BookingServices.Persistance.Migrations
             migrationBuilder.InsertData(
                 table: "Industries",
                 columns: new[] { "Id", "CreatedAt", "CreatedBy", "Description", "IsActive", "ModifiedAt", "ModifiedBy", "Name" },
-                values: new object[] { 1, new DateTime(2023, 6, 16, 9, 24, 39, 694, DateTimeKind.Local).AddTicks(3143), 1, "Uroda; Styl życia", true, null, null, "Beauty" });
+                values: new object[] { 1, new DateTime(2023, 8, 5, 18, 49, 13, 791, DateTimeKind.Local).AddTicks(4237), 1, "Uroda; Styl życia", true, null, null, "Beauty" });
+
+            migrationBuilder.InsertData(
+                table: "ServiceRecipients",
+                columns: new[] { "Id", "CreatedAt", "CreatedBy", "IsActive", "ModifiedAt", "ModifiedBy", "Phone", "Email_DomainName", "Email_UserName", "FirstName", "LastName" },
+                values: new object[,]
+                {
+                    { 1, new DateTime(2023, 8, 5, 18, 49, 13, 791, DateTimeKind.Local).AddTicks(5489), 1, true, null, null, "500500500", "dw.pl", "rob", "Robert", "Laskowski" },
+                    { 2, new DateTime(2023, 8, 5, 18, 49, 13, 791, DateTimeKind.Local).AddTicks(5495), 1, true, null, null, "603604605", "pkp.pl", "asiaf", "Joanna", "Ferdel" }
+                });
 
             migrationBuilder.InsertData(
                 table: "ServiceProviders",
-                columns: new[] { "Id", "CreatedAt", "CreatedBy", "Description", "IndustryId", "IsActive", "ModifiedAt", "ModifiedBy", "Name", "Nip", "Phone", "FirstName", "LastName", "Email_DomainName", "Email_UserName" },
-                values: new object[] { 1, new DateTime(2023, 6, 16, 9, 24, 39, 694, DateTimeKind.Local).AddTicks(3558), 1, null, 1, true, null, null, "Prześwietny Salon Art-Design", null, null, "Bob", "Kaminski", "op.pl", "art-design" });
+                columns: new[] { "Id", "CreatedAt", "CreatedBy", "Description", "IndustryId", "IsActive", "ModifiedAt", "ModifiedBy", "Name", "Nip", "Phone", "FirstName", "LastName", "Email_DomainName", "Email_UserName", "City", "Number", "Street", "ZipCode" },
+                values: new object[,]
+                {
+                    { 1, new DateTime(2023, 8, 5, 18, 49, 13, 791, DateTimeKind.Local).AddTicks(4734), 1, null, 1, true, null, null, "Prześwietny Salon Art-Design", null, null, "Bob", "Kaminski", "op.pl", "art-design", "Dulcza", "14", "Miła", "33-220" },
+                    { 2, new DateTime(2023, 8, 5, 18, 49, 13, 791, DateTimeKind.Local).AddTicks(4745), 1, null, 1, true, null, null, "Colormix", null, null, "Lukas", "Kolorowy", "wp.pl", "color", "Flismanowa", "234A", null, "32-120" }
+                });
 
             migrationBuilder.InsertData(
-                table: "Services",
+                table: "PersonPerformings",
+                columns: new[] { "Id", "CreatedAt", "CreatedBy", "IsActive", "ModifiedAt", "ModifiedBy", "Phone", "ServiceProviderId", "Email_DomainName", "Email_UserName", "FirstName", "LastName" },
+                values: new object[,]
+                {
+                    { 1, new DateTime(2023, 8, 5, 18, 49, 13, 791, DateTimeKind.Local).AddTicks(5837), 1, true, null, null, "200300400", 2, "op.pl", "kaska", "Kasia", "Łaskawa" },
+                    { 2, new DateTime(2023, 8, 5, 18, 49, 13, 791, DateTimeKind.Local).AddTicks(5849), 1, true, null, null, "500666444", 1, "wp.pl", "janko", "Janusz", "Obeznany" },
+                    { 3, new DateTime(2023, 8, 5, 18, 49, 13, 791, DateTimeKind.Local).AddTicks(5852), 1, true, null, null, "505606707", 1, "zix.com", "zenobio", "Zenon", "Gruszka" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Products",
                 columns: new[] { "Id", "CreatedAt", "CreatedBy", "Description", "IsActive", "ModifiedAt", "ModifiedBy", "Name", "ServiceProviderId" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2023, 6, 16, 9, 24, 39, 694, DateTimeKind.Local).AddTicks(4076), 1, "Beauty", true, null, null, "Idealny Makeup", 1 },
-                    { 2, new DateTime(2023, 6, 16, 9, 24, 39, 694, DateTimeKind.Local).AddTicks(4093), 1, "", true, null, null, "Golenie jak złoto", 1 }
+                    { 1, new DateTime(2023, 8, 5, 18, 49, 13, 791, DateTimeKind.Local).AddTicks(5436), 1, "Beauty", true, null, null, "Idealny Makeup", 1 },
+                    { 2, new DateTime(2023, 8, 5, 18, 49, 13, 791, DateTimeKind.Local).AddTicks(5450), 1, "", true, null, null, "Golenie jak złoto", 1 },
+                    { 3, new DateTime(2023, 8, 5, 18, 49, 13, 791, DateTimeKind.Local).AddTicks(5454), 1, "", true, null, null, "Kolor za zeta", 2 }
                 });
 
             migrationBuilder.CreateIndex(
@@ -232,14 +260,19 @@ namespace BookingServices.Persistance.Migrations
                 column: "ServiceProviderId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Products_ServiceProviderId",
+                table: "Products",
+                column: "ServiceProviderId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ServicePerformances_PersonPerformingId",
                 table: "ServicePerformances",
                 column: "PersonPerformingId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ServicePerformances_ServiceId",
+                name: "IX_ServicePerformances_ProductId",
                 table: "ServicePerformances",
-                column: "ServiceId");
+                column: "ProductId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ServicePerformances_ServiceRecipientId",
@@ -247,19 +280,14 @@ namespace BookingServices.Persistance.Migrations
                 column: "ServiceRecipientId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ServicePersonPerforming_ServicesId",
+                name: "IX_ServicePersonPerforming_ProductsId",
                 table: "ServicePersonPerforming",
-                column: "ServicesId");
+                column: "ProductsId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ServiceProviders_IndustryId",
                 table: "ServiceProviders",
                 column: "IndustryId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Services_ServiceProviderId",
-                table: "Services",
-                column: "ServiceProviderId");
         }
 
         /// <inheritdoc />
@@ -278,7 +306,7 @@ namespace BookingServices.Persistance.Migrations
                 name: "PersonPerformings");
 
             migrationBuilder.DropTable(
-                name: "Services");
+                name: "Products");
 
             migrationBuilder.DropTable(
                 name: "ServiceProviders");
