@@ -25,13 +25,9 @@ namespace BookingServices.Application.ServiceProviders.Commands.CreateServicePro
         public void Mapping(Profile profile)
         {
             profile.CreateMap<CreateServiceProviderCommand, ServiceProvider>()
-                  .ForMember(s => s.Email, m => m.MapFrom(src => Email.For(src.EmailAddress)))
-                  .ForPath(s => s.ContactPerson.FirstName, m => m.MapFrom(src => src.ContactFirstName))
-                  .ForPath(s => s.ContactPerson.LastName, m => m.MapFrom(src => src.ContactLastName))
-                  .ForPath(s => s.Address.Street, m => m.MapFrom(src => src.Street))
-                  .ForPath(s => s.Address.City, m => m.MapFrom(src => src.City))
-                  .ForPath(s => s.Address.ZipCode, m => m.MapFrom(src => src.ZipCode))
-                  .ForPath(s => s.Address.Number, m => m.MapFrom(src => src.Number));
+                 .ForMember(s => s.Email, m => m.MapFrom(src => Email.For(src.EmailAddress)))
+                 .ForMember(s => s.ContactPerson, m => m.MapFrom(src => new PersonName(src.ContactFirstName, src.ContactLastName)))
+                 .ForMember(s => s.Address, m => m.MapFrom(src => new Address(src.Street, src.City, src.ZipCode, src.Number)));
         }
     }
 }

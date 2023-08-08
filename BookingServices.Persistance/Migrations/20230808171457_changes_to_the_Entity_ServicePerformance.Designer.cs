@@ -4,6 +4,7 @@ using BookingServices.Persistance;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookingServices.Persistance.Migrations
 {
     [DbContext(typeof(BookingServicesDbContext))]
-    partial class BookingServicesDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230808171457_changes_to_the_Entity_ServicePerformance")]
+    partial class changes_to_the_Entity_ServicePerformance
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -61,7 +64,7 @@ namespace BookingServices.Persistance.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2023, 8, 8, 19, 21, 56, 834, DateTimeKind.Local).AddTicks(6947),
+                            CreatedAt = new DateTime(2023, 8, 8, 19, 14, 56, 586, DateTimeKind.Local).AddTicks(7155),
                             CreatedBy = 1,
                             Description = "Uroda; Styl życia",
                             IsActive = true,
@@ -109,7 +112,7 @@ namespace BookingServices.Persistance.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2023, 8, 8, 19, 21, 56, 834, DateTimeKind.Local).AddTicks(9746),
+                            CreatedAt = new DateTime(2023, 8, 8, 19, 14, 56, 586, DateTimeKind.Local).AddTicks(8697),
                             CreatedBy = 1,
                             IsActive = true,
                             Phone = "200300400",
@@ -118,7 +121,7 @@ namespace BookingServices.Persistance.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2023, 8, 8, 19, 21, 56, 834, DateTimeKind.Local).AddTicks(9769),
+                            CreatedAt = new DateTime(2023, 8, 8, 19, 14, 56, 586, DateTimeKind.Local).AddTicks(8709),
                             CreatedBy = 1,
                             IsActive = true,
                             Phone = "500666444",
@@ -127,7 +130,7 @@ namespace BookingServices.Persistance.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2023, 8, 8, 19, 21, 56, 834, DateTimeKind.Local).AddTicks(9775),
+                            CreatedAt = new DateTime(2023, 8, 8, 19, 14, 56, 586, DateTimeKind.Local).AddTicks(8713),
                             CreatedBy = 1,
                             IsActive = true,
                             Phone = "505606707",
@@ -178,7 +181,7 @@ namespace BookingServices.Persistance.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2023, 8, 8, 19, 21, 56, 834, DateTimeKind.Local).AddTicks(8410),
+                            CreatedAt = new DateTime(2023, 8, 8, 19, 14, 56, 586, DateTimeKind.Local).AddTicks(8307),
                             CreatedBy = 1,
                             Description = "Beauty",
                             IsActive = true,
@@ -188,7 +191,7 @@ namespace BookingServices.Persistance.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2023, 8, 8, 19, 21, 56, 834, DateTimeKind.Local).AddTicks(8449),
+                            CreatedAt = new DateTime(2023, 8, 8, 19, 14, 56, 586, DateTimeKind.Local).AddTicks(8321),
                             CreatedBy = 1,
                             Description = "",
                             IsActive = true,
@@ -198,7 +201,7 @@ namespace BookingServices.Persistance.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2023, 8, 8, 19, 21, 56, 834, DateTimeKind.Local).AddTicks(8453),
+                            CreatedAt = new DateTime(2023, 8, 8, 19, 14, 56, 586, DateTimeKind.Local).AddTicks(8324),
                             CreatedBy = 1,
                             Description = "",
                             IsActive = true,
@@ -228,9 +231,7 @@ namespace BookingServices.Persistance.Migrations
                         .HasColumnType("bit");
 
                     b.Property<bool>("IsFinished")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false);
+                        .HasColumnType("bit");
 
                     b.Property<DateTime?>("ModifiedAt")
                         .HasColumnType("datetime2");
@@ -316,7 +317,7 @@ namespace BookingServices.Persistance.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2023, 8, 8, 19, 21, 56, 834, DateTimeKind.Local).AddTicks(7674),
+                            CreatedAt = new DateTime(2023, 8, 8, 19, 14, 56, 586, DateTimeKind.Local).AddTicks(7602),
                             CreatedBy = 1,
                             IndustryId = 1,
                             IsActive = true,
@@ -325,7 +326,7 @@ namespace BookingServices.Persistance.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2023, 8, 8, 19, 21, 56, 834, DateTimeKind.Local).AddTicks(7686),
+                            CreatedAt = new DateTime(2023, 8, 8, 19, 14, 56, 586, DateTimeKind.Local).AddTicks(7613),
                             CreatedBy = 1,
                             IndustryId = 1,
                             IsActive = true,
@@ -368,7 +369,7 @@ namespace BookingServices.Persistance.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2023, 8, 8, 19, 21, 56, 834, DateTimeKind.Local).AddTicks(8496),
+                            CreatedAt = new DateTime(2023, 8, 8, 19, 14, 56, 586, DateTimeKind.Local).AddTicks(8362),
                             CreatedBy = 1,
                             IsActive = true,
                             Phone = "500500500"
@@ -376,7 +377,7 @@ namespace BookingServices.Persistance.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2023, 8, 8, 19, 21, 56, 834, DateTimeKind.Local).AddTicks(8502),
+                            CreatedAt = new DateTime(2023, 8, 8, 19, 14, 56, 586, DateTimeKind.Local).AddTicks(8367),
                             CreatedBy = 1,
                             IsActive = true,
                             Phone = "603604605"

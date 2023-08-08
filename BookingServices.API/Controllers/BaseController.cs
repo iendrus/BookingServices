@@ -1,10 +1,11 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookingServices.API.Controllers
 {
     [ApiController]
+    [EnableCors("MyAllowSpecificOrigins")]
     public class BaseController : ControllerBase
     {
         private IMediator _mediator;

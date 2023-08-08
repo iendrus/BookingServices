@@ -5,8 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 namespace BookingServices.API.Controllers
 {
     [Route("api/v1/services")]
-    [ApiController]
-    [EnableCors("MyAllowSpecificOrigins")]
     public class ServicesController : ControllerBase
     {
         /// <summary>
