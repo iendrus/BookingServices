@@ -1,5 +1,6 @@
 ﻿using BookingServices.Application.ServiceProviders.Commands.CreateServiceProvider;
 using BookingServices.Application.ServiceProviders.Commands.DeleteServiceProvider;
+using BookingServices.Application.ServiceProviders.Commands.UpdateServiceProvider;
 using BookingServices.Application.ServiceProviders.Queries.GetServiceProviderDetail;
 using BookingServices.Application.ServiceProviders.Queries.GetServiceProviders;
 using Microsoft.AspNetCore.Cors;
@@ -7,9 +8,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BookingServices.API.Controllers
 {
-
+    /// <summary>
+    /// 
+    /// </summary>
     [Route("api/serviceProviders")]
-    [EnableCors("MyAllowSpecificOrigins")]
     public class ServiceProvidersController : BaseController
     {
         /// <summary>
@@ -25,14 +27,23 @@ namespace BookingServices.API.Controllers
             return vm;
         }
 
+
         /// <summary>
-        /// Returns a list of of Service Providers
+        /// Returns a list of Service Providers by specified parameters or all if parameters are not defined
         /// </summary>
+        /// <param name="industryId"></param>
+        /// <param name="city">Returns items that match the entered phrase or where the first part matches the entered phrase. Capitalization does not matter.</param>
+        /// <param name="name">Returns items that match the entered phrase or where the first part matches the entered phrase. Capitalization does not matter.</param>
         /// <returns></returns>
         [HttpGet]
-        public async Task<ActionResult<ServiceProvidersVm>> GetServiceProividers()
+        public async Task<ActionResult<ServiceProvidersVm>> GetServiceProividers(int? industryId, string? city, string? name)
         {
-            var vm = await Mediator.Send(new GetServiceProvidersQuery() );
+            var vm = await Mediator.Send(new GetServiceProvidersQuery() 
+            { 
+              IndustryId = industryId,
+              City = city,
+              Name = name
+            });
             return vm;
         }
 
@@ -59,6 +70,19 @@ namespace BookingServices.API.Controllers
             var command = new DeleteServiceProviderCommand { ServiceProviderId = id };
             await Mediator.Send(command);
             return NoContent();
+        }
+        /// <summary>
+        /// Updattes a Service Provider by Id
+        /// </summary>
+        /// <param name="command"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateServiceProvider(UpdateServiceProviderCommand command, int id)
+        {
+            command.SetId(id);
+            var result = await Mediator.Send(command);
+            return Ok(result);
         }
 
     }

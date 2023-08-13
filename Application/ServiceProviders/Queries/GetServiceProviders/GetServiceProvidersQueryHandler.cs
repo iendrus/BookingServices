@@ -23,8 +23,22 @@ namespace BookingServices.Application.ServiceProviders.Queries.GetServiceProvide
         }
         public async Task<ServiceProvidersVm> Handle(GetServiceProvidersQuery request, CancellationToken cancellationToken)
         {
-            var serviceProviders = await _context.ServiceProviders
-                .Where(x => x.IsActive == true)
+            var serviceProvidersQuery = _context.ServiceProviders
+                .Where(x => x.IsActive == true);
+
+            if (request.IndustryId != null) 
+            {
+                serviceProvidersQuery = serviceProvidersQuery.Where(x => x.Industry.Id == request.IndustryId);
+            }
+            if (!string.IsNullOrEmpty(request.City))
+            {
+                serviceProvidersQuery = serviceProvidersQuery.Where(x => x.Address.City.StartsWith(request.City));
+            }
+            if (!string.IsNullOrEmpty(request.Name))
+            {
+                serviceProvidersQuery = serviceProvidersQuery.Where(x => x.Name.StartsWith(request.Name));
+            }
+            var serviceProviders = await serviceProvidersQuery
                 .AsNoTracking().ProjectTo<ServiceProvidersDto>(_mapper.ConfigurationProvider)
                 .ToListAsync();
             return new ServiceProvidersVm() { ServiceProviders = serviceProviders };

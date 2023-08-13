@@ -11,7 +11,8 @@ namespace BookingServices.Persistance
         {
             modelBuilder.Entity<Industry>(i =>
             {
-                i.HasData(new Industry()
+                i.HasData(
+                new Industry()
                 {
                     Id = 1,
                     Name = "Beauty",
@@ -19,7 +20,17 @@ namespace BookingServices.Persistance
                     CreatedAt = DateTime.Now,
                     CreatedBy = 1,
                     IsActive = true
+                },
+                new Industry()
+                {
+                    Id = 2,
+                    Name = "Fun",
+                    Description = "Rozrywka, zabawa",
+                    CreatedAt = DateTime.Now,
+                    CreatedBy = 1,
+                    IsActive = true
                 });
+                
             });
 
             modelBuilder.Entity<ServiceProvider>(s =>

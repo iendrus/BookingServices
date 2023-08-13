@@ -10,10 +10,12 @@ namespace BookingServices.Application.ServiceProviders.Queries.GetServiceProvide
         public int Id { get; set; }
         public string Name { get; set; }
         public string IndustryName { get; set; }
+        public string City { get; set; }
 
         public void Mapping(Profile profile) 
         {
-            profile.CreateMap<ServiceProvider, ServiceProvidersDto>();
+            profile.CreateMap<ServiceProvider, ServiceProvidersDto>()
+                .ForMember(s => s.City, m => m.MapFrom(src => src.Address.City));
         }
     }
 }

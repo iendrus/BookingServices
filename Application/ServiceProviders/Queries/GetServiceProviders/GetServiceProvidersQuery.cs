@@ -9,5 +9,8 @@ namespace BookingServices.Application.ServiceProviders.Queries.GetServiceProvide
 {
     public class GetServiceProvidersQuery : IRequest<ServiceProvidersVm>
     {
+        public int? IndustryId { get; set; }
+        public string? City { get; set; }
+        public string? Name { get; set; }
     }
 }

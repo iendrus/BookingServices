@@ -9,7 +9,6 @@
   <ItemGroup>
     <Folder Include="Common\Exceptions\" />
     <Folder Include="Interfaces\" />
-    <Folder Include="ServiceProviders\Commands\UpdateServiceProvider\" />
   </ItemGroup>
 
   <ItemGroup>
