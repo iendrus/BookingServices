@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using BookingServices.Application.Common.Mappings;
-using BookingServices.Application.ServiceProviders.Commands.CreateServiceProvider;
 using BookingServices.Domain.Entities;
 using BookingServices.Domain.ValueObjects;
 using MediatR;
@@ -31,9 +30,5 @@ namespace BookingServices.Application.ServiceProviders.Commands.UpdateServicePro
                  .ForMember(s => s.Address, m => m.MapFrom(src => new Address(src.Street, src.City, src.ZipCode, src.Number)));
         }
 
-        public void SetId(int id)
-        {
-            Id = id;
-        }
     }
 }

@@ -2,7 +2,7 @@
 using BookingServices.Application.Common.Interfaces;
 using BookingServices.Domain.Entities;
 using MediatR;
-using System;
+
 
 
 namespace BookingServices.Application.ServiceProviders.Commands.CreateServiceProvider

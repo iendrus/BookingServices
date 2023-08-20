@@ -19,9 +19,16 @@ namespace BookingServices.Application.ServiceProviders.Commands.UpdateServicePro
         public async Task<int> Handle(UpdateServiceProviderCommand request, CancellationToken cancellationToken)
         {
             var serviceProvider = await _context.ServiceProviders.Where(x => x.Id == request.Id).FirstOrDefaultAsync(cancellationToken);
-            _mapper.Map(request, serviceProvider);
-            await _context.SaveChangesAsync(cancellationToken);
-            return serviceProvider.Id;
+            if (serviceProvider != null)
+            {
+                _mapper.Map(request, serviceProvider);
+                await _context.SaveChangesAsync(cancellationToken);
+                return serviceProvider.Id;
+            }
+            else
+            {
+                return 0;
+            }
         }
     }
 }

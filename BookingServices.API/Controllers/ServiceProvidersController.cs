@@ -8,9 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BookingServices.API.Controllers
 {
-    /// <summary>
-    /// 
-    /// </summary>
+
     [Route("api/serviceProviders")]
     public class ServiceProvidersController : BaseController
     {
@@ -21,9 +19,9 @@ namespace BookingServices.API.Controllers
         /// <returns></returns>
         [HttpGet("{id}")]
         
-        public async Task<ActionResult<ServiceProviderDatailVm>> GetDetails(int id)
+        public async Task<ActionResult<ServiceProviderDatailVm>> GetServiceProviderDetails(int id)
         {
-            var vm = await Mediator.Send(new GetServiceProviderDatailQuery() { ServiceProviderId= id });
+            var vm = await Mediator.Send(new GetServiceProviderDatailQuery() { Id = id });
             return vm;
         }
 
@@ -32,8 +30,8 @@ namespace BookingServices.API.Controllers
         /// Returns a list of Service Providers by specified parameters or all if parameters are not defined
         /// </summary>
         /// <param name="industryId"></param>
-        /// <param name="city">Returns items that match the entered phrase or where the first part matches the entered phrase. Capitalization does not matter.</param>
-        /// <param name="name">Returns items that match the entered phrase or where the first part matches the entered phrase. Capitalization does not matter.</param>
+        /// <param name="city">Enter the beginning part of the search phrase. Capitalization does not matter.</param>
+        /// <param name="name">Enter the beginning part of the search phrase. Capitalization does not matter.</param>
         /// <returns></returns>
         [HttpGet]
         public async Task<ActionResult<ServiceProvidersVm>> GetServiceProividers(int? industryId, string? city, string? name)
@@ -67,7 +65,7 @@ namespace BookingServices.API.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteServiceProvider(int id)
         {
-            var command = new DeleteServiceProviderCommand { ServiceProviderId = id };
+            var command = new DeleteServiceProviderCommand { Id = id };
             await Mediator.Send(command);
             return NoContent();
         }
@@ -78,12 +76,16 @@ namespace BookingServices.API.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateServiceProvider(UpdateServiceProviderCommand command, int id)
+
+
+        public async Task<IActionResult> UpdateServiceProvider(int id, [FromBody] UpdateServiceProviderCommand command)
         {
-            command.SetId(id);
+            if (id != command.Id)
+            {
+                return BadRequest("Id w parametrze i w komendzie muszą być zgodne.");
+            }
             var result = await Mediator.Send(command);
             return Ok(result);
         }
-
     }
 }

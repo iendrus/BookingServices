@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BookingServices.Application.ServiceProviders.Queries.GetServiceProviderDetail
+namespace BookingServices.Application.PersonPerformings.Queries.GetPersonPerformingDetail
 {
-    public class GetServiceProviderDatailQuery : IRequest<ServiceProviderDatailVm>
+    public class GetPersonPerformingDatailQuery : IRequest<PersonPerformingDatailVm>
     {
         public int Id { get; set; }
     }

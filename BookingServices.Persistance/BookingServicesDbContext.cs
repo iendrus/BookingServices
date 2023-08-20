@@ -47,10 +47,11 @@ namespace BookingServices.Persistance
                         entry.Entity.ModifiedBy = 1;
                         entry.Entity.ModifiedAt = _dateTime.Now;
                         break;
-                    case EntityState.Detached:
+                    case EntityState.Deleted:
                         entry.Entity.ModifiedBy = 1;
                         entry.Entity.ModifiedAt = _dateTime.Now;
                         entry.Entity.IsActive = false;
+                        entry.State = EntityState.Modified;
                         break;
                 }
             }

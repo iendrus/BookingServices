@@ -9,6 +9,16 @@ namespace BookingServices.Domain.ValueObjects
         public string UserName { get; set; }
         public string DomainName { get; set; }
 
+        public Email()
+        {
+
+        }
+        public Email(string userName, string domainName)
+        {
+            UserName = userName;
+            DomainName = domainName;
+        }
+
         public static Email For( string email)
         {
             var emailObj = new Email();
