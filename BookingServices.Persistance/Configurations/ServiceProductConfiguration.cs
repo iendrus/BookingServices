@@ -1,28 +1,24 @@
 ﻿using BookingServices.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Emit;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace BookingServices.Persistance.Configurations
 {
-    public class ProductConfiguration : IEntityTypeConfiguration<Product>
+    public class ServiceProductConfiguration : IEntityTypeConfiguration<ServiceProduct>
     {
 
-        public void Configure(EntityTypeBuilder<Product> builder)
+        public void Configure(EntityTypeBuilder<ServiceProduct> builder)
         {
 
             //// --- configure one-to-many 
             builder
                 .HasMany(x => x.ServicePerformances)
-                .WithOne(x => x.Product)
-                .HasForeignKey(x => x.ProductId)
+                .WithOne(x => x.ServiceProduct)
+                .HasForeignKey(x => x.ServiceProductId)
                 .OnDelete(DeleteBehavior.Restrict)
                 .IsRequired();
+            builder.Property(p => p.Name).HasMaxLength(255).IsRequired();
         }
     }
 }

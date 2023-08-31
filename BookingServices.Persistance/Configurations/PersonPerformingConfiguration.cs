@@ -28,14 +28,14 @@ namespace BookingServices.Persistance.Configurations
 
             //--configure many - to - many
             builder
-                .HasMany(p => p.Products)
+                .HasMany(p => p.ServiceProducts)
                 .WithMany(s => s.PersonPerformings)
                 .UsingEntity<Dictionary<string, object>>(
                     "ServicePersonPerforming",
                 x => x
-                    .HasOne<Product>()
+                    .HasOne<ServiceProduct>()
                     .WithMany()
-                    .HasForeignKey("ProductsId")
+                    .HasForeignKey("ServiceProductsId")
                     .OnDelete(DeleteBehavior.Restrict),
                 x => x
                     .HasOne<PersonPerforming>()

@@ -20,7 +20,7 @@ namespace BookingServices.Persistance.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.8")
+                .HasAnnotation("ServiceProductVersion", "7.0.8")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -138,7 +138,7 @@ namespace BookingServices.Persistance.Migrations
                         });
                 });
 
-            modelBuilder.Entity("BookingServices.Domain.Entities.Product", b =>
+            modelBuilder.Entity("BookingServices.Domain.Entities.ServiceProduct", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -175,7 +175,7 @@ namespace BookingServices.Persistance.Migrations
 
                     b.HasIndex("ServiceProviderId");
 
-                    b.ToTable("Products");
+                    b.ToTable("ServiceProducts");
 
                     b.HasData(
                         new
@@ -239,7 +239,7 @@ namespace BookingServices.Persistance.Migrations
                     b.Property<int>("PersonPerformingId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ProductId")
+                    b.Property<int>("ServiceProductId")
                         .HasColumnType("int");
 
                     b.Property<string>("ServiceRecipientComments")
@@ -258,7 +258,7 @@ namespace BookingServices.Persistance.Migrations
 
                     b.HasIndex("PersonPerformingId");
 
-                    b.HasIndex("ProductId");
+                    b.HasIndex("ServiceProductId");
 
                     b.HasIndex("ServiceRecipientId");
 
@@ -389,12 +389,12 @@ namespace BookingServices.Persistance.Migrations
                     b.Property<int>("PersonPerformingsId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ProductsId")
+                    b.Property<int>("ServiceProductsId")
                         .HasColumnType("int");
 
-                    b.HasKey("PersonPerformingsId", "ProductsId");
+                    b.HasKey("PersonPerformingsId", "ServiceProductsId");
 
-                    b.HasIndex("ProductsId");
+                    b.HasIndex("ServiceProductsId");
 
                     b.ToTable("ServicePersonPerforming");
                 });
@@ -504,10 +504,10 @@ namespace BookingServices.Persistance.Migrations
                     b.Navigation("ServiceProvider");
                 });
 
-            modelBuilder.Entity("BookingServices.Domain.Entities.Product", b =>
+            modelBuilder.Entity("BookingServices.Domain.Entities.ServiceProduct", b =>
                 {
                     b.HasOne("BookingServices.Domain.Entities.ServiceProvider", "ServiceProvider")
-                        .WithMany("Products")
+                        .WithMany("ServiceProducts")
                         .HasForeignKey("ServiceProviderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -523,9 +523,9 @@ namespace BookingServices.Persistance.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("BookingServices.Domain.Entities.Product", "Product")
+                    b.HasOne("BookingServices.Domain.Entities.ServiceProduct", "ServiceProduct")
                         .WithMany("ServicePerformances")
-                        .HasForeignKey("ProductId")
+                        .HasForeignKey("ServiceProductId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
@@ -537,7 +537,7 @@ namespace BookingServices.Persistance.Migrations
 
                     b.Navigation("PersonPerforming");
 
-                    b.Navigation("Product");
+                    b.Navigation("ServiceProduct");
 
                     b.Navigation("ServiceRecipient");
                 });
@@ -784,9 +784,9 @@ namespace BookingServices.Persistance.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("BookingServices.Domain.Entities.Product", null)
+                    b.HasOne("BookingServices.Domain.Entities.ServiceProduct", null)
                         .WithMany()
-                        .HasForeignKey("ProductsId")
+                        .HasForeignKey("ServiceProductsId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
@@ -801,7 +801,7 @@ namespace BookingServices.Persistance.Migrations
                     b.Navigation("ServicePerformances");
                 });
 
-            modelBuilder.Entity("BookingServices.Domain.Entities.Product", b =>
+            modelBuilder.Entity("BookingServices.Domain.Entities.ServiceProduct", b =>
                 {
                     b.Navigation("ServicePerformances");
                 });
@@ -810,7 +810,7 @@ namespace BookingServices.Persistance.Migrations
                 {
                     b.Navigation("PersonPerformings");
 
-                    b.Navigation("Products");
+                    b.Navigation("ServiceProducts");
                 });
 
             modelBuilder.Entity("BookingServices.Domain.Entities.ServiceRecipient", b =>

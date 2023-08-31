@@ -1,5 +1,8 @@
 ﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using BookingServices.Application.Common.Interfaces;
+using BookingServices.Application.ServiceProducts.Queries.GetServiceProductDetails;
+using BookingServices.Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,13 +21,17 @@ namespace BookingServices.Application.PersonPerformings.Queries.GetPersonPerform
         }
         public async Task<PersonPerformingDatailVm> Handle(GetPersonPerformingDatailQuery request, CancellationToken cancellationToken)
         {
-            var personPerforming = await _context.PersonPerformings.Where(p => p.Id == request.Id && p.IsActive == true)
-                .Include(p => p.ServiceProvider)
-                .FirstOrDefaultAsync(cancellationToken);
+            var personPerforming = _context.PersonPerformings.Where(p => p.Id == request.Id && p.IsActive == true)
+                .Include(p => p.ServiceProvider);
 
-            var personPerformingVm = _mapper.Map<PersonPerformingDatailVm>(personPerforming); 
-
-            return personPerformingVm;
+            if (personPerforming != null)
+            {
+                var personPerformingVm = await personPerforming
+                    .AsNoTracking().ProjectTo<PersonPerformingDatailVm>(_mapper.ConfigurationProvider)
+                    .FirstOrDefaultAsync(cancellationToken);
+                return personPerformingVm;
+            }
+            throw new InvalidOperationException("Nie odnaleziono żądanego zasobu.");
         }
     }
 }

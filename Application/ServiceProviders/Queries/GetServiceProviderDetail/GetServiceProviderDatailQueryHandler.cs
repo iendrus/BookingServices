@@ -1,5 +1,10 @@
 ﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using BookingServices.Application.Common.Interfaces;
+using BookingServices.Application.Industries.Queries.GetIndustryDetails;
+using BookingServices.Application.ServiceProducts.Queries.GetServiceProductDetails;
+using BookingServices.Application.ServiceRecipients.Queries.GetServiceRecipientDetail;
+using BookingServices.Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -18,13 +23,16 @@ namespace BookingServices.Application.ServiceProviders.Queries.GetServiceProvide
         }
         public async Task<ServiceProviderDatailVm> Handle(GetServiceProviderDatailQuery request, CancellationToken cancellationToken)
         {
-            var serviceProvider = await _context.ServiceProviders.Where(s => s.Id == request.Id && s.IsActive == true)
-                .Include(s => s.Industry)
-                .FirstOrDefaultAsync(cancellationToken);
+            var serviceProvider = _context.ServiceProviders.Where(s => s.Id == request.Id && s.IsActive == true);
 
-            var serviceProviderVm = _mapper.Map<ServiceProviderDatailVm>(serviceProvider); 
-
-            return serviceProviderVm;
+            if (serviceProvider != null)
+            {
+                var serviceProviderVm = await serviceProvider
+                    .AsNoTracking().ProjectTo<ServiceProviderDatailVm>(_mapper.ConfigurationProvider)
+                    .FirstOrDefaultAsync(cancellationToken);
+                return serviceProviderVm;
+            }
+            throw new InvalidOperationException("Nie odnaleziono żądanego zasobu.");
         }
     }
 }

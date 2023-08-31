@@ -1,4 +1,5 @@
-﻿using BookingServices.Application.Common.Interfaces;
+﻿using AutoMapper;
+using BookingServices.Application.Common.Interfaces;
 using BookingServices.Domain.ValueObjects;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -14,6 +15,7 @@ namespace BookingServices.Application.ServiceRecipients.Commands.DeleteServiceRe
         public DeleteServiceRecipientCommandHandler(IBookingServicesDbContext bookingServicesDbContext)
         {
             _context = bookingServicesDbContext;
+
         }
 
         public async Task Handle(DeleteServiceRecipientCommand request, CancellationToken cancellationToken)
@@ -23,13 +25,17 @@ namespace BookingServices.Application.ServiceRecipients.Commands.DeleteServiceRe
 
             if (serviceRecipient != null)
             {
-
                 serviceRecipient.FullName = new PersonName(serviceRecipient.FullName.FirstName, serviceRecipient.FullName.LastName);
                 serviceRecipient.Email = new Email(serviceRecipient.Email.UserName, serviceRecipient.Email.DomainName);
 
                 _context.ServiceRecipients.Remove(serviceRecipient);
                 await _context.SaveChangesAsync(cancellationToken);
             }
+            else
+            {
+                throw new InvalidOperationException("Nie odnaleziono żądanego zasobu.");
+            }
         }
+
     }
 }

@@ -1,8 +1,6 @@
 ﻿using MediatR.Pipeline;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Linq;
 using System.Reflection;
 using BookingServices.Application.Common.Behaviours;
 using FluentValidation;

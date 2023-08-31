@@ -3,7 +3,7 @@
 
 namespace BookingServices.Domain.Entities
 {
-    public class Product : AuditableEntity
+    public class ServiceProduct : AuditableEntity
     {
         public string Name { get; set; }
         public string? Description { get; set; }

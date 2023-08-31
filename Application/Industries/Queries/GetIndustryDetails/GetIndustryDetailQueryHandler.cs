@@ -1,9 +1,8 @@
 ﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using BookingServices.Application.Common.Interfaces;
-using BookingServices.Application.ServiceProviders.Queries.GetServiceProviderDetail;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using System;
 
 
 namespace BookingServices.Application.Industries.Queries.GetIndustryDetails
@@ -19,11 +18,17 @@ namespace BookingServices.Application.Industries.Queries.GetIndustryDetails
         }
         public async Task<IndustryDetailVm> Handle(GetIndustryDetailQuery request, CancellationToken cancellationToken)
         {
-            var industry = await _context.Industries.Where(s => s.Id == request.Id && s.IsActive == true)
-                .FirstOrDefaultAsync(cancellationToken);
 
-            var industriesVm = _mapper.Map<IndustryDetailVm>(industry);
-            return industriesVm;
+            var industry = _context.Industries.Where(s => s.Id == request.Id && s.IsActive == true);
+
+            if (industry != null)
+            {
+                var industryVm = await industry
+                    .AsNoTracking().ProjectTo<IndustryDetailVm>(_mapper.ConfigurationProvider)
+                    .FirstOrDefaultAsync(cancellationToken);
+                return industryVm;
+            }
+            throw new InvalidOperationException("Nie odnaleziono żądanego zasobu.");
         }
     }
 }

@@ -20,9 +20,9 @@ namespace BookingServices.Application.ServiceRecipients.Commands.UpdateServiceRe
                 .Where(x => x.Id == request.Id && x.IsActive == true).FirstOrDefaultAsync(cancellationToken);
             if (serviceRecipient != null) 
             { 
-            _mapper.Map(request, serviceRecipient);
-            await _context.SaveChangesAsync(cancellationToken);
-            return serviceRecipient.Id;
+                _mapper.Map(request, serviceRecipient);
+                await _context.SaveChangesAsync(cancellationToken);
+                return serviceRecipient.Id;
             }
             else
             {

@@ -6,9 +6,9 @@ using System;
 
 namespace BookingServices.Application.Industries.Commands.CreateIndustry
 {
-    public class UpdateIndustryCommandValidator : AbstractValidator<CreateIndustryCommand>
+    public class CreateIndustryCommandValidator : AbstractValidator<CreateIndustryCommand>
     {
-        public UpdateIndustryCommandValidator()
+        public CreateIndustryCommandValidator()
         {
             RuleFor(x => x.Name)
                 .NotEmpty()

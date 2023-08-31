@@ -15,7 +15,8 @@ namespace BookingServices.Application.Industries.Queries.GetIndustryDetails
 
         public void Mapping(Profile profile)
         {
-            profile.CreateMap<Industry, IndustryDetailVm>();
+            profile.CreateMap<Industry, IndustryDetailVm>()
+                .ForMember(x => x.Id, m => m.MapFrom(src => src.Id));
         }
     }
 }

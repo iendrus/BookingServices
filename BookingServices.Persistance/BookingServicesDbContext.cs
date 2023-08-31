@@ -16,7 +16,7 @@ namespace BookingServices.Persistance
             _dateTime = dateTime;
         }
 
-        public DbSet<Product> Products { get; set; }
+        public DbSet<ServiceProduct> ServiceProducts { get; set; }
         public DbSet<PersonPerforming> PersonPerformings { get; set; }
         public DbSet<ServiceProvider> ServiceProviders { get; set; }
         public DbSet<ServicePerformance> ServicePerformances { get; set; }

@@ -49,21 +49,21 @@ namespace BookingServices.Persistance.Migrations
                 value: new DateTime(2023, 8, 8, 19, 21, 56, 834, DateTimeKind.Local).AddTicks(9775));
 
             migrationBuilder.UpdateData(
-                table: "Products",
+                table: "ServiceProducts",
                 keyColumn: "Id",
                 keyValue: 1,
                 column: "CreatedAt",
                 value: new DateTime(2023, 8, 8, 19, 21, 56, 834, DateTimeKind.Local).AddTicks(8410));
 
             migrationBuilder.UpdateData(
-                table: "Products",
+                table: "ServiceProducts",
                 keyColumn: "Id",
                 keyValue: 2,
                 column: "CreatedAt",
                 value: new DateTime(2023, 8, 8, 19, 21, 56, 834, DateTimeKind.Local).AddTicks(8449));
 
             migrationBuilder.UpdateData(
-                table: "Products",
+                table: "ServiceProducts",
                 keyColumn: "Id",
                 keyValue: 3,
                 column: "CreatedAt",
@@ -139,21 +139,21 @@ namespace BookingServices.Persistance.Migrations
                 value: new DateTime(2023, 8, 8, 19, 14, 56, 586, DateTimeKind.Local).AddTicks(8713));
 
             migrationBuilder.UpdateData(
-                table: "Products",
+                table: "ServiceProducts",
                 keyColumn: "Id",
                 keyValue: 1,
                 column: "CreatedAt",
                 value: new DateTime(2023, 8, 8, 19, 14, 56, 586, DateTimeKind.Local).AddTicks(8307));
 
             migrationBuilder.UpdateData(
-                table: "Products",
+                table: "ServiceProducts",
                 keyColumn: "Id",
                 keyValue: 2,
                 column: "CreatedAt",
                 value: new DateTime(2023, 8, 8, 19, 14, 56, 586, DateTimeKind.Local).AddTicks(8321));
 
             migrationBuilder.UpdateData(
-                table: "Products",
+                table: "ServiceProducts",
                 keyColumn: "Id",
                 keyValue: 3,
                 column: "CreatedAt",

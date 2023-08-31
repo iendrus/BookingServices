@@ -120,7 +120,7 @@ namespace BookingServices.Persistance.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Products",
+                name: "ServiceProducts",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -136,9 +136,9 @@ namespace BookingServices.Persistance.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Products", x => x.Id);
+                    table.PrimaryKey("PK_ServiceProducts", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Products_ServiceProviders_ServiceProviderId",
+                        name: "FK_ServiceProducts_ServiceProviders_ServiceProviderId",
                         column: x => x.ServiceProviderId,
                         principalTable: "ServiceProviders",
                         principalColumn: "Id",
@@ -153,7 +153,7 @@ namespace BookingServices.Persistance.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ServiceRecipientId = table.Column<int>(type: "int", nullable: false),
                     PersonPerformingId = table.Column<int>(type: "int", nullable: false),
-                    ProductId = table.Column<int>(type: "int", nullable: false),
+                    ServiceProductId = table.Column<int>(type: "int", nullable: false),
                     StatusId = table.Column<int>(type: "int", nullable: false),
                     ServiceRecipientComments = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     StartOfService = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -174,9 +174,9 @@ namespace BookingServices.Persistance.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ServicePerformances_Products_ProductId",
-                        column: x => x.ProductId,
-                        principalTable: "Products",
+                        name: "FK_ServicePerformances_ServiceProducts_ServiceProductId",
+                        column: x => x.ServiceProductId,
+                        principalTable: "ServiceProducts",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -192,11 +192,11 @@ namespace BookingServices.Persistance.Migrations
                 columns: table => new
                 {
                     PersonPerformingsId = table.Column<int>(type: "int", nullable: false),
-                    ProductsId = table.Column<int>(type: "int", nullable: false)
+                    ServiceProductsId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ServicePersonPerforming", x => new { x.PersonPerformingsId, x.ProductsId });
+                    table.PrimaryKey("PK_ServicePersonPerforming", x => new { x.PersonPerformingsId, x.ServiceProductsId });
                     table.ForeignKey(
                         name: "FK_ServicePersonPerforming_PersonPerformings_PersonPerformingsId",
                         column: x => x.PersonPerformingsId,
@@ -204,9 +204,9 @@ namespace BookingServices.Persistance.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_ServicePersonPerforming_Products_ProductsId",
-                        column: x => x.ProductsId,
-                        principalTable: "Products",
+                        name: "FK_ServicePersonPerforming_ServiceProducts_ServiceProductsId",
+                        column: x => x.ServiceProductsId,
+                        principalTable: "ServiceProducts",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -245,7 +245,7 @@ namespace BookingServices.Persistance.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Products",
+                table: "ServiceProducts",
                 columns: new[] { "Id", "CreatedAt", "CreatedBy", "Description", "IsActive", "ModifiedAt", "ModifiedBy", "Name", "ServiceProviderId" },
                 values: new object[,]
                 {
@@ -260,8 +260,8 @@ namespace BookingServices.Persistance.Migrations
                 column: "ServiceProviderId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Products_ServiceProviderId",
-                table: "Products",
+                name: "IX_ServiceProducts_ServiceProviderId",
+                table: "ServiceProducts",
                 column: "ServiceProviderId");
 
             migrationBuilder.CreateIndex(
@@ -270,9 +270,9 @@ namespace BookingServices.Persistance.Migrations
                 column: "PersonPerformingId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ServicePerformances_ProductId",
+                name: "IX_ServicePerformances_ServiceProductId",
                 table: "ServicePerformances",
-                column: "ProductId");
+                column: "ServiceProductId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ServicePerformances_ServiceRecipientId",
@@ -280,9 +280,9 @@ namespace BookingServices.Persistance.Migrations
                 column: "ServiceRecipientId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ServicePersonPerforming_ProductsId",
+                name: "IX_ServicePersonPerforming_ServiceProductsId",
                 table: "ServicePersonPerforming",
-                column: "ProductsId");
+                column: "ServiceProductsId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ServiceProviders_IndustryId",
@@ -306,7 +306,7 @@ namespace BookingServices.Persistance.Migrations
                 name: "PersonPerformings");
 
             migrationBuilder.DropTable(
-                name: "Products");
+                name: "ServiceProducts");
 
             migrationBuilder.DropTable(
                 name: "ServiceProviders");

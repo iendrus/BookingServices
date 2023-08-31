@@ -1,4 +1,6 @@
-﻿using BookingServices.Application.ServiceRecipients.Commands.CreateServiceRecipient;
+﻿using BookingServices.Application.ServiceProviders.Commands.DeleteServiceProvider;
+using BookingServices.Application.ServiceRecipients.Commands.CreateServiceRecipient;
+using BookingServices.Application.ServiceRecipients.Commands.DeleteServiceRecipient;
 using BookingServices.Application.ServiceRecipients.Commands.UpdateServiceRecipient;
 using BookingServices.Application.ServiceRecipients.Queries.GetServiceRecipientDetail;
 using BookingServices.Application.ServiceRecipients.Queries.GetServiceRecipients;
@@ -79,7 +81,18 @@ namespace BookingServices.API.Controllers
             return Ok(result);
         }
 
-
+        /// <summary>
+        /// Deletes a Service Recipient by Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteServiceRecipient(int id)
+        {
+            var command = new DeleteServiceRecipientCommand { Id = id };
+            await Mediator.Send(command);
+            return NoContent();
+        }
 
     }
 }

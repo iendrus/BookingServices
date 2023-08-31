@@ -70,10 +70,10 @@ namespace BookingServices.Persistance
                     );
             });
 
-            modelBuilder.Entity<Product>(s =>
+            modelBuilder.Entity<ServiceProduct>(s =>
             {
                 s.HasData(
-                new Product()
+                new ServiceProduct()
                 {
                     Id = 1,
                     ServiceProviderId = 1,
@@ -83,7 +83,7 @@ namespace BookingServices.Persistance
                     CreatedBy = 1,
                     IsActive = true
                 },
-                new Product()
+                new ServiceProduct()
                 {
                     Id = 2,
                     ServiceProviderId = 1,
@@ -93,7 +93,7 @@ namespace BookingServices.Persistance
                     CreatedBy = 1,
                     IsActive = true
                 },
-                new Product()
+                new ServiceProduct()
                 {
                     Id = 3,
                     ServiceProviderId = 2,

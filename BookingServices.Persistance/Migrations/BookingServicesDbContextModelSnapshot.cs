@@ -61,11 +61,20 @@ namespace BookingServices.Persistance.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2023, 8, 8, 19, 21, 56, 834, DateTimeKind.Local).AddTicks(6947),
+                            CreatedAt = new DateTime(2023, 8, 21, 17, 37, 57, 110, DateTimeKind.Local).AddTicks(7701),
                             CreatedBy = 1,
                             Description = "Uroda; Styl życia",
                             IsActive = true,
                             Name = "Beauty"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedAt = new DateTime(2023, 8, 21, 17, 37, 57, 110, DateTimeKind.Local).AddTicks(7768),
+                            CreatedBy = 1,
+                            Description = "Rozrywka, zabawa",
+                            IsActive = true,
+                            Name = "Fun"
                         });
                 });
 
@@ -109,7 +118,7 @@ namespace BookingServices.Persistance.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2023, 8, 8, 19, 21, 56, 834, DateTimeKind.Local).AddTicks(9746),
+                            CreatedAt = new DateTime(2023, 8, 21, 17, 37, 57, 110, DateTimeKind.Local).AddTicks(9511),
                             CreatedBy = 1,
                             IsActive = true,
                             Phone = "200300400",
@@ -118,7 +127,7 @@ namespace BookingServices.Persistance.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2023, 8, 8, 19, 21, 56, 834, DateTimeKind.Local).AddTicks(9769),
+                            CreatedAt = new DateTime(2023, 8, 21, 17, 37, 57, 110, DateTimeKind.Local).AddTicks(9525),
                             CreatedBy = 1,
                             IsActive = true,
                             Phone = "500666444",
@@ -127,83 +136,11 @@ namespace BookingServices.Persistance.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2023, 8, 8, 19, 21, 56, 834, DateTimeKind.Local).AddTicks(9775),
+                            CreatedAt = new DateTime(2023, 8, 21, 17, 37, 57, 110, DateTimeKind.Local).AddTicks(9529),
                             CreatedBy = 1,
                             IsActive = true,
                             Phone = "505606707",
                             ServiceProviderId = 1
-                        });
-                });
-
-            modelBuilder.Entity("BookingServices.Domain.Entities.Product", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("CreatedBy")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool?>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("ModifiedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("ModifiedBy")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ServiceProviderId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ServiceProviderId");
-
-                    b.ToTable("Products");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CreatedAt = new DateTime(2023, 8, 8, 19, 21, 56, 834, DateTimeKind.Local).AddTicks(8410),
-                            CreatedBy = 1,
-                            Description = "Beauty",
-                            IsActive = true,
-                            Name = "Idealny Makeup",
-                            ServiceProviderId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CreatedAt = new DateTime(2023, 8, 8, 19, 21, 56, 834, DateTimeKind.Local).AddTicks(8449),
-                            CreatedBy = 1,
-                            Description = "",
-                            IsActive = true,
-                            Name = "Golenie jak złoto",
-                            ServiceProviderId = 1
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CreatedAt = new DateTime(2023, 8, 8, 19, 21, 56, 834, DateTimeKind.Local).AddTicks(8453),
-                            CreatedBy = 1,
-                            Description = "",
-                            IsActive = true,
-                            Name = "Kolor za zeta",
-                            ServiceProviderId = 2
                         });
                 });
 
@@ -241,7 +178,7 @@ namespace BookingServices.Persistance.Migrations
                     b.Property<int>("PersonPerformingId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ProductId")
+                    b.Property<int>("ServiceProductId")
                         .HasColumnType("int");
 
                     b.Property<string>("ServiceRecipientComments")
@@ -257,11 +194,84 @@ namespace BookingServices.Persistance.Migrations
 
                     b.HasIndex("PersonPerformingId");
 
-                    b.HasIndex("ProductId");
+                    b.HasIndex("ServiceProductId");
 
                     b.HasIndex("ServiceRecipientId");
 
                     b.ToTable("ServicePerformances");
+                });
+
+            modelBuilder.Entity("BookingServices.Domain.Entities.ServiceProduct", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("CreatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool?>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("ModifiedBy")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<int>("ServiceProviderId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ServiceProviderId");
+
+                    b.ToTable("ServiceProducts");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedAt = new DateTime(2023, 8, 21, 17, 37, 57, 110, DateTimeKind.Local).AddTicks(8968),
+                            CreatedBy = 1,
+                            Description = "Beauty",
+                            IsActive = true,
+                            Name = "Idealny Makeup",
+                            ServiceProviderId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedAt = new DateTime(2023, 8, 21, 17, 37, 57, 110, DateTimeKind.Local).AddTicks(8982),
+                            CreatedBy = 1,
+                            Description = "",
+                            IsActive = true,
+                            Name = "Golenie jak złoto",
+                            ServiceProviderId = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CreatedAt = new DateTime(2023, 8, 21, 17, 37, 57, 110, DateTimeKind.Local).AddTicks(8986),
+                            CreatedBy = 1,
+                            Description = "",
+                            IsActive = true,
+                            Name = "Kolor za zeta",
+                            ServiceProviderId = 2
+                        });
                 });
 
             modelBuilder.Entity("BookingServices.Domain.Entities.ServiceProvider", b =>
@@ -316,7 +326,7 @@ namespace BookingServices.Persistance.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2023, 8, 8, 19, 21, 56, 834, DateTimeKind.Local).AddTicks(7674),
+                            CreatedAt = new DateTime(2023, 8, 21, 17, 37, 57, 110, DateTimeKind.Local).AddTicks(8235),
                             CreatedBy = 1,
                             IndustryId = 1,
                             IsActive = true,
@@ -325,7 +335,7 @@ namespace BookingServices.Persistance.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2023, 8, 8, 19, 21, 56, 834, DateTimeKind.Local).AddTicks(7686),
+                            CreatedAt = new DateTime(2023, 8, 21, 17, 37, 57, 110, DateTimeKind.Local).AddTicks(8243),
                             CreatedBy = 1,
                             IndustryId = 1,
                             IsActive = true,
@@ -368,7 +378,7 @@ namespace BookingServices.Persistance.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2023, 8, 8, 19, 21, 56, 834, DateTimeKind.Local).AddTicks(8496),
+                            CreatedAt = new DateTime(2023, 8, 21, 17, 37, 57, 110, DateTimeKind.Local).AddTicks(9025),
                             CreatedBy = 1,
                             IsActive = true,
                             Phone = "500500500"
@@ -376,7 +386,7 @@ namespace BookingServices.Persistance.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2023, 8, 8, 19, 21, 56, 834, DateTimeKind.Local).AddTicks(8502),
+                            CreatedAt = new DateTime(2023, 8, 21, 17, 37, 57, 110, DateTimeKind.Local).AddTicks(9031),
                             CreatedBy = 1,
                             IsActive = true,
                             Phone = "603604605"
@@ -388,12 +398,12 @@ namespace BookingServices.Persistance.Migrations
                     b.Property<int>("PersonPerformingsId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ProductsId")
+                    b.Property<int>("ServiceProductsId")
                         .HasColumnType("int");
 
-                    b.HasKey("PersonPerformingsId", "ProductsId");
+                    b.HasKey("PersonPerformingsId", "ServiceProductsId");
 
-                    b.HasIndex("ProductsId");
+                    b.HasIndex("ServiceProductsId");
 
                     b.ToTable("ServicePersonPerforming");
                 });
@@ -503,17 +513,6 @@ namespace BookingServices.Persistance.Migrations
                     b.Navigation("ServiceProvider");
                 });
 
-            modelBuilder.Entity("BookingServices.Domain.Entities.Product", b =>
-                {
-                    b.HasOne("BookingServices.Domain.Entities.ServiceProvider", "ServiceProvider")
-                        .WithMany("Products")
-                        .HasForeignKey("ServiceProviderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("ServiceProvider");
-                });
-
             modelBuilder.Entity("BookingServices.Domain.Entities.ServicePerformance", b =>
                 {
                     b.HasOne("BookingServices.Domain.Entities.PersonPerforming", "PersonPerforming")
@@ -522,9 +521,9 @@ namespace BookingServices.Persistance.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("BookingServices.Domain.Entities.Product", "Product")
+                    b.HasOne("BookingServices.Domain.Entities.ServiceProduct", "ServiceProduct")
                         .WithMany("ServicePerformances")
-                        .HasForeignKey("ProductId")
+                        .HasForeignKey("ServiceProductId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
@@ -536,9 +535,20 @@ namespace BookingServices.Persistance.Migrations
 
                     b.Navigation("PersonPerforming");
 
-                    b.Navigation("Product");
+                    b.Navigation("ServiceProduct");
 
                     b.Navigation("ServiceRecipient");
+                });
+
+            modelBuilder.Entity("BookingServices.Domain.Entities.ServiceProduct", b =>
+                {
+                    b.HasOne("BookingServices.Domain.Entities.ServiceProvider", "ServiceProvider")
+                        .WithMany("ServiceProducts")
+                        .HasForeignKey("ServiceProviderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ServiceProvider");
                 });
 
             modelBuilder.Entity("BookingServices.Domain.Entities.ServiceProvider", b =>
@@ -783,9 +793,9 @@ namespace BookingServices.Persistance.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("BookingServices.Domain.Entities.Product", null)
+                    b.HasOne("BookingServices.Domain.Entities.ServiceProduct", null)
                         .WithMany()
-                        .HasForeignKey("ProductsId")
+                        .HasForeignKey("ServiceProductsId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
@@ -800,7 +810,7 @@ namespace BookingServices.Persistance.Migrations
                     b.Navigation("ServicePerformances");
                 });
 
-            modelBuilder.Entity("BookingServices.Domain.Entities.Product", b =>
+            modelBuilder.Entity("BookingServices.Domain.Entities.ServiceProduct", b =>
                 {
                     b.Navigation("ServicePerformances");
                 });
@@ -809,7 +819,7 @@ namespace BookingServices.Persistance.Migrations
                 {
                     b.Navigation("PersonPerformings");
 
-                    b.Navigation("Products");
+                    b.Navigation("ServiceProducts");
                 });
 
             modelBuilder.Entity("BookingServices.Domain.Entities.ServiceRecipient", b =>

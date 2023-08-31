@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using BookingServices.Application.Common.Interfaces;
+using BookingServices.Application.ServiceProviders.Queries.GetServiceProviderDetail;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,14 +20,15 @@ namespace BookingServices.Application.ServiceRecipients.Queries.GetServiceRecipi
         }
         public async Task<ServiceRecipientDatailVm> Handle(GetServiceRecipientDatailQuery request, CancellationToken cancellationToken)
         {
-            var serviceRecipient = await _context.ServiceRecipients.Where(p => p.Id == request.Id && p.IsActive == true)
-                .FirstOrDefaultAsync(cancellationToken);
+            var serviceRecipient = _context.ServiceRecipients.Where(p => p.Id == request.Id && p.IsActive == true);
             if (serviceRecipient != null)
             {
-                var serviceRecipientVm = _mapper.Map<ServiceRecipientDatailVm>(serviceRecipient);
+                var serviceRecipientVm = await serviceRecipient
+                    .AsNoTracking().ProjectTo<ServiceRecipientDatailVm>(_mapper.ConfigurationProvider)
+                    .FirstOrDefaultAsync(cancellationToken);
                 return serviceRecipientVm;
             }
-            throw new InvalidOperationException("Nie znaleziono żądanego zasobu.");
+            throw new InvalidOperationException("Nie odnaleziono żądanego zasobu.");
         }
     }
 }

@@ -17,6 +17,6 @@ namespace BookingServices.Domain.Entities
 
         public Industry Industry { get; set; }
         public List<PersonPerforming> PersonPerformings { get; private set; } = new();
-        public List<Product> Products { get; private set; } = new();
+        public List<ServiceProduct> ServiceProducts { get; private set; } = new();
     }
 }
