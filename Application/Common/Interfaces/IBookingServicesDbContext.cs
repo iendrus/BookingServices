@@ -9,12 +9,12 @@ namespace BookingServices.Application.Common.Interfaces
 {
     public interface IBookingServicesDbContext
     {
-        DbSet<ServiceProduct> ServiceProducts { get; set; }
-        DbSet<PersonPerforming> PersonPerformings { get; set; }
-        DbSet<ServiceProvider> ServiceProviders { get; set; }
-        DbSet<ServicePerformance> ServicePerformances { get; set; }
+        DbSet<Product> Products { get; set; }
+        DbSet<Performer> Performers { get; set; }
+        DbSet<Provider> Providers { get; set; }
+        DbSet<Offer> Offers { get; set; }
         DbSet<Industry> Industries { get; set; }
-        DbSet<ServiceRecipient> ServiceRecipients { get; set; }
+        DbSet<Recipient> Recipients { get; set; }
 
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);

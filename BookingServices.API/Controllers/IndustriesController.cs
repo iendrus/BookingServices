@@ -67,8 +67,8 @@ namespace BookingServices.API.Controllers
             {
                 return BadRequest("Id w parametrze i w komendzie muszą być zgodne.");
             }
-            var result = await Mediator.Send(command);
-            return Ok(result);
+            await Mediator.Send(command);
+            return NoContent();
         }
 
         /// <summary>

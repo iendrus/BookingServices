@@ -33,10 +33,10 @@ namespace BookingServices.Persistance
                 
             });
 
-            modelBuilder.Entity<ServiceProvider>(s =>
+            modelBuilder.Entity<Provider>(s =>
             {
                 s.HasData(
-                new ServiceProvider()
+                new Provider()
                 {
                     Id = 1,
                     IndustryId = 1,
@@ -45,7 +45,7 @@ namespace BookingServices.Persistance
                     CreatedBy = 1,
                     IsActive = true,
                 },
-                new ServiceProvider()
+                new Provider()
                 {
                     Id = 2,
                     IndustryId = 1,
@@ -57,46 +57,46 @@ namespace BookingServices.Persistance
 
                 );
                 s.OwnsOne(s => s.Email).HasData(
-                    new { ServiceProviderId = 1, DomainName = "op.pl", UserName = "art-design" },
-                    new { ServiceProviderId = 2, DomainName = "wp.pl", UserName = "color" }
+                    new { ProviderId = 1, DomainName = "op.pl", UserName = "art-design" },
+                    new { ProviderId = 2, DomainName = "wp.pl", UserName = "color" }
                     );
                 s.OwnsOne(s => s.ContactPerson).HasData(
-                    new { ServiceProviderId = 1, FirstName = "Bob", LastName = "Kaminski" },
-                    new { ServiceProviderId = 2, FirstName = "Lukas", LastName = "Kolorowy" }
+                    new { ProviderId = 1, FirstName = "Bob", LastName = "Kaminski" },
+                    new { ProviderId = 2, FirstName = "Lukas", LastName = "Kolorowy" }
                     );
                 s.OwnsOne(s => s.Address).HasData(
-                    new { ServiceProviderId = 1, City = "Dulcza", Street = "Miła", ZipCode ="33-220", Number="14" },
-                    new { ServiceProviderId = 2, City = "Flismanowa", ZipCode = "32-120", Number = "234A" }
+                    new { ProviderId = 1, City = "Dulcza", Street = "Miła", ZipCode ="33-220", Number="14" },
+                    new { ProviderId = 2, City = "Flismanowa", ZipCode = "32-120", Number = "234A" }
                     );
             });
 
-            modelBuilder.Entity<ServiceProduct>(s =>
+            modelBuilder.Entity<Product>(s =>
             {
                 s.HasData(
-                new ServiceProduct()
+                new Product()
                 {
                     Id = 1,
-                    ServiceProviderId = 1,
+                    ProviderId = 1,
                     Name = "Idealny Makeup",
                     Description = "Beauty",
                     CreatedAt = DateTime.Now,
                     CreatedBy = 1,
                     IsActive = true
                 },
-                new ServiceProduct()
+                new Product()
                 {
                     Id = 2,
-                    ServiceProviderId = 1,
+                    ProviderId = 1,
                     Name = "Golenie jak złoto",
                     Description = "",
                     CreatedAt = DateTime.Now,
                     CreatedBy = 1,
                     IsActive = true
                 },
-                new ServiceProduct()
+                new Product()
                 {
                     Id = 3,
-                    ServiceProviderId = 2,
+                    ProviderId = 2,
                     Name = "Kolor za zeta",
                     Description = "",
                     CreatedAt = DateTime.Now,
@@ -105,10 +105,10 @@ namespace BookingServices.Persistance
                 });
             });
 
-            modelBuilder.Entity<ServiceRecipient>(s =>
+            modelBuilder.Entity<Recipient>(s =>
             {
                 s.HasData(
-                new ServiceRecipient()
+                new Recipient()
                 {
                     Id = 1,
                     Phone = "500500500",
@@ -116,7 +116,7 @@ namespace BookingServices.Persistance
                     CreatedBy = 1,
                     IsActive = true
                 },
-                new ServiceRecipient()
+                new Recipient()
                 {
                     Id = 2,
                     Phone = "603604605",
@@ -126,40 +126,40 @@ namespace BookingServices.Persistance
                 }
                 );
                 s.OwnsOne(s => s.FullName).HasData(
-                    new { ServiceRecipientId = 1 ,FirstName = "Robert", LastName = "Laskowski" },
-                    new { ServiceRecipientId = 2, FirstName = "Joanna", LastName = "Ferdel" }
+                    new { RecipientId = 1 ,FirstName = "Robert", LastName = "Laskowski" },
+                    new { RecipientId = 2, FirstName = "Joanna", LastName = "Ferdel" }
                     );
                 s.OwnsOne(s => s.Email).HasData(
-                    new { ServiceRecipientId = 1, UserName = "rob", DomainName = "dw.pl" },
-                    new { ServiceRecipientId = 2, UserName = "asiaf", DomainName = "pkp.pl" }
+                    new { RecipientId = 1, UserName = "rob", DomainName = "dw.pl" },
+                    new { RecipientId = 2, UserName = "asiaf", DomainName = "pkp.pl" }
                     );
             });
 
-            modelBuilder.Entity<PersonPerforming>(s =>
+            modelBuilder.Entity<Performer>(s =>
             {
                 s.HasData(
-                new PersonPerforming()
+                new Performer()
                 {
                     Id = 1,
-                    ServiceProviderId = 2,
+                    ProviderId = 2,
                     Phone = "200300400",
                     CreatedAt = DateTime.Now,
                     CreatedBy = 1,
                     IsActive = true
                 },
-                new PersonPerforming()
+                new Performer()
                 {
                     Id = 2,
-                    ServiceProviderId = 1,
+                    ProviderId = 1,
                     Phone = "500666444",
                     CreatedAt = DateTime.Now,
                     CreatedBy = 1,
                     IsActive = true
                 },
-                new PersonPerforming()
+                new Performer()
                 {
                     Id = 3,
-                    ServiceProviderId = 1,
+                    ProviderId = 1,
                     Phone = "505606707",
                     CreatedAt = DateTime.Now,
                     CreatedBy = 1,
@@ -167,14 +167,14 @@ namespace BookingServices.Persistance
                 }
                 );
                 s.OwnsOne(s => s.FullName).HasData(
-                    new { PersonPerformingId = 1, FirstName = "Kasia", LastName = "Łaskawa" },
-                    new { PersonPerformingId = 2, FirstName = "Janusz", LastName = "Obeznany" },
-                    new { PersonPerformingId = 3, FirstName = "Zenon", LastName = "Gruszka" }
+                    new { PerformerId = 1, FirstName = "Kasia", LastName = "Łaskawa" },
+                    new { PerformerId = 2, FirstName = "Janusz", LastName = "Obeznany" },
+                    new { PerformerId = 3, FirstName = "Zenon", LastName = "Gruszka" }
                     );
                 s.OwnsOne(s => s.Email).HasData(
-                    new { PersonPerformingId = 1, UserName = "kaska", DomainName = "op.pl" },
-                    new { PersonPerformingId = 2, UserName = "janko", DomainName = "wp.pl" },
-                    new { PersonPerformingId = 3, UserName = "zenobio", DomainName = "zix.com" }
+                    new { PerformerId = 1, UserName = "kaska", DomainName = "op.pl" },
+                    new { PerformerId = 2, UserName = "janko", DomainName = "wp.pl" },
+                    new { PerformerId = 3, UserName = "zenobio", DomainName = "zix.com" }
                     );
             });
 

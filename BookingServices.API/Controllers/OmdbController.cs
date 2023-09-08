@@ -1,5 +1,5 @@
 ﻿using BookingServices.Application.Common.Interfaces;
-using BookingServices.Application.ServiceProviders.Queries.GetServiceProviderDetail;
+using BookingServices.Application.Providers.Queries.GetProviderDetail;
 using BookingServices.Infrastructure.ExternalAPI.OMDB;
 using MediatR;
 using Microsoft.AspNetCore.Http;

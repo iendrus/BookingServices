@@ -1,4 +1,5 @@
-﻿using BookingServices.Application.Common.Interfaces;
+﻿using BookingServices.Application.Common.Helpers;
+using BookingServices.Application.Common.Interfaces;
 using Newtonsoft.Json;
 using System;
 using System.Net.Http;
@@ -37,7 +38,7 @@ namespace BookingServices.Infrastructure.ExternalAPI.OMDB
         public async Task<string> GetMovie(string searchFilter, CancellationToken cancellationToken)
         {
             var urlBuilder = new StringBuilder();
-            urlBuilder.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("?apikey=ad7c7082");
+            urlBuilder.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("?apikey=" + Helpers.GetFileContent("C:\\ApiKeys\\omdb_key.txt"));
             urlBuilder.Append("&t=").Append(searchFilter);
             var client = _httpClient;
             try
@@ -56,7 +57,7 @@ namespace BookingServices.Infrastructure.ExternalAPI.OMDB
                     }
                     else
                     {
-                        return "Something bad happened";
+                        return "Coś poszło nie tak...";
                     }
                 }
             }

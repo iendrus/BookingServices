@@ -22,6 +22,67 @@ namespace BookingServices.Persistance.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("BookingServices.Domain.Entities.Booking", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<decimal>("Cost")
+                        .HasPrecision(9, 2)
+                        .HasColumnType("decimal(9,2)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("CreatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("EndOfService")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool?>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("ModifiedBy")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OfferId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PerformerId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RecipientId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("StartOfService")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("State")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OfferId");
+
+                    b.HasIndex("PerformerId");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("RecipientId");
+
+                    b.ToTable("Bookings");
+                });
+
             modelBuilder.Entity("BookingServices.Domain.Entities.Industry", b =>
                 {
                     b.Property<int>("Id")
@@ -61,7 +122,7 @@ namespace BookingServices.Persistance.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2023, 8, 21, 17, 37, 57, 110, DateTimeKind.Local).AddTicks(7701),
+                            CreatedAt = new DateTime(2023, 9, 8, 13, 52, 32, 446, DateTimeKind.Local).AddTicks(4609),
                             CreatedBy = 1,
                             Description = "Uroda; Styl życia",
                             IsActive = true,
@@ -70,7 +131,7 @@ namespace BookingServices.Persistance.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2023, 8, 21, 17, 37, 57, 110, DateTimeKind.Local).AddTicks(7768),
+                            CreatedAt = new DateTime(2023, 9, 8, 13, 52, 32, 446, DateTimeKind.Local).AddTicks(4669),
                             CreatedBy = 1,
                             Description = "Rozrywka, zabawa",
                             IsActive = true,
@@ -78,7 +139,58 @@ namespace BookingServices.Persistance.Migrations
                         });
                 });
 
-            modelBuilder.Entity("BookingServices.Domain.Entities.PersonPerforming", b =>
+            modelBuilder.Entity("BookingServices.Domain.Entities.Offer", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<decimal>("Cost")
+                        .HasPrecision(9, 2)
+                        .HasColumnType("decimal(9,2)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("CreatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("EndOfService")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool?>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsAvailable")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("ModifiedBy")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PerformerId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("StartOfService")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PerformerId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("Offers");
+                });
+
+            modelBuilder.Entity("BookingServices.Domain.Entities.Performer", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -105,103 +217,46 @@ namespace BookingServices.Persistance.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
-                    b.Property<int>("ServiceProviderId")
+                    b.Property<int>("ProviderId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ServiceProviderId");
+                    b.HasIndex("ProviderId");
 
-                    b.ToTable("PersonPerformings");
+                    b.ToTable("Performers");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2023, 8, 21, 17, 37, 57, 110, DateTimeKind.Local).AddTicks(9511),
+                            CreatedAt = new DateTime(2023, 9, 8, 13, 52, 32, 446, DateTimeKind.Local).AddTicks(6245),
                             CreatedBy = 1,
                             IsActive = true,
                             Phone = "200300400",
-                            ServiceProviderId = 2
+                            ProviderId = 2
                         },
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2023, 8, 21, 17, 37, 57, 110, DateTimeKind.Local).AddTicks(9525),
+                            CreatedAt = new DateTime(2023, 9, 8, 13, 52, 32, 446, DateTimeKind.Local).AddTicks(6259),
                             CreatedBy = 1,
                             IsActive = true,
                             Phone = "500666444",
-                            ServiceProviderId = 1
+                            ProviderId = 1
                         },
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2023, 8, 21, 17, 37, 57, 110, DateTimeKind.Local).AddTicks(9529),
+                            CreatedAt = new DateTime(2023, 9, 8, 13, 52, 32, 446, DateTimeKind.Local).AddTicks(6263),
                             CreatedBy = 1,
                             IsActive = true,
                             Phone = "505606707",
-                            ServiceProviderId = 1
+                            ProviderId = 1
                         });
                 });
 
-            modelBuilder.Entity("BookingServices.Domain.Entities.ServicePerformance", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("CreatedBy")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("EndOfService")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool?>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsFinished")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false);
-
-                    b.Property<DateTime?>("ModifiedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("ModifiedBy")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PersonPerformingId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ServiceProductId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ServiceRecipientComments")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ServiceRecipientId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("StartOfService")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PersonPerformingId");
-
-                    b.HasIndex("ServiceProductId");
-
-                    b.HasIndex("ServiceRecipientId");
-
-                    b.ToTable("ServicePerformances");
-                });
-
-            modelBuilder.Entity("BookingServices.Domain.Entities.ServiceProduct", b =>
+            modelBuilder.Entity("BookingServices.Domain.Entities.Product", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -232,49 +287,87 @@ namespace BookingServices.Persistance.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<int>("ServiceProviderId")
+                    b.Property<int>("ProviderId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ServiceProviderId");
+                    b.HasIndex("ProviderId");
 
-                    b.ToTable("ServiceProducts");
+                    b.ToTable("Products");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2023, 8, 21, 17, 37, 57, 110, DateTimeKind.Local).AddTicks(8968),
+                            CreatedAt = new DateTime(2023, 9, 8, 13, 52, 32, 446, DateTimeKind.Local).AddTicks(5749),
                             CreatedBy = 1,
                             Description = "Beauty",
                             IsActive = true,
                             Name = "Idealny Makeup",
-                            ServiceProviderId = 1
+                            ProviderId = 1
                         },
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2023, 8, 21, 17, 37, 57, 110, DateTimeKind.Local).AddTicks(8982),
+                            CreatedAt = new DateTime(2023, 9, 8, 13, 52, 32, 446, DateTimeKind.Local).AddTicks(5763),
                             CreatedBy = 1,
                             Description = "",
                             IsActive = true,
                             Name = "Golenie jak złoto",
-                            ServiceProviderId = 1
+                            ProviderId = 1
                         },
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2023, 8, 21, 17, 37, 57, 110, DateTimeKind.Local).AddTicks(8986),
+                            CreatedAt = new DateTime(2023, 9, 8, 13, 52, 32, 446, DateTimeKind.Local).AddTicks(5767),
                             CreatedBy = 1,
                             Description = "",
                             IsActive = true,
                             Name = "Kolor za zeta",
-                            ServiceProviderId = 2
+                            ProviderId = 2
                         });
                 });
 
-            modelBuilder.Entity("BookingServices.Domain.Entities.ServiceProvider", b =>
+            modelBuilder.Entity("BookingServices.Domain.Entities.ProductPerformer", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("CreatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<bool?>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("ModifiedBy")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PerformerId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PerformerId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("ProductPerformers");
+                });
+
+            modelBuilder.Entity("BookingServices.Domain.Entities.Provider", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -320,13 +413,13 @@ namespace BookingServices.Persistance.Migrations
 
                     b.HasIndex("IndustryId");
 
-                    b.ToTable("ServiceProviders");
+                    b.ToTable("Providers");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2023, 8, 21, 17, 37, 57, 110, DateTimeKind.Local).AddTicks(8235),
+                            CreatedAt = new DateTime(2023, 9, 8, 13, 52, 32, 446, DateTimeKind.Local).AddTicks(5069),
                             CreatedBy = 1,
                             IndustryId = 1,
                             IsActive = true,
@@ -335,7 +428,7 @@ namespace BookingServices.Persistance.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2023, 8, 21, 17, 37, 57, 110, DateTimeKind.Local).AddTicks(8243),
+                            CreatedAt = new DateTime(2023, 9, 8, 13, 52, 32, 446, DateTimeKind.Local).AddTicks(5078),
                             CreatedBy = 1,
                             IndustryId = 1,
                             IsActive = true,
@@ -343,7 +436,7 @@ namespace BookingServices.Persistance.Migrations
                         });
                 });
 
-            modelBuilder.Entity("BookingServices.Domain.Entities.ServiceRecipient", b =>
+            modelBuilder.Entity("BookingServices.Domain.Entities.Recipient", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -372,13 +465,13 @@ namespace BookingServices.Persistance.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ServiceRecipients");
+                    b.ToTable("Recipients");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2023, 8, 21, 17, 37, 57, 110, DateTimeKind.Local).AddTicks(9025),
+                            CreatedAt = new DateTime(2023, 9, 8, 13, 52, 32, 446, DateTimeKind.Local).AddTicks(5807),
                             CreatedBy = 1,
                             IsActive = true,
                             Phone = "500500500"
@@ -386,39 +479,78 @@ namespace BookingServices.Persistance.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2023, 8, 21, 17, 37, 57, 110, DateTimeKind.Local).AddTicks(9031),
+                            CreatedAt = new DateTime(2023, 9, 8, 13, 52, 32, 446, DateTimeKind.Local).AddTicks(5813),
                             CreatedBy = 1,
                             IsActive = true,
                             Phone = "603604605"
                         });
                 });
 
-            modelBuilder.Entity("ServicePersonPerforming", b =>
+            modelBuilder.Entity("BookingServices.Domain.Entities.Booking", b =>
                 {
-                    b.Property<int>("PersonPerformingsId")
-                        .HasColumnType("int");
+                    b.HasOne("BookingServices.Domain.Entities.Offer", "Offer")
+                        .WithMany("Bookings")
+                        .HasForeignKey("OfferId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
-                    b.Property<int>("ServiceProductsId")
-                        .HasColumnType("int");
+                    b.HasOne("BookingServices.Domain.Entities.Performer", "Performer")
+                        .WithMany("Bookings")
+                        .HasForeignKey("PerformerId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
-                    b.HasKey("PersonPerformingsId", "ServiceProductsId");
+                    b.HasOne("BookingServices.Domain.Entities.Product", "Product")
+                        .WithMany("Bookings")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
-                    b.HasIndex("ServiceProductsId");
+                    b.HasOne("BookingServices.Domain.Entities.Recipient", "Recipient")
+                        .WithMany("Bookings")
+                        .HasForeignKey("RecipientId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
-                    b.ToTable("ServicePersonPerforming");
+                    b.Navigation("Offer");
+
+                    b.Navigation("Performer");
+
+                    b.Navigation("Product");
+
+                    b.Navigation("Recipient");
                 });
 
-            modelBuilder.Entity("BookingServices.Domain.Entities.PersonPerforming", b =>
+            modelBuilder.Entity("BookingServices.Domain.Entities.Offer", b =>
                 {
-                    b.HasOne("BookingServices.Domain.Entities.ServiceProvider", "ServiceProvider")
-                        .WithMany("PersonPerformings")
-                        .HasForeignKey("ServiceProviderId")
+                    b.HasOne("BookingServices.Domain.Entities.Performer", "Performer")
+                        .WithMany("Offers")
+                        .HasForeignKey("PerformerId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("BookingServices.Domain.Entities.Product", "Product")
+                        .WithMany("Offers")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Performer");
+
+                    b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("BookingServices.Domain.Entities.Performer", b =>
+                {
+                    b.HasOne("BookingServices.Domain.Entities.Provider", "Provider")
+                        .WithMany("Performers")
+                        .HasForeignKey("ProviderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.OwnsOne("BookingServices.Domain.ValueObjects.Email", "Email", b1 =>
                         {
-                            b1.Property<int>("PersonPerformingId")
+                            b1.Property<int>("PerformerId")
                                 .HasColumnType("int");
 
                             b1.Property<string>("DomainName")
@@ -431,29 +563,29 @@ namespace BookingServices.Persistance.Migrations
                                 .HasMaxLength(100)
                                 .HasColumnType("nvarchar(100)");
 
-                            b1.HasKey("PersonPerformingId");
+                            b1.HasKey("PerformerId");
 
-                            b1.ToTable("PersonPerformings");
+                            b1.ToTable("Performers");
 
                             b1.WithOwner()
-                                .HasForeignKey("PersonPerformingId");
+                                .HasForeignKey("PerformerId");
 
                             b1.HasData(
                                 new
                                 {
-                                    PersonPerformingId = 1,
+                                    PerformerId = 1,
                                     DomainName = "op.pl",
                                     UserName = "kaska"
                                 },
                                 new
                                 {
-                                    PersonPerformingId = 2,
+                                    PerformerId = 2,
                                     DomainName = "wp.pl",
                                     UserName = "janko"
                                 },
                                 new
                                 {
-                                    PersonPerformingId = 3,
+                                    PerformerId = 3,
                                     DomainName = "zix.com",
                                     UserName = "zenobio"
                                 });
@@ -461,7 +593,7 @@ namespace BookingServices.Persistance.Migrations
 
                     b.OwnsOne("BookingServices.Domain.ValueObjects.PersonName", "FullName", b1 =>
                         {
-                            b1.Property<int>("PersonPerformingId")
+                            b1.Property<int>("PerformerId")
                                 .HasColumnType("int");
 
                             b1.Property<string>("FirstName")
@@ -476,29 +608,29 @@ namespace BookingServices.Persistance.Migrations
                                 .HasColumnType("nvarchar(100)")
                                 .HasColumnName("LastName");
 
-                            b1.HasKey("PersonPerformingId");
+                            b1.HasKey("PerformerId");
 
-                            b1.ToTable("PersonPerformings");
+                            b1.ToTable("Performers");
 
                             b1.WithOwner()
-                                .HasForeignKey("PersonPerformingId");
+                                .HasForeignKey("PerformerId");
 
                             b1.HasData(
                                 new
                                 {
-                                    PersonPerformingId = 1,
+                                    PerformerId = 1,
                                     FirstName = "Kasia",
                                     LastName = "Łaskawa"
                                 },
                                 new
                                 {
-                                    PersonPerformingId = 2,
+                                    PerformerId = 2,
                                     FirstName = "Janusz",
                                     LastName = "Obeznany"
                                 },
                                 new
                                 {
-                                    PersonPerformingId = 3,
+                                    PerformerId = 3,
                                     FirstName = "Zenon",
                                     LastName = "Gruszka"
                                 });
@@ -510,58 +642,50 @@ namespace BookingServices.Persistance.Migrations
                     b.Navigation("FullName")
                         .IsRequired();
 
-                    b.Navigation("ServiceProvider");
+                    b.Navigation("Provider");
                 });
 
-            modelBuilder.Entity("BookingServices.Domain.Entities.ServicePerformance", b =>
+            modelBuilder.Entity("BookingServices.Domain.Entities.Product", b =>
                 {
-                    b.HasOne("BookingServices.Domain.Entities.PersonPerforming", "PersonPerforming")
-                        .WithMany("ServicePerformances")
-                        .HasForeignKey("PersonPerformingId")
+                    b.HasOne("BookingServices.Domain.Entities.Provider", "Provider")
+                        .WithMany("Products")
+                        .HasForeignKey("ProviderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("BookingServices.Domain.Entities.ServiceProduct", "ServiceProduct")
-                        .WithMany("ServicePerformances")
-                        .HasForeignKey("ServiceProductId")
+                    b.Navigation("Provider");
+                });
+
+            modelBuilder.Entity("BookingServices.Domain.Entities.ProductPerformer", b =>
+                {
+                    b.HasOne("BookingServices.Domain.Entities.Performer", "Performer")
+                        .WithMany("ProductPerformers")
+                        .HasForeignKey("PerformerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BookingServices.Domain.Entities.Product", "Product")
+                        .WithMany("ProductPerformers")
+                        .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("BookingServices.Domain.Entities.ServiceRecipient", "ServiceRecipient")
-                        .WithMany("ServicePerformances")
-                        .HasForeignKey("ServiceRecipientId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("Performer");
 
-                    b.Navigation("PersonPerforming");
-
-                    b.Navigation("ServiceProduct");
-
-                    b.Navigation("ServiceRecipient");
+                    b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("BookingServices.Domain.Entities.ServiceProduct", b =>
-                {
-                    b.HasOne("BookingServices.Domain.Entities.ServiceProvider", "ServiceProvider")
-                        .WithMany("ServiceProducts")
-                        .HasForeignKey("ServiceProviderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("ServiceProvider");
-                });
-
-            modelBuilder.Entity("BookingServices.Domain.Entities.ServiceProvider", b =>
+            modelBuilder.Entity("BookingServices.Domain.Entities.Provider", b =>
                 {
                     b.HasOne("BookingServices.Domain.Entities.Industry", "Industry")
-                        .WithMany("ServiceProviders")
+                        .WithMany("Providers")
                         .HasForeignKey("IndustryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.OwnsOne("BookingServices.Domain.ValueObjects.PersonName", "ContactPerson", b1 =>
                         {
-                            b1.Property<int>("ServiceProviderId")
+                            b1.Property<int>("ProviderId")
                                 .HasColumnType("int");
 
                             b1.Property<string>("FirstName")
@@ -576,23 +700,23 @@ namespace BookingServices.Persistance.Migrations
                                 .HasColumnType("nvarchar(100)")
                                 .HasColumnName("LastName");
 
-                            b1.HasKey("ServiceProviderId");
+                            b1.HasKey("ProviderId");
 
-                            b1.ToTable("ServiceProviders");
+                            b1.ToTable("Providers");
 
                             b1.WithOwner()
-                                .HasForeignKey("ServiceProviderId");
+                                .HasForeignKey("ProviderId");
 
                             b1.HasData(
                                 new
                                 {
-                                    ServiceProviderId = 1,
+                                    ProviderId = 1,
                                     FirstName = "Bob",
                                     LastName = "Kaminski"
                                 },
                                 new
                                 {
-                                    ServiceProviderId = 2,
+                                    ProviderId = 2,
                                     FirstName = "Lukas",
                                     LastName = "Kolorowy"
                                 });
@@ -600,7 +724,7 @@ namespace BookingServices.Persistance.Migrations
 
                     b.OwnsOne("BookingServices.Domain.ValueObjects.Email", "Email", b1 =>
                         {
-                            b1.Property<int>("ServiceProviderId")
+                            b1.Property<int>("ProviderId")
                                 .HasColumnType("int");
 
                             b1.Property<string>("DomainName")
@@ -613,23 +737,23 @@ namespace BookingServices.Persistance.Migrations
                                 .HasMaxLength(100)
                                 .HasColumnType("nvarchar(100)");
 
-                            b1.HasKey("ServiceProviderId");
+                            b1.HasKey("ProviderId");
 
-                            b1.ToTable("ServiceProviders");
+                            b1.ToTable("Providers");
 
                             b1.WithOwner()
-                                .HasForeignKey("ServiceProviderId");
+                                .HasForeignKey("ProviderId");
 
                             b1.HasData(
                                 new
                                 {
-                                    ServiceProviderId = 1,
+                                    ProviderId = 1,
                                     DomainName = "op.pl",
                                     UserName = "art-design"
                                 },
                                 new
                                 {
-                                    ServiceProviderId = 2,
+                                    ProviderId = 2,
                                     DomainName = "wp.pl",
                                     UserName = "color"
                                 });
@@ -637,7 +761,7 @@ namespace BookingServices.Persistance.Migrations
 
                     b.OwnsOne("BookingServices.Domain.ValueObjects.Address", "Address", b1 =>
                         {
-                            b1.Property<int>("ServiceProviderId")
+                            b1.Property<int>("ProviderId")
                                 .HasColumnType("int");
 
                             b1.Property<string>("City")
@@ -663,17 +787,17 @@ namespace BookingServices.Persistance.Migrations
                                 .HasColumnType("nvarchar(10)")
                                 .HasColumnName("ZipCode");
 
-                            b1.HasKey("ServiceProviderId");
+                            b1.HasKey("ProviderId");
 
-                            b1.ToTable("ServiceProviders");
+                            b1.ToTable("Providers");
 
                             b1.WithOwner()
-                                .HasForeignKey("ServiceProviderId");
+                                .HasForeignKey("ProviderId");
 
                             b1.HasData(
                                 new
                                 {
-                                    ServiceProviderId = 1,
+                                    ProviderId = 1,
                                     City = "Dulcza",
                                     Number = "14",
                                     Street = "Miła",
@@ -681,7 +805,7 @@ namespace BookingServices.Persistance.Migrations
                                 },
                                 new
                                 {
-                                    ServiceProviderId = 2,
+                                    ProviderId = 2,
                                     City = "Flismanowa",
                                     Number = "234A",
                                     ZipCode = "32-120"
@@ -700,11 +824,11 @@ namespace BookingServices.Persistance.Migrations
                     b.Navigation("Industry");
                 });
 
-            modelBuilder.Entity("BookingServices.Domain.Entities.ServiceRecipient", b =>
+            modelBuilder.Entity("BookingServices.Domain.Entities.Recipient", b =>
                 {
                     b.OwnsOne("BookingServices.Domain.ValueObjects.Email", "Email", b1 =>
                         {
-                            b1.Property<int>("ServiceRecipientId")
+                            b1.Property<int>("RecipientId")
                                 .HasColumnType("int");
 
                             b1.Property<string>("DomainName")
@@ -717,23 +841,23 @@ namespace BookingServices.Persistance.Migrations
                                 .HasMaxLength(100)
                                 .HasColumnType("nvarchar(100)");
 
-                            b1.HasKey("ServiceRecipientId");
+                            b1.HasKey("RecipientId");
 
-                            b1.ToTable("ServiceRecipients");
+                            b1.ToTable("Recipients");
 
                             b1.WithOwner()
-                                .HasForeignKey("ServiceRecipientId");
+                                .HasForeignKey("RecipientId");
 
                             b1.HasData(
                                 new
                                 {
-                                    ServiceRecipientId = 1,
+                                    RecipientId = 1,
                                     DomainName = "dw.pl",
                                     UserName = "rob"
                                 },
                                 new
                                 {
-                                    ServiceRecipientId = 2,
+                                    RecipientId = 2,
                                     DomainName = "pkp.pl",
                                     UserName = "asiaf"
                                 });
@@ -741,7 +865,7 @@ namespace BookingServices.Persistance.Migrations
 
                     b.OwnsOne("BookingServices.Domain.ValueObjects.PersonName", "FullName", b1 =>
                         {
-                            b1.Property<int>("ServiceRecipientId")
+                            b1.Property<int>("RecipientId")
                                 .HasColumnType("int");
 
                             b1.Property<string>("FirstName")
@@ -756,23 +880,23 @@ namespace BookingServices.Persistance.Migrations
                                 .HasColumnType("nvarchar(100)")
                                 .HasColumnName("LastName");
 
-                            b1.HasKey("ServiceRecipientId");
+                            b1.HasKey("RecipientId");
 
-                            b1.ToTable("ServiceRecipients");
+                            b1.ToTable("Recipients");
 
                             b1.WithOwner()
-                                .HasForeignKey("ServiceRecipientId");
+                                .HasForeignKey("RecipientId");
 
                             b1.HasData(
                                 new
                                 {
-                                    ServiceRecipientId = 1,
+                                    RecipientId = 1,
                                     FirstName = "Robert",
                                     LastName = "Laskowski"
                                 },
                                 new
                                 {
-                                    ServiceRecipientId = 2,
+                                    RecipientId = 2,
                                     FirstName = "Joanna",
                                     LastName = "Ferdel"
                                 });
@@ -785,46 +909,44 @@ namespace BookingServices.Persistance.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("ServicePersonPerforming", b =>
-                {
-                    b.HasOne("BookingServices.Domain.Entities.PersonPerforming", null)
-                        .WithMany()
-                        .HasForeignKey("PersonPerformingsId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("BookingServices.Domain.Entities.ServiceProduct", null)
-                        .WithMany()
-                        .HasForeignKey("ServiceProductsId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("BookingServices.Domain.Entities.Industry", b =>
                 {
-                    b.Navigation("ServiceProviders");
+                    b.Navigation("Providers");
                 });
 
-            modelBuilder.Entity("BookingServices.Domain.Entities.PersonPerforming", b =>
+            modelBuilder.Entity("BookingServices.Domain.Entities.Offer", b =>
                 {
-                    b.Navigation("ServicePerformances");
+                    b.Navigation("Bookings");
                 });
 
-            modelBuilder.Entity("BookingServices.Domain.Entities.ServiceProduct", b =>
+            modelBuilder.Entity("BookingServices.Domain.Entities.Performer", b =>
                 {
-                    b.Navigation("ServicePerformances");
+                    b.Navigation("Bookings");
+
+                    b.Navigation("Offers");
+
+                    b.Navigation("ProductPerformers");
                 });
 
-            modelBuilder.Entity("BookingServices.Domain.Entities.ServiceProvider", b =>
+            modelBuilder.Entity("BookingServices.Domain.Entities.Product", b =>
                 {
-                    b.Navigation("PersonPerformings");
+                    b.Navigation("Bookings");
 
-                    b.Navigation("ServiceProducts");
+                    b.Navigation("Offers");
+
+                    b.Navigation("ProductPerformers");
                 });
 
-            modelBuilder.Entity("BookingServices.Domain.Entities.ServiceRecipient", b =>
+            modelBuilder.Entity("BookingServices.Domain.Entities.Provider", b =>
                 {
-                    b.Navigation("ServicePerformances");
+                    b.Navigation("Performers");
+
+                    b.Navigation("Products");
+                });
+
+            modelBuilder.Entity("BookingServices.Domain.Entities.Recipient", b =>
+                {
+                    b.Navigation("Bookings");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using BookingServices.Application.Common.Interfaces;
-using BookingServices.Application.ServiceProviders.Commands.CreateServiceProvider;
+using BookingServices.Application.Providers.Commands.CreateProvider;
 using BookingServices.Domain.Entities;
 using MediatR;
 using System;

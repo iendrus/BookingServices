@@ -1,4 +1,5 @@
-﻿using BookingServices.Application.Common.Interfaces;
+﻿using BookingServices.Application.Common.Exceptions;
+using BookingServices.Application.Common.Interfaces;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -19,11 +20,13 @@ namespace BookingServices.Application.Industries.Commands.DeleteIndustry
         {
             var industry = await _context.Industries.Where(s => s.Id == request.Id && s.IsActive == true)
                .FirstOrDefaultAsync(cancellationToken);
-            if (industry != null)
+            if (industry == null)
             {
-                _context.Industries.Remove(industry);
-                await _context.SaveChangesAsync(cancellationToken);
+                throw new IsNullException();
             }
+            _context.Industries.Remove(industry);
+            await _context.SaveChangesAsync(cancellationToken);
+            await Task.CompletedTask;
         }
     }
 }

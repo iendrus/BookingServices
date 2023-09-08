@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
+using BookingServices.Application.Common.Exceptions;
 using BookingServices.Application.Common.Interfaces;
-using BookingServices.Application.ServiceProviders.Commands.CreateServiceProvider;
+using BookingServices.Application.Providers.Commands.CreateProvider;
 using BookingServices.Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -8,7 +9,7 @@ using System;
 
 namespace BookingServices.Application.Industries.Commands.UpdateIndustry
 {
-    public class UpdateIndustryCommandHandler : IRequestHandler<UpdateIndustryCommand, int>
+    public class UpdateIndustryCommandHandler : IRequestHandler<UpdateIndustryCommand>
     {
         private readonly IBookingServicesDbContext _context;
         private readonly IMapper _mapper;
@@ -17,20 +18,16 @@ namespace BookingServices.Application.Industries.Commands.UpdateIndustry
             _context = bookingServicesDbContext;
             _mapper = mapper;
         }
-        public async Task<int> Handle(UpdateIndustryCommand request, CancellationToken cancellationToken)
+        public async Task Handle(UpdateIndustryCommand request, CancellationToken cancellationToken)
         {
             var industry = await _context.Industries.Where(x => x.Id == request.Id).FirstOrDefaultAsync(cancellationToken);
-            if (industry != null)
+            if (industry == null)
             {
-                _mapper.Map(request, industry);
-                await _context.SaveChangesAsync(cancellationToken);
-                return industry.Id;
+                throw new IsNullException();
             }
-            else
-            {
-                return 0;
-            }
-
+            _mapper.Map(request, industry);
+            await _context.SaveChangesAsync(cancellationToken);
+            await Task.CompletedTask;
         }
 
     }

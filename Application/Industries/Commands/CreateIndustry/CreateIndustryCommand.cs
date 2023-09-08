@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using BookingServices.Application.Common.Mappings;
 using BookingServices.Application.Industries.Queries.GetIndustryDetails;
-using BookingServices.Application.ServiceProviders.Commands.CreateServiceProvider;
+using BookingServices.Application.Providers.Commands.CreateProvider;
 using BookingServices.Domain.Entities;
 using MediatR;
 using System;

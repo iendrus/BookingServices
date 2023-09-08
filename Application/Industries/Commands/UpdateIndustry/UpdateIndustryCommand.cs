@@ -1,14 +1,14 @@
 ﻿using AutoMapper;
 using BookingServices.Application.Common.Mappings;
 using BookingServices.Application.Industries.Queries.GetIndustryDetails;
-using BookingServices.Application.ServiceProviders.Commands.CreateServiceProvider;
+using BookingServices.Application.Providers.Commands.CreateProvider;
 using BookingServices.Domain.Entities;
 using MediatR;
 
 
 namespace BookingServices.Application.Industries.Commands.UpdateIndustry
 {
-    public class UpdateIndustryCommand : IRequest<int>, IMapFrom<UpdateIndustryCommand>
+    public class UpdateIndustryCommand : IRequest, IMapFrom<UpdateIndustryCommand>
     {
         public int Id { get; set; }
         public string Name { get; set; }

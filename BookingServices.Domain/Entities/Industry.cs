@@ -7,6 +7,6 @@ namespace BookingServices.Domain.Entities
     {
         public string Name { get; set; }
         public string? Description { get; set; }
-        public List<ServiceProvider> ServiceProviders { get; private set; } = new();
+        public List<Provider> Providers { get; private set; } = new();
     }
 }

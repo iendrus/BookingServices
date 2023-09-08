@@ -1,4 +1,4 @@
-﻿using BookingServices.Application.ServiceProviders.Commands.CreateServiceProvider;
+﻿using BookingServices.Application.Providers.Commands.CreateProvider;
 using FluentValidation;
 using FluentValidation.Validators;
 using System;

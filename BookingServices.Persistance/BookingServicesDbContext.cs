@@ -16,13 +16,16 @@ namespace BookingServices.Persistance
             _dateTime = dateTime;
         }
 
-        public DbSet<ServiceProduct> ServiceProducts { get; set; }
-        public DbSet<PersonPerforming> PersonPerformings { get; set; }
-        public DbSet<ServiceProvider> ServiceProviders { get; set; }
-        public DbSet<ServicePerformance> ServicePerformances { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<Performer> Performers { get; set; }
+        public DbSet<Provider> Providers { get; set; }
+        public DbSet<Offer> Offers { get; set; }
+        public DbSet<Booking> Bookings { get; set; }
         public DbSet<Industry> Industries { get; set; }
-        public DbSet<ServiceRecipient> ServiceRecipients { get; set; }
-      
+        public DbSet<Recipient> Recipients { get; set; }
+        public DbSet<ProductPerformer> ProductPerformers { get; set; }
+
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
 
