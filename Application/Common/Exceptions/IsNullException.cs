@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+
+using System.Runtime.InteropServices;
 
 namespace BookingServices.Application.Common.Exceptions
 {
     public class IsNullException : Exception
     {
 
-        public IsNullException():base("Nie odnaleziono wskazanego zasobu.")
+        public IsNullException(string message = "Nie odnaleziono wskazanego zasobu.") :base(message)
         {
 
         }

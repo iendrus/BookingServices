@@ -22,6 +22,7 @@ namespace BookingServices.Application.Products.Queries.GetProducts
             var productsQuery = _context.Products
                 .Where(x => x.IsActive == true);
 
+
             if (!string.IsNullOrEmpty(request.Name))
             {
                 productsQuery = productsQuery.Where(x => x.Name.Contains(request.Name));

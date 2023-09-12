@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace BookingServices.Persistance.Configurations
 {
-    public class ProductPerformerConfigurations : IEntityTypeConfiguration<ProductPerformer>
+    public class ProductPerformerConfiguration : IEntityTypeConfiguration<ProductPerformer>
     {
         public void Configure(EntityTypeBuilder<ProductPerformer> builder)
         {
@@ -14,12 +14,12 @@ namespace BookingServices.Persistance.Configurations
                 .WithMany(sp => sp.ProductPerformers)
                 .HasForeignKey(spp => spp.ProductId)
                  .OnDelete(DeleteBehavior.Restrict);
-
             builder
                 .HasOne(spp => spp.Performer)
                 .WithMany(pp => pp.ProductPerformers)
                 .HasForeignKey(spp => spp.PerformerId)
-                   .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Cascade);
+            builder.HasKey(p => new { p.ProductId, p.PerformerId });
         }
 
     }

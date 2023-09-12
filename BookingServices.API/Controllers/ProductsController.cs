@@ -54,7 +54,7 @@ namespace BookingServices.API.Controllers
         }
 
         /// <summary>
-        /// Updattes a Service Product by Id
+        /// Updates a Service Product by Id
         /// </summary>
         /// <param name="command"></param>
         /// <param name="id"></param>

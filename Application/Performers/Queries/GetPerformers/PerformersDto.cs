@@ -8,6 +8,7 @@ namespace BookingServices.Application.Performers.Queries.GetPerformers
     public class PerformersDto : IMapFrom<Performer>
     {
         public int Id { get; set; }
+        public int ProviderId { get; set; }
         public string FullName { get; set; }
         public string ProviderName { get; set; }
 

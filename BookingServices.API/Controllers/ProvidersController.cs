@@ -70,7 +70,7 @@ namespace BookingServices.API.Controllers
             return NoContent();
         }
         /// <summary>
-        /// Updattes a Service Provider by Id
+        /// Updates a Service Provider by Id
         /// </summary>
         /// <param name="command"></param>
         /// <param name="id"></param>

@@ -19,14 +19,46 @@ namespace BookingServices.Application.Offers.Commands.UpdateOffer
         {
             var offer = await _context.Offers
                 .Where(x => x.Id == request.Id && x.IsActive == true).FirstOrDefaultAsync(cancellationToken);
+            
             if (offer == null)
             {
                 throw new IsNullException();
+            }
+            
+            if (!await IsTheProductPerformerExists(request.PerformerId, request.ProductId, cancellationToken))
+            {
+                throw new NotExistsProductPerformerException();
+            }
+
+            if (!await IsThePerformerHavaTimeAvailable(request.Id, request.PerformerId, request.StartOfService, request.EndOfService, cancellationToken))
+            {
+                throw new TimeRangeUnavalaibleException();
             }
 
             _mapper.Map(request, offer);
             await _context.SaveChangesAsync(cancellationToken);
             await Task.CompletedTask;
+        }
+
+        private async Task<bool> IsTheProductPerformerExists(int performerId, int productId, CancellationToken cancellationToken)
+        {
+            bool result = await _context.ProductPerformers
+                .AnyAsync(pp => pp.PerformerId == performerId && pp.ProductId == productId, cancellationToken);
+
+            return result;
+        }
+
+        private async Task<bool> IsThePerformerHavaTimeAvailable(int offerId, int performerId, DateTime timeFrom,
+            DateTime timeTo, CancellationToken cancellationToken)
+        {
+            bool result = await _context.Offers
+                .AnyAsync(o => (o.PerformerId == performerId && o.IsActive == true && o.Id != offerId )
+                && ((o.StartOfService < timeTo && o.StartOfService > timeFrom)
+                || (o.EndOfService < timeTo && o.EndOfService > timeFrom)
+                || (o.StartOfService <= timeFrom && o.EndOfService >= timeTo)),
+                cancellationToken);
+
+            return !result;
         }
     }
 }

@@ -21,9 +21,8 @@ namespace BookingServices.Application.Offers.Queries.GetOfferDetail
         public async Task<OfferDatailVm> Handle(GetOfferDatailQuery request, CancellationToken cancellationToken)
         {
             var offer = _context.Offers
-                .Where(p => p.Id == request.Id && p.IsActive == true)
-                .Include(p => p.Performer)
-                .Include(p => p.Product);
+                .Where(p => p.Id == request.Id && p.IsActive == true);
+
             if (offer == null)
             {
                 throw new IsNullException();

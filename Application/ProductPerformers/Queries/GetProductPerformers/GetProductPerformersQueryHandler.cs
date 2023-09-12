@@ -1,11 +1,8 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using BookingServices.Application.Common.Interfaces;
-using BookingServices.Application.Providers.Queries.GetProviders;
-using BookingServices.Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using System;
 
 
 namespace BookingServices.Application.ProductPerformers.Queries.GetProductPerformers
@@ -13,34 +10,47 @@ namespace BookingServices.Application.ProductPerformers.Queries.GetProductPerfor
     public class GetProductPerformersQueryHandler : IRequestHandler<GetProductPerformersQuery, ProductPerformersVm>
     {
         private readonly IBookingServicesDbContext _context;
-        public GetProductPerformersQueryHandler(IBookingServicesDbContext bookingServicesDbContext)
+        private readonly IMapper _mapper;
+        public GetProductPerformersQueryHandler(IBookingServicesDbContext bookingServicesDbContext, IMapper mapper)
         {
             _context = bookingServicesDbContext;
+            _mapper = mapper;
 
         }
         public async Task<ProductPerformersVm> Handle(GetProductPerformersQuery request, CancellationToken cancellationToken)
         {
+            var query = _context.ProductPerformers.AsQueryable();
 
-            var query = from pp in _context.Performers 
-                         where 
-                        pp.IsActive == true
-                        && (request.PerformerName == null || 
-                        (pp.FullName.FirstName.StartsWith(request.PerformerName) 
-                            || pp.FullName.LastName.StartsWith(request.PerformerName)))
-                        && (request.ProviderName == null || pp.Provider.Name.StartsWith(request.ProviderName))
-                        && (request.PerformerId == null || pp.Id == request.PerformerId)
-                        && (request.ProviderId == null || pp.Provider.Id == request.ProviderId)
-                        select new ProductPerformersDto
-                        {
+            if (!string.IsNullOrEmpty(request.ProductName))
+            {
+                query = query.Where(x => x.Product.Name.Contains(request.ProductName));
+            }
+            if (!string.IsNullOrEmpty(request.PerformerName))
+            {
+                query = query.Where(x => x.Performer.FullName.FirstName.Contains(request.PerformerName)
+                    || x.Performer.FullName.LastName.Contains(request.PerformerName));
+            }
+            if (!string.IsNullOrEmpty(request.ProviderName))
+            {
+                query = query.Where(x => x.Performer.Provider.Name.Contains(request.ProviderName));
+            }
+            if (request.PerformerId != null)
+            {
+                query = query.Where(x => x.PerformerId == request.PerformerId);
+            }
+            if (request.ProductId != null)
+            {
+                query = query.Where(x => x.ProductId == request.ProductId);
+            }
+            if (request.ProviderId != null)
+            {
+                query = query.Where(x => x.Performer.ProviderId == request.ProviderId);
+            }
 
-
-                            PerformerId = pp.Id,
-                            PerformerName = pp.FullName.ToString(),
-
-                        };
-
-            var results = await query.AsNoTracking().ToListAsync(cancellationToken);
-            return new ProductPerformersVm() { ProductPerformers = results };
+            var productPerformers = await query
+                .AsNoTracking().ProjectTo<ProductPerformersDto>(_mapper.ConfigurationProvider)
+                .ToListAsync();
+            return new ProductPerformersVm() { ProductPerformers = productPerformers };
         }
     }
 }

@@ -5,6 +5,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 
+
 namespace BookingServices.Application.Performers.Queries.GetPerformers
 {
     public class GetPerformersQueryHandler : IRequestHandler<GetPerformersQuery, PerformersVm>
@@ -22,7 +23,7 @@ namespace BookingServices.Application.Performers.Queries.GetPerformers
             var performersQuery = _context.Performers
                 .Where(x => x.IsActive == true);
 
-            if (request.ProviderId != null) 
+            if (request.ProviderId != null)
             {
                 performersQuery = performersQuery.Where(x => x.Provider.Id == request.ProviderId);
             }

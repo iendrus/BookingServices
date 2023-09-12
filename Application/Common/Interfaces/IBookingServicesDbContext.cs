@@ -15,7 +15,8 @@ namespace BookingServices.Application.Common.Interfaces
         DbSet<Offer> Offers { get; set; }
         DbSet<Industry> Industries { get; set; }
         DbSet<Recipient> Recipients { get; set; }
-
+        DbSet<Booking> Bookings { get; set; }
+        DbSet<ProductPerformer> ProductPerformers { get; set; }
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }

@@ -5,10 +5,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace BookingServices.Persistance.Configurations
 {
-    public class ProviderConfiguration : IEntityTypeConfiguration<Provider>
+    public class ProviderConfiguration : BaseEntityConfiguration<Provider>
     {
-        public void Configure(EntityTypeBuilder<Provider> builder)
+        public override void Configure(EntityTypeBuilder<Provider> builder)
         {
+            base.Configure(builder);
             builder.OwnsOne(p => p.Email).Property(p => p.UserName)
                 .IsRequired()
                 .HasMaxLength(100);

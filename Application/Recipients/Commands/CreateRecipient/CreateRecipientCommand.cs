@@ -1,10 +1,8 @@
 ﻿using AutoMapper;
 using BookingServices.Application.Common.Mappings;
-using BookingServices.Application.Recipients.Queries.GetRecipientDetail;
 using BookingServices.Domain.Entities;
 using BookingServices.Domain.ValueObjects;
 using MediatR;
-using System.Reflection.Metadata;
 
 namespace BookingServices.Application.Recipients.Commands.CreateRecipient
 {

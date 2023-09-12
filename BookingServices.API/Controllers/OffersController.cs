@@ -3,7 +3,6 @@ using BookingServices.Application.Offers.Commands.DeleteOffer;
 using BookingServices.Application.Offers.Commands.UpdateOffer;
 using BookingServices.Application.Offers.Queries.GetOfferDetail;
 using BookingServices.Application.Offers.Queries.GetOffers;
-using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookingServices.API.Controllers
@@ -14,7 +13,7 @@ namespace BookingServices.API.Controllers
     public class OffersController : BaseController
     {
         /// <summary>
-        /// Returns the Service Performance details by Id
+        /// Returns the Offer details by Id
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -27,23 +26,40 @@ namespace BookingServices.API.Controllers
 
 
         /// <summary>
-        /// Returns the Service Performances list by Person Performer
+        /// Returns the Offers list
         /// </summary>
-        /// <param name="personPerformerId"></param>
+        /// <param name="performerId"></param>
+        /// <param name="providerId"></param>
+        /// <param name="providerName"></param>
+        /// <param name="isAvailable"></param>
+        /// <param name="productName"></param>
+        /// <param name="startOfServiceFrom"></param>
+        /// <param name="startOfServiceTo"></param>
+        /// <param name="isAnyServiceAvailableFrom"></param>
+        /// <param name="isAnyServiceAvailableTo"></param>
         /// <returns></returns>
         [HttpGet]
-        public async Task<ActionResult<OffersByPersonPerformerVm>> GetOffersByPersonPerformer(int personPerformerId, bool? isFinished)
+        public async Task<ActionResult<OffersVm>> GetOffers(int? performerId, int? providerId, 
+            string? providerName, bool? isAvailable, string? productName, DateTime? startOfServiceFrom, 
+            DateTime? startOfServiceTo, DateTime? isAnyServiceAvailableFrom, DateTime? isAnyServiceAvailableTo)
         {
-            var vm = await Mediator.Send(new GetOffersByPersonPerformerQuery()
+            var vm = await Mediator.Send(new GetOffersQuery()
             {
-                PersonPerformerId = personPerformerId,
-                IsFinished = isFinished
+                PerformerId = performerId,
+                IsAvailable = isAvailable,
+                ProviderId = providerId,
+                ProviderName = providerName,
+                ProductName = productName,
+                StartOfServiceFrom = startOfServiceFrom,
+                StartOfServiceTo = startOfServiceTo,
+                IsAnyServiceAvailableFrom = isAnyServiceAvailableFrom,
+                IsAnyServiceAvailableTo = isAnyServiceAvailableTo
             });
             return vm;
         }
 
         /// <summary>
-        /// Creates a new Service Product
+        /// Creates a new Offer
         /// </summary>
         /// <param name="command"></param>
         /// <returns></returns>
@@ -55,7 +71,7 @@ namespace BookingServices.API.Controllers
         }
 
         /// <summary>
-        /// Updattes a Service Product by Id
+        /// Updates a Offer by Id
         /// </summary>
         /// <param name="command"></param>
         /// <param name="id"></param>
@@ -72,7 +88,7 @@ namespace BookingServices.API.Controllers
         }
 
         /// <summary>
-        /// Deletes a Service Product by Id
+        /// Deletes a Offer by Id
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>

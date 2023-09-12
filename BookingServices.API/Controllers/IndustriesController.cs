@@ -55,7 +55,7 @@ namespace BookingServices.API.Controllers
         }
 
         /// <summary>
-        /// Updattes a Industry by Id
+        /// Updates a Industry by Id
         /// </summary>
         /// <param name="command"></param>
         /// <param name="id"></param>

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using BookingServices.Application.Common.Exceptions;
 using BookingServices.Application.Common.Interfaces;
 using BookingServices.Domain.Entities;
 using MediatR;
@@ -6,34 +7,36 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BookingServices.Application.ProductPerformers.Commands.CreateProductPerformer
 {
-    public class UpdateProductCommandHandler : IRequestHandler<CreateProductPerformerCommand, int>
+    public class CreateProductCommandHandler : IRequestHandler<CreateProductPerformerCommand, int>
     {
         private readonly IBookingServicesDbContext _context;
-        public UpdateProductCommandHandler(IBookingServicesDbContext bookingServicesDbContext)
+        private readonly IMapper _mapper;
+        public CreateProductCommandHandler(IBookingServicesDbContext bookingServicesDbContext, IMapper mapper)
         {
             _context = bookingServicesDbContext;
+            _mapper = mapper;
         }
         public async Task<int> Handle(CreateProductPerformerCommand request, CancellationToken cancellationToken)
         {
-            Performer performer = await _context.Performers
-                .Where(p => p.Id == request.PerformerId && p.IsActive == true)
-                .FirstOrDefaultAsync(cancellationToken);
-            if (performer != null)
+            if (!await IsProductExistsFromPerformerProvider(request.PerformerId, request.ProductId,cancellationToken))
             {
-                var productPerformer = await _context.Products
-                .Where(s => s.Id == request.ProductId
-                && s.Provider.Id == performer.ProviderId // produkty tylko oferowane przez Providera
-                && s.IsActive == true)
-                .FirstOrDefaultAsync(cancellationToken);
-
-                //if (productPerformer != null)
-                //{ 
-                //    productPerformer.Performers.Add(performer);
-                //    await _context.SaveChangesAsync(cancellationToken);
-                //    return 1;
-                //}
+                throw new NotExistsProductPerformerException();
             }
+
+            var productPerformer = _mapper.Map<ProductPerformer>(request);
+
+            _context.ProductPerformers.Add(productPerformer);
+            await _context.SaveChangesAsync(cancellationToken);
             return 0;
         }
+
+        private async Task<bool> IsProductExistsFromPerformerProvider(int performerId, int productId, CancellationToken cancellationToken)
+        {
+            bool result = await _context.Products
+                .AnyAsync(p => p.Provider.Performers.Any(p => p.Id == performerId) && p.Id == productId
+                    && p.IsActive == true, cancellationToken);
+            return result;
+        }
+
     }
 }

@@ -13,7 +13,7 @@ namespace BookingServices.Application.Offers.Commands.CreateOffer
             RuleFor(x => x.ProductId)
                 .NotEmpty()
                 .WithMessage("Pole ProductId nie może być puste.");
-               RuleFor(x => x.PerformerId)
+            RuleFor(x => x.PerformerId)
                 .NotEmpty()
                 .WithMessage("Pole PerformerId nie może być puste.");
             RuleFor(x => x.StartOfService)
@@ -26,8 +26,9 @@ namespace BookingServices.Application.Offers.Commands.CreateOffer
                 .WithMessage("Pole EndOfService nie może być puste.")
                 .GreaterThanOrEqualTo(x => x.StartOfService)
                 .WithMessage("Czas zakończenia nie może być wcześniejszy ani równy czasowi rozpoczęcia.");
-
+            RuleFor(x => x.Cost)
+                .NotEmpty().GreaterThanOrEqualTo(x => 0)
+                .WithMessage("Koszt usługi nie może być mniejszy niż zero.");
         }
-
     }
 }

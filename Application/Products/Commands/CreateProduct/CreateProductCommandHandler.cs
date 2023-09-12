@@ -6,11 +6,11 @@ using MediatR;
 
 namespace BookingServices.Application.Products.Commands.CreateProduct
 {
-    public class UpdateProductCommandHandler : IRequestHandler<CreateProductCommand, int>
+    public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand, int>
     {
         private readonly IBookingServicesDbContext _context;
         private readonly IMapper _mapper;
-        public UpdateProductCommandHandler(IBookingServicesDbContext bookingServicesDbContext, IMapper mapper)
+        public CreateProductCommandHandler(IBookingServicesDbContext bookingServicesDbContext, IMapper mapper)
         {
             _context = bookingServicesDbContext;
             _mapper = mapper;

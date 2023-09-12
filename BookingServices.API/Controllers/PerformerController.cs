@@ -61,7 +61,7 @@ namespace BookingServices.API.Controllers
         }
 
         /// <summary>
-        /// Updattes a Person Performing by Id
+        /// Updates a Person Performing by Id
         /// </summary>
         /// <param name="command"></param>
         /// <param name="id"></param>

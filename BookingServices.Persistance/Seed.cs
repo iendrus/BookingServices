@@ -53,20 +53,32 @@ namespace BookingServices.Persistance
                     CreatedAt = DateTime.Now,
                     CreatedBy = 1,
                     IsActive = true
+                },
+                new Provider()
+                {
+                    Id = 3,
+                    IndustryId = 2,
+                    Name = "Śmiechu warte",
+                    CreatedAt = DateTime.Now,
+                    CreatedBy = 1,
+                    IsActive = true
                 }
 
                 );
                 s.OwnsOne(s => s.Email).HasData(
                     new { ProviderId = 1, DomainName = "op.pl", UserName = "art-design" },
-                    new { ProviderId = 2, DomainName = "wp.pl", UserName = "color" }
+                    new { ProviderId = 2, DomainName = "wp.pl", UserName = "color" },
+                    new { ProviderId = 3, DomainName = "smiechu.pl", UserName = "warte" }
                     );
                 s.OwnsOne(s => s.ContactPerson).HasData(
                     new { ProviderId = 1, FirstName = "Bob", LastName = "Kaminski" },
-                    new { ProviderId = 2, FirstName = "Lukas", LastName = "Kolorowy" }
+                    new { ProviderId = 2, FirstName = "Lukas", LastName = "Kolorowy" },
+                    new { ProviderId = 3, FirstName = "Anna", LastName = "Zasępiona" }
                     );
                 s.OwnsOne(s => s.Address).HasData(
                     new { ProviderId = 1, City = "Dulcza", Street = "Miła", ZipCode ="33-220", Number="14" },
-                    new { ProviderId = 2, City = "Flismanowa", ZipCode = "32-120", Number = "234A" }
+                    new { ProviderId = 2, City = "Flismanowa", ZipCode = "32-120", Number = "234A" },
+                    new { ProviderId = 3, City = "Lasków", Street = "Dębowa", ZipCode = "27-100", Number = "22/165" }
                     );
             });
 
@@ -88,7 +100,7 @@ namespace BookingServices.Persistance
                     Id = 2,
                     ProviderId = 1,
                     Name = "Golenie jak złoto",
-                    Description = "",
+                    Description = "Bez draśnięcia",
                     CreatedAt = DateTime.Now,
                     CreatedBy = 1,
                     IsActive = true
@@ -98,11 +110,23 @@ namespace BookingServices.Persistance
                     Id = 3,
                     ProviderId = 2,
                     Name = "Kolor za zeta",
-                    Description = "",
+                    Description = "Będzie Pani zadowolona",
                     CreatedAt = DateTime.Now,
                     CreatedBy = 1,
                     IsActive = true
-                });
+                },
+                new Product()
+                {
+                    Id = 4,
+                    ProviderId = 3,
+                    Name = "Jazda na całego",
+                    Description = "Full wypas",
+                    CreatedAt = DateTime.Now,
+                    CreatedBy = 1,
+                    IsActive = true
+                })
+
+                ;
             });
 
             modelBuilder.Entity<Recipient>(s =>
@@ -164,20 +188,56 @@ namespace BookingServices.Persistance
                     CreatedAt = DateTime.Now,
                     CreatedBy = 1,
                     IsActive = true
+                },
+                new Performer()
+                {
+                    Id = 4,
+                    ProviderId = 3,
+                    Phone = "200300400",
+                    CreatedAt = DateTime.Now,
+                    CreatedBy = 1,
+                    IsActive = true
                 }
                 );
                 s.OwnsOne(s => s.FullName).HasData(
                     new { PerformerId = 1, FirstName = "Kasia", LastName = "Łaskawa" },
                     new { PerformerId = 2, FirstName = "Janusz", LastName = "Obeznany" },
-                    new { PerformerId = 3, FirstName = "Zenon", LastName = "Gruszka" }
+                    new { PerformerId = 3, FirstName = "Zenon", LastName = "Gruszka" },
+                    new { PerformerId = 4, FirstName = "Stefan", LastName = "Onieśmielający" }
                     );
                 s.OwnsOne(s => s.Email).HasData(
                     new { PerformerId = 1, UserName = "kaska", DomainName = "op.pl" },
                     new { PerformerId = 2, UserName = "janko", DomainName = "wp.pl" },
-                    new { PerformerId = 3, UserName = "zenobio", DomainName = "zix.com" }
+                    new { PerformerId = 3, UserName = "zenobio", DomainName = "zix.com" },
+                    new { PerformerId = 4, UserName = "stiwi", DomainName = "smiechu.pl" }
                     );
             });
 
+            modelBuilder.Entity<ProductPerformer>(s =>
+            {
+                s.HasData(
+                new ProductPerformer()
+                {
+                    PerformerId = 2,
+                    ProductId = 1
+                },
+                new ProductPerformer()
+                {
+                    PerformerId = 1,
+                    ProductId = 3
+                },
+                new ProductPerformer()
+                {
+                    PerformerId = 3,
+                    ProductId = 2
+                },
+                new ProductPerformer()
+                {
+                    PerformerId = 4,
+                    ProductId = 4
+                })
+                ;
+            });
         }
     }
 }

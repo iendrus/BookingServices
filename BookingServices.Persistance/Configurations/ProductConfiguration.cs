@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace BookingServices.Persistance.Configurations
 {
-    public class ProductConfiguration : IEntityTypeConfiguration<Product>
+    public class ProductConfiguration : BaseEntityConfiguration<Product>
     {
-
-        public void Configure(EntityTypeBuilder<Product> builder)
+        public override void Configure(EntityTypeBuilder<Product> builder)
         {
+            base.Configure(builder);
             builder.Property(p => p.Name).HasMaxLength(255).IsRequired();
             builder.Property(p => p.ProviderId).IsRequired();
 

@@ -2,7 +2,6 @@
 using BookingServices.Application.Common.Interfaces;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using System;
 
 
 namespace BookingServices.Application.ProductPerformers.Commands.DeleteProductPerformer
@@ -18,23 +17,15 @@ public class DeleteProductPerformerCommandHandler : IRequestHandler<DeleteProduc
 
     public async Task Handle(DeleteProductPerformerCommand request, CancellationToken cancellationToken)
     {
-            var productPerformer = await _context.Products
-                .Where(s => s.Id == request.ProductId && s.IsActive == true)
-                .FirstOrDefaultAsync(cancellationToken);
-            if (productPerformer == null)
+            var productPerformers = await _context.ProductPerformers.Where(p => p.PerformerId == request.PerformerId 
+            && p.ProductId == request.ProductId)
+               .FirstOrDefaultAsync(cancellationToken);
+            if (productPerformers == null)
             {
                 throw new IsNullException();
             }
-            //var performer = productPerformer.Performers
-            //    .FirstOrDefault(p => p.Id == request.PerformerId && p.IsActive == true);
-
-            //if (performer == null)
-            //{
-            //    throw new IsNullException();
-            //}
-
-            //productPerformer.Performers.Remove(performer);
-            //await _context.SaveChangesAsync(cancellationToken);
+            _context.ProductPerformers.Remove(productPerformers);
+            await _context.SaveChangesAsync(cancellationToken);
             await Task.CompletedTask;
         }
     }

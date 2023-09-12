@@ -23,7 +23,7 @@ namespace BookingServices.API.Controllers
         /// <returns></returns>
         [HttpGet]
         public async Task<ActionResult<ProductPerformersVm>> ProductPerformers(string? performerName, 
-            string? productName, int? productId, int? performerId, string? providerName, int providerId)
+            string? productName, int? productId, int? performerId, string? providerName, int? providerId)
         {
             var vm = await Mediator.Send(new GetProductPerformersQuery()
             {
@@ -33,7 +33,6 @@ namespace BookingServices.API.Controllers
                 ProductId = productId,
                 PerformerId= performerId,
                 ProviderId = providerId
-               
             });
             return vm;
         }

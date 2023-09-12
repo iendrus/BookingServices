@@ -1,33 +1,34 @@
-﻿using FluentValidation.Validators;
-using FluentValidation;
-
+﻿using FluentValidation;
+using BookingServices.Application.Common.Interfaces;
 
 namespace BookingServices.Application.Offers.Commands.UpdateOffer
 {
     public class UpdateOfferCommandValidator : AbstractValidator<UpdateOfferCommand>
     {
-        public UpdateOfferCommandValidator()
+        private readonly IDateTime _dateTime;
+        public UpdateOfferCommandValidator(IDateTime dateTime)
         {
             {
-                RuleFor(x => x.FirstName)
+                _dateTime = dateTime;
+                RuleFor(x => x.ProductId)
                     .NotEmpty()
-                        .WithMessage("Imię jest wymagane.")
-                    .MaximumLength(60)
-                    .MinimumLength(2)
-                        .WithMessage("Długość imienia musi zawierać się w przedziale 2 - 60 znaków.");
-                RuleFor(x => x.LastName)
+                    .WithMessage("Pole ProductId nie może być puste.");
+                RuleFor(x => x.PerformerId)
+                 .NotEmpty()
+                 .WithMessage("Pole PerformerId nie może być puste.");
+                RuleFor(x => x.StartOfService)
                     .NotEmpty()
-                        .WithMessage("Nazwisko jest wymagane.")
-                    .MaximumLength(60)
-                    .MinimumLength(2)
-                        .WithMessage("Długość nazwiska musi zawierać się w przedziale 2 - 60 znaków.");
-                RuleFor(x => x.EmailAddress)
-                    .NotEmpty()
-                        .WithMessage("Adres e-mail jest wymagany.")
-                    .EmailAddress(EmailValidationMode.Net4xRegex)
-                        .WithMessage("Podano nieprawidłowy adres e-mail.");
-                RuleFor(x => x.ProviderId).NotEmpty()
-                    .WithMessage("Pole ProviderId jest wymagane.");
+                    .WithMessage("Pole StartOfService nie może być puste.")
+                    .GreaterThanOrEqualTo(x => _dateTime.Now)
+                    .WithMessage("Czas rozpoczęcia nie może być wcześniejszy ani równy aktualnemu.");
+                RuleFor(x => x.EndOfService)
+                .NotEmpty()
+                    .WithMessage("Pole EndOfService nie może być puste.")
+                    .GreaterThanOrEqualTo(x => x.StartOfService)
+                    .WithMessage("Czas zakończenia nie może być wcześniejszy ani równy czasowi rozpoczęcia.");
+                RuleFor(x => x.Cost)
+                    .NotEmpty().GreaterThanOrEqualTo(x => 0)
+                    .WithMessage("Koszt usługi nie może być mniejszy niż zero.");
             }
         }
     }

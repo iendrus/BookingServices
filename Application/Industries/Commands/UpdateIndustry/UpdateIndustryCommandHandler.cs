@@ -1,11 +1,9 @@
 ﻿using AutoMapper;
 using BookingServices.Application.Common.Exceptions;
 using BookingServices.Application.Common.Interfaces;
-using BookingServices.Application.Providers.Commands.CreateProvider;
-using BookingServices.Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using System;
+
 
 namespace BookingServices.Application.Industries.Commands.UpdateIndustry
 {

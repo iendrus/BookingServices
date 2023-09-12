@@ -13,6 +13,5 @@ namespace BookingServices.Domain.Entities
         public int ProviderId { get; set; }
         public List<ProductPerformer> ProductPerformers { get; private set; } = new List<ProductPerformer>();
         public List<Offer> Offers { get; private set; } = new();
-        public List<Booking> Bookings { get; private set; } = new List<Booking>();
     }
 }
