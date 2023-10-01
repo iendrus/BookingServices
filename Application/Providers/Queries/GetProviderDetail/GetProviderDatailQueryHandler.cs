@@ -23,7 +23,7 @@ namespace BookingServices.Application.Providers.Queries.GetProviderDetail
         }
         public async Task<ProviderDatailVm> Handle(GetProviderDatailQuery request, CancellationToken cancellationToken)
         {
-            var provider = _context.Providers.Where(s => s.Id == request.Id && s.IsActive == true);
+            var provider = _context.Providers.Where(s => s.Id == request.Id && s.IsActive == 1);
 
             if (provider != null)
             {

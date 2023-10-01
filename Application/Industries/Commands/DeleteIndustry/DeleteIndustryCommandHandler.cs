@@ -18,7 +18,7 @@ namespace BookingServices.Application.Industries.Commands.DeleteIndustry
 
         public async Task Handle(DeleteIndustryCommand request, CancellationToken cancellationToken)
         {
-            var industry = await _context.Industries.Where(s => s.Id == request.Id && s.IsActive == true)
+            var industry = await _context.Industries.Where(s => s.Id == request.Id && s.IsActive == 1)
                .FirstOrDefaultAsync(cancellationToken);
             if (industry == null)
             {

@@ -18,7 +18,7 @@ namespace BookingServices.Application.Offers.Commands.DeleteOffer
         public async Task Handle(DeleteOfferCommand request, CancellationToken cancellationToken)
         {
             var offer = await _context.Offers
-               .Where(s => s.Id == request.Id && s.IsActive == true).FirstOrDefaultAsync(cancellationToken);
+               .Where(s => s.Id == request.Id && s.IsActive == 1).FirstOrDefaultAsync(cancellationToken);
 
             if (offer == null)
             {

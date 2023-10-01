@@ -20,7 +20,7 @@ namespace BookingServices.Application.Performers.Commands.DeletePerformer
         public async Task Handle(DeletePerformerCommand request, CancellationToken cancellationToken)
         {
             var performer = await _context.Performers
-               .Where(s => s.Id == request.Id && s.IsActive == true).FirstOrDefaultAsync(cancellationToken);
+               .Where(s => s.Id == request.Id && s.IsActive == 1).FirstOrDefaultAsync(cancellationToken);
 
             if (performer == null)
             {

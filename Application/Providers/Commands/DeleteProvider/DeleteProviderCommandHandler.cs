@@ -19,7 +19,7 @@ namespace BookingServices.Application.Providers.Commands.DeleteProvider
         public async Task Handle(DeleteProviderCommand request, CancellationToken cancellationToken)
         {
             var provider = await _context.Providers
-               .Where(s => s.Id == request.Id && s.IsActive == true).FirstOrDefaultAsync(cancellationToken);
+               .Where(s => s.Id == request.Id && s.IsActive == 1).FirstOrDefaultAsync(cancellationToken);
 
             if (provider == null)
             {

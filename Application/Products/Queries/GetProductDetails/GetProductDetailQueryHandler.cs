@@ -21,7 +21,7 @@ namespace BookingServices.Application.Products.Queries.GetProductDetails
         }
         public async Task<ProductDetailVm> Handle(GetProductDetailQuery request, CancellationToken cancellationToken)
         {
-            var product = _context.Products.Where(s => s.Id == request.Id && s.IsActive == true)
+            var product = _context.Products.Where(s => s.Id == request.Id && s.IsActive == 1)
                .Include(s => s.Provider);
 
             if (product != null)

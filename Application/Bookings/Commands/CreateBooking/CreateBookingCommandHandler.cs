@@ -21,13 +21,13 @@ namespace BookingServices.Application.Bookings.Commands.CreateBooking
         public async Task<int> Handle(CreateBookingCommand request, CancellationToken cancellationToken)
         {
             var offer = await _context.Offers
-               .FirstOrDefaultAsync(x => x.IsAvailable && x.IsActive && 
+               .FirstOrDefaultAsync(x => x.IsAvailable && x.IsActive == 1 && 
                x.Id == request.OfferId && x.EndOfService > _dateTime.Now);
             if (offer == null) 
             {
                 throw new IsNullException("Oferta jest niedostępna lub upłynął jej czas realizacji.");
             }
-            bool isAnyBookingForOffer = await _context.Bookings.AnyAsync(x => x.OfferId == request.OfferId && (int)x.State < 2 && x.IsActive);
+            bool isAnyBookingForOffer = await _context.Bookings.AnyAsync(x => x.OfferId == request.OfferId && (int)x.State < 2 && x.IsActive == 1);
             if (isAnyBookingForOffer || !offer.IsAvailable) 
             {
                 throw new TimeRangeUnavalaibleException();

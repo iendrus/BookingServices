@@ -18,7 +18,7 @@ namespace BookingServices.Application.Recipients.Commands.UpdateRecipient
         public async Task Handle(UpdateRecipientCommand request, CancellationToken cancellationToken)
         {
             var recipient = await _context.Recipients
-                .Where(x => x.Id == request.Id && x.IsActive == true).FirstOrDefaultAsync(cancellationToken);
+                .Where(x => x.Id == request.Id && x.IsActive == 1).FirstOrDefaultAsync(cancellationToken);
             if (recipient == null)
             {
                 throw new IsNullException();

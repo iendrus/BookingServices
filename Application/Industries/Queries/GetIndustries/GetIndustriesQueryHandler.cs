@@ -21,7 +21,7 @@ namespace BookingServices.Application.Industries.Queries.GetIndustries
         public async Task<IndustriesVm> Handle(GetIndustriesQuery request, CancellationToken cancellationToken)
         {
             var industriesQuery = _context.Industries
-                .Where(x => x.IsActive == true);
+                .Where(x => x.IsActive == 1);
 
             if (!string.IsNullOrEmpty(request.Name))
             {

@@ -83,7 +83,7 @@ namespace BookingServices.Persistance.Migrations
                             Cost = 150m,
                             CreatedAt = new DateTime(2023, 10, 1, 12, 40, 26, 688, DateTimeKind.Local).AddTicks(1360),
                             CreatedBy = "BobSmith@email.com",
-                            IsActive = true,
+                            IsActive = 1,
                             OfferId = 1,
                             RecipientId = 2,
                             State = 0
@@ -94,7 +94,7 @@ namespace BookingServices.Persistance.Migrations
                             Cost = 100m,
                             CreatedAt = new DateTime(2023, 10, 1, 12, 40, 26, 688, DateTimeKind.Local).AddTicks(1367),
                             CreatedBy = "BobSmith@email.com",
-                            IsActive = true,
+                            IsActive = 1,
                             OfferId = 2,
                             RecipientId = 1,
                             State = 1
@@ -148,7 +148,7 @@ namespace BookingServices.Persistance.Migrations
                             CreatedAt = new DateTime(2023, 10, 1, 12, 40, 26, 687, DateTimeKind.Local).AddTicks(8917),
                             CreatedBy = "BobSmith@email.com",
                             Description = "Uroda; Styl życia",
-                            IsActive = true,
+                            IsActive = 1,
                             Name = "Beauty"
                         },
                         new
@@ -157,7 +157,7 @@ namespace BookingServices.Persistance.Migrations
                             CreatedAt = new DateTime(2023, 10, 1, 12, 40, 26, 687, DateTimeKind.Local).AddTicks(8977),
                             CreatedBy = "BobSmith@email.com",
                             Description = "Rozrywka, zabawa",
-                            IsActive = true,
+                            IsActive = 1,
                             Name = "Fun"
                         });
                 });
@@ -233,7 +233,7 @@ namespace BookingServices.Persistance.Migrations
                             CreatedAt = new DateTime(2023, 10, 1, 12, 40, 26, 688, DateTimeKind.Local).AddTicks(1262),
                             CreatedBy = "BobSmith@email.com",
                             EndOfService = new DateTime(2023, 10, 3, 17, 0, 0, 688, DateTimeKind.Local).AddTicks(1255),
-                            IsActive = true,
+                            IsActive = 1,
                             IsAvailable = true,
                             PerformerId = 1,
                             ProductId = 3,
@@ -246,7 +246,7 @@ namespace BookingServices.Persistance.Migrations
                             CreatedAt = new DateTime(2023, 10, 1, 12, 40, 26, 688, DateTimeKind.Local).AddTicks(1279),
                             CreatedBy = "BobSmith@email.com",
                             EndOfService = new DateTime(2023, 10, 4, 15, 0, 0, 688, DateTimeKind.Local).AddTicks(1272),
-                            IsActive = true,
+                            IsActive = 1,
                             IsAvailable = true,
                             PerformerId = 2,
                             ProductId = 1,
@@ -259,7 +259,7 @@ namespace BookingServices.Persistance.Migrations
                             CreatedAt = new DateTime(2023, 10, 1, 12, 40, 26, 688, DateTimeKind.Local).AddTicks(1297),
                             CreatedBy = "BobSmith@email.com",
                             EndOfService = new DateTime(2023, 10, 5, 14, 0, 0, 688, DateTimeKind.Local).AddTicks(1290),
-                            IsActive = true,
+                            IsActive = 1,
                             IsAvailable = true,
                             PerformerId = 4,
                             ProductId = 4,
@@ -272,7 +272,7 @@ namespace BookingServices.Persistance.Migrations
                             CreatedAt = new DateTime(2023, 10, 1, 12, 40, 26, 688, DateTimeKind.Local).AddTicks(1313),
                             CreatedBy = "BobSmith@email.com",
                             EndOfService = new DateTime(2023, 10, 2, 14, 0, 0, 688, DateTimeKind.Local).AddTicks(1306),
-                            IsActive = true,
+                            IsActive = 1,
                             IsAvailable = true,
                             PerformerId = 3,
                             ProductId = 2,
@@ -327,7 +327,7 @@ namespace BookingServices.Persistance.Migrations
                             Id = 1,
                             CreatedAt = new DateTime(2023, 10, 1, 12, 40, 26, 688, DateTimeKind.Local).AddTicks(646),
                             CreatedBy = "BobSmith@email.com",
-                            IsActive = true,
+                            IsActive = 1,
                             Phone = "200300400",
                             ProviderId = 2
                         },
@@ -336,7 +336,7 @@ namespace BookingServices.Persistance.Migrations
                             Id = 2,
                             CreatedAt = new DateTime(2023, 10, 1, 12, 40, 26, 688, DateTimeKind.Local).AddTicks(719),
                             CreatedBy = "BobSmith@email.com",
-                            IsActive = true,
+                            IsActive = 1,
                             Phone = "500666444",
                             ProviderId = 1
                         },
@@ -345,7 +345,7 @@ namespace BookingServices.Persistance.Migrations
                             Id = 3,
                             CreatedAt = new DateTime(2023, 10, 1, 12, 40, 26, 688, DateTimeKind.Local).AddTicks(724),
                             CreatedBy = "BobSmith@email.com",
-                            IsActive = true,
+                            IsActive = 1,
                             Phone = "505606707",
                             ProviderId = 1
                         },
@@ -354,7 +354,7 @@ namespace BookingServices.Persistance.Migrations
                             Id = 4,
                             CreatedAt = new DateTime(2023, 10, 1, 12, 40, 26, 688, DateTimeKind.Local).AddTicks(728),
                             CreatedBy = "BobSmith@email.com",
-                            IsActive = true,
+                            IsActive = 1,
                             Phone = "200300400",
                             ProviderId = 3
                         });
@@ -412,7 +412,7 @@ namespace BookingServices.Persistance.Migrations
                             CreatedAt = new DateTime(2023, 10, 1, 12, 40, 26, 688, DateTimeKind.Local).AddTicks(175),
                             CreatedBy = "BobSmith@email.com",
                             Description = "Beauty",
-                            IsActive = true,
+                            IsActive = 1,
                             Name = "Idealny Makeup",
                             ProviderId = 1
                         },
@@ -422,7 +422,7 @@ namespace BookingServices.Persistance.Migrations
                             CreatedAt = new DateTime(2023, 10, 1, 12, 40, 26, 688, DateTimeKind.Local).AddTicks(188),
                             CreatedBy = "BobSmith@email.com",
                             Description = "Bez draśnięcia",
-                            IsActive = true,
+                            IsActive = 1,
                             Name = "Golenie jak złoto",
                             ProviderId = 1
                         },
@@ -432,7 +432,7 @@ namespace BookingServices.Persistance.Migrations
                             CreatedAt = new DateTime(2023, 10, 1, 12, 40, 26, 688, DateTimeKind.Local).AddTicks(191),
                             CreatedBy = "BobSmith@email.com",
                             Description = "Będzie Pani zadowolona",
-                            IsActive = true,
+                            IsActive = 1,
                             Name = "Kolor za zeta",
                             ProviderId = 2
                         },
@@ -442,7 +442,7 @@ namespace BookingServices.Persistance.Migrations
                             CreatedAt = new DateTime(2023, 10, 1, 12, 40, 26, 688, DateTimeKind.Local).AddTicks(195),
                             CreatedBy = "BobSmith@email.com",
                             Description = "Full wypas",
-                            IsActive = true,
+                            IsActive = 1,
                             Name = "Jazda na całego",
                             ProviderId = 3
                         });
@@ -545,7 +545,7 @@ namespace BookingServices.Persistance.Migrations
                             CreatedAt = new DateTime(2023, 10, 1, 12, 40, 26, 687, DateTimeKind.Local).AddTicks(9354),
                             CreatedBy = "BobSmith@email.com",
                             IndustryId = 1,
-                            IsActive = true,
+                            IsActive = 1,
                             Name = "Prześwietny Salon Art-Design"
                         },
                         new
@@ -554,7 +554,7 @@ namespace BookingServices.Persistance.Migrations
                             CreatedAt = new DateTime(2023, 10, 1, 12, 40, 26, 687, DateTimeKind.Local).AddTicks(9363),
                             CreatedBy = "BobSmith@email.com",
                             IndustryId = 1,
-                            IsActive = true,
+                            IsActive = 1,
                             Name = "Colormix"
                         },
                         new
@@ -563,7 +563,7 @@ namespace BookingServices.Persistance.Migrations
                             CreatedAt = new DateTime(2023, 10, 1, 12, 40, 26, 687, DateTimeKind.Local).AddTicks(9366),
                             CreatedBy = "BobSmith@email.com",
                             IndustryId = 2,
-                            IsActive = true,
+                            IsActive = 1,
                             Name = "Śmiechu warte"
                         });
                 });
@@ -610,7 +610,7 @@ namespace BookingServices.Persistance.Migrations
                             Id = 1,
                             CreatedAt = new DateTime(2023, 10, 1, 12, 40, 26, 688, DateTimeKind.Local).AddTicks(244),
                             CreatedBy = "BobSmith@email.com",
-                            IsActive = true,
+                            IsActive = 1,
                             Phone = "500500500"
                         },
                         new
@@ -618,7 +618,7 @@ namespace BookingServices.Persistance.Migrations
                             Id = 2,
                             CreatedAt = new DateTime(2023, 10, 1, 12, 40, 26, 688, DateTimeKind.Local).AddTicks(250),
                             CreatedBy = "BobSmith@email.com",
-                            IsActive = true,
+                            IsActive = 1,
                             Phone = "603604605"
                         });
                 });

@@ -21,7 +21,7 @@ namespace BookingServices.Application.Bookings.Queries.GetBookingDetail
         public async Task<BookingDatailVm> Handle(GetBookingDatailQuery request, CancellationToken cancellationToken)
         {
             var booking = _context.Bookings
-                .Where(p => p.Id == request.Id && p.IsActive == true);
+                .Where(p => p.Id == request.Id && p.IsActive == 1);
             if (booking == null)
             {
                 throw new IsNullException();

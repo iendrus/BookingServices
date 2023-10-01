@@ -61,7 +61,7 @@ namespace BookingServices.Persistance
                     case EntityState.Added:
                         entry.Entity.CreatedBy = _userService.Email;
                         entry.Entity.CreatedAt = _dateTime.Now;
-                        entry.Entity.IsActive = true;
+                        entry.Entity.IsActive = 1;
                         break;
                     case EntityState.Modified:
                         entry.Entity.ModifiedBy = _userService.Email;
@@ -70,7 +70,7 @@ namespace BookingServices.Persistance
                     case EntityState.Deleted:
                         entry.Entity.ModifiedBy = _userService.Email;
                         entry.Entity.ModifiedAt = _dateTime.Now;
-                        entry.Entity.IsActive = false;
+                        entry.Entity.IsActive = 0;
                         entry.State = EntityState.Modified;
                         break;
                 }

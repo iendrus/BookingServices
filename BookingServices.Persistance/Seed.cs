@@ -19,7 +19,7 @@ namespace BookingServices.Persistance
                     Description = "Uroda; Styl życia",
                     CreatedAt = DateTime.Now,
                     CreatedBy = "BobSmith@email.com",
-                    IsActive = true
+                    IsActive = 1
                 },
                 new Industry()
                 {
@@ -28,7 +28,7 @@ namespace BookingServices.Persistance
                     Description = "Rozrywka, zabawa",
                     CreatedAt = DateTime.Now,
                     CreatedBy = "BobSmith@email.com",
-                    IsActive = true
+                    IsActive = 1
                 });
                 
             });
@@ -43,7 +43,7 @@ namespace BookingServices.Persistance
                     Name = "Prześwietny Salon Art-Design",
                     CreatedAt = DateTime.Now,
                     CreatedBy = "BobSmith@email.com",
-                    IsActive = true,
+                    IsActive = 1,
                 },
                 new Provider()
                 {
@@ -52,7 +52,7 @@ namespace BookingServices.Persistance
                     Name = "Colormix",
                     CreatedAt = DateTime.Now,
                     CreatedBy = "BobSmith@email.com",
-                    IsActive = true
+                    IsActive = 1
                 },
                 new Provider()
                 {
@@ -61,7 +61,7 @@ namespace BookingServices.Persistance
                     Name = "Śmiechu warte",
                     CreatedAt = DateTime.Now,
                     CreatedBy = "BobSmith@email.com",
-                    IsActive = true
+                    IsActive = 1
                 }
 
                 );
@@ -93,7 +93,7 @@ namespace BookingServices.Persistance
                     Description = "Beauty",
                     CreatedAt = DateTime.Now,
                     CreatedBy = "BobSmith@email.com",
-                    IsActive = true
+                    IsActive = 1
                 },
                 new Product()
                 {
@@ -103,7 +103,7 @@ namespace BookingServices.Persistance
                     Description = "Bez draśnięcia",
                     CreatedAt = DateTime.Now,
                     CreatedBy = "BobSmith@email.com",
-                    IsActive = true
+                    IsActive = 1
                 },
                 new Product()
                 {
@@ -113,7 +113,7 @@ namespace BookingServices.Persistance
                     Description = "Będzie Pani zadowolona",
                     CreatedAt = DateTime.Now,
                     CreatedBy = "BobSmith@email.com",
-                    IsActive = true
+                    IsActive = 1
                 },
                 new Product()
                 {
@@ -123,7 +123,7 @@ namespace BookingServices.Persistance
                     Description = "Full wypas",
                     CreatedAt = DateTime.Now,
                     CreatedBy = "BobSmith@email.com",
-                    IsActive = true
+                    IsActive = 1
                 })
 
                 ;
@@ -138,7 +138,7 @@ namespace BookingServices.Persistance
                     Phone = "500500500",
                     CreatedAt = DateTime.Now,
                     CreatedBy = "BobSmith@email.com",
-                    IsActive = true
+                    IsActive = 1
                 },
                 new Recipient()
                 {
@@ -146,7 +146,7 @@ namespace BookingServices.Persistance
                     Phone = "603604605",
                     CreatedAt = DateTime.Now,
                     CreatedBy = "BobSmith@email.com",
-                    IsActive = true
+                    IsActive = 1
                 }
                 );
                 s.OwnsOne(s => s.FullName).HasData(
@@ -169,7 +169,7 @@ namespace BookingServices.Persistance
                     Phone = "200300400",
                     CreatedAt = DateTime.Now,
                     CreatedBy = "BobSmith@email.com",
-                    IsActive = true
+                    IsActive = 1
                 },
                 new Performer()
                 {
@@ -178,7 +178,7 @@ namespace BookingServices.Persistance
                     Phone = "500666444",
                     CreatedAt = DateTime.Now,
                     CreatedBy = "BobSmith@email.com",
-                    IsActive = true
+                    IsActive = 1
                 },
                 new Performer()
                 {
@@ -187,7 +187,7 @@ namespace BookingServices.Persistance
                     Phone = "505606707",
                     CreatedAt = DateTime.Now,
                     CreatedBy = "BobSmith@email.com",
-                    IsActive = true
+                    IsActive = 1
                 },
                 new Performer()
                 {
@@ -196,7 +196,7 @@ namespace BookingServices.Persistance
                     Phone = "200300400",
                     CreatedAt = DateTime.Now,
                     CreatedBy = "BobSmith@email.com",
-                    IsActive = true
+                    IsActive = 1
                 }
                 );
                 s.OwnsOne(s => s.FullName).HasData(
@@ -254,7 +254,7 @@ namespace BookingServices.Persistance
                     EndOfService = DateTime.Now.AddDays(2).AddHours(5).AddMinutes(-DateTime.Now.Minute).AddSeconds(-DateTime.Now.Second),
                     CreatedAt = DateTime.Now,
                     CreatedBy = "BobSmith@email.com",
-                    IsActive = true
+                    IsActive = 1
                 },
                 new Offer()
                 {
@@ -267,7 +267,7 @@ namespace BookingServices.Persistance
                     EndOfService = DateTime.Now.AddDays(3).AddHours(3).AddMinutes(-DateTime.Now.Minute).AddSeconds(-DateTime.Now.Second),
                     CreatedAt = DateTime.Now,
                     CreatedBy = "BobSmith@email.com",
-                    IsActive = true
+                    IsActive = 1
                 },
                 new Offer()
                 {
@@ -280,7 +280,7 @@ namespace BookingServices.Persistance
                     EndOfService = DateTime.Now.AddDays(4).AddHours(2).AddMinutes(-DateTime.Now.Minute).AddSeconds(-DateTime.Now.Second),
                     CreatedAt = DateTime.Now,
                     CreatedBy = "BobSmith@email.com",
-                    IsActive = true
+                    IsActive = 1
                 },
                 new Offer()
                 {
@@ -293,7 +293,7 @@ namespace BookingServices.Persistance
                     EndOfService = DateTime.Now.AddDays(1).AddHours(2).AddMinutes(-DateTime.Now.Minute).AddSeconds(-DateTime.Now.Second),
                     CreatedAt = DateTime.Now,
                     CreatedBy = "BobSmith@email.com",
-                    IsActive = true
+                    IsActive = 1
                 }
                 );
             });
@@ -310,7 +310,7 @@ namespace BookingServices.Persistance
                     Cost = 150,
                     CreatedAt = DateTime.Now,
                     CreatedBy = "BobSmith@email.com",
-                    IsActive = true
+                    IsActive = 1
                 },
                 new Booking()
                 {
@@ -321,7 +321,7 @@ namespace BookingServices.Persistance
                     Cost = 100,
                     CreatedAt = DateTime.Now,
                     CreatedBy = "BobSmith@email.com",
-                    IsActive = true
+                    IsActive = 1
                 });
             });
         }

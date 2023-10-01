@@ -9,7 +9,7 @@ namespace BookingServices.Application.Bookings.Commands.UpdateBooking
     {
         public int Id { get; set; }
         public int Cost { get; set; }
-        public int State { get; set; }
+        public BookingState State { get; set; }
 
         public void Mapping(Profile profile)
         {

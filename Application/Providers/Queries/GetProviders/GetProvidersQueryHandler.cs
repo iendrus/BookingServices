@@ -24,7 +24,7 @@ namespace BookingServices.Application.Providers.Queries.GetProviders
         public async Task<ProvidersVm> Handle(GetProvidersQuery request, CancellationToken cancellationToken)
         {
             var providersQuery = _context.Providers
-                .Where(x => x.IsActive == true);
+                .Where(x => x.IsActive == 1);
 
             if (request.IndustryId != null) 
             {

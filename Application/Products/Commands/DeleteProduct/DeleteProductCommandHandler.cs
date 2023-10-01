@@ -17,7 +17,7 @@ namespace BookingServices.Application.Products.Commands.DeleteProduct
 
         public async Task Handle(DeleteProductCommand request, CancellationToken cancellationToken)
         {
-            var product = await _context.Products.Where(s => s.Id == request.Id && s.IsActive == true)
+            var product = await _context.Products.Where(s => s.Id == request.Id && s.IsActive == 1)
                .FirstOrDefaultAsync(cancellationToken);
             if (product == null)
             {

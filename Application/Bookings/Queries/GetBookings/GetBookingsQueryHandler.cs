@@ -19,7 +19,7 @@ namespace BookingServices.Application.Bookings.Queries.GetBookings
         }
         public async Task<BookingsVm> Handle(GetBookingsQuery request, CancellationToken cancellationToken)
         {
-            var bookingsQuery = _context.Bookings.Where(x => x.IsActive == true);
+            var bookingsQuery = _context.Bookings.Where(x => x.IsActive == 1);
 
             if (request.PerformerId != null)
             {

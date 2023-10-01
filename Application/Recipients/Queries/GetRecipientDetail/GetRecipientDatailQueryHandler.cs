@@ -20,7 +20,7 @@ namespace BookingServices.Application.Recipients.Queries.GetRecipientDetail
         }
         public async Task<RecipientDatailVm> Handle(GetRecipientDatailQuery request, CancellationToken cancellationToken)
         {
-            var recipient = _context.Recipients.Where(p => p.Id == request.Id && p.IsActive == true);
+            var recipient = _context.Recipients.Where(p => p.Id == request.Id && p.IsActive == 1);
             if (recipient != null)
             {
                 var recipientVm = await recipient

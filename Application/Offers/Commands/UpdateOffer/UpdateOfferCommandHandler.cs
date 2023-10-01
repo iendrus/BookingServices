@@ -18,7 +18,7 @@ namespace BookingServices.Application.Offers.Commands.UpdateOffer
         public async Task Handle(UpdateOfferCommand request, CancellationToken cancellationToken)
         {
             var offer = await _context.Offers
-                .Where(x => x.Id == request.Id && x.IsActive == true).FirstOrDefaultAsync(cancellationToken);
+                .Where(x => x.Id == request.Id && x.IsActive == 1).FirstOrDefaultAsync(cancellationToken);
             
             if (offer == null)
             {
@@ -52,7 +52,7 @@ namespace BookingServices.Application.Offers.Commands.UpdateOffer
             DateTime timeTo, CancellationToken cancellationToken)
         {
             bool result = await _context.Offers
-                .AnyAsync(o => (o.PerformerId == performerId && o.IsActive == true && o.Id != offerId )
+                .AnyAsync(o => (o.PerformerId == performerId && o.IsActive == 1 && o.Id != offerId )
                 && ((o.StartOfService < timeTo && o.StartOfService > timeFrom)
                 || (o.EndOfService < timeTo && o.EndOfService > timeFrom)
                 || (o.StartOfService <= timeFrom && o.EndOfService >= timeTo)),

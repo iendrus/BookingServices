@@ -18,7 +18,7 @@ namespace BookingServices.Application.Offers.Queries.GetOffers
         }
         public async Task<OffersVm> Handle(GetOffersQuery request, CancellationToken cancellationToken)
         {
-            var offersQuery = _context.Offers.Where(x => x.IsActive == true);
+            var offersQuery = _context.Offers.Where(x => x.IsActive == 1);
 
             if (request.PerformerId != null)
             {

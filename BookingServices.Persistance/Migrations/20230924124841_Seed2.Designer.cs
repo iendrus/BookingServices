@@ -80,7 +80,7 @@ namespace BookingServices.Persistance.Migrations
                             Cost = 150m,
                             CreatedAt = new DateTime(2023, 9, 24, 14, 48, 40, 997, DateTimeKind.Local).AddTicks(9936),
                             CreatedBy = 1,
-                            IsActive = true,
+                            IsActive = 1,
                             OfferId = 1,
                             RecipientId = 2,
                             State = 0
@@ -91,7 +91,7 @@ namespace BookingServices.Persistance.Migrations
                             Cost = 100m,
                             CreatedAt = new DateTime(2023, 9, 24, 14, 48, 40, 997, DateTimeKind.Local).AddTicks(9941),
                             CreatedBy = 1,
-                            IsActive = true,
+                            IsActive = 1,
                             OfferId = 2,
                             RecipientId = 1,
                             State = 1
@@ -142,7 +142,7 @@ namespace BookingServices.Persistance.Migrations
                             CreatedAt = new DateTime(2023, 9, 24, 14, 48, 40, 997, DateTimeKind.Local).AddTicks(7498),
                             CreatedBy = 1,
                             Description = "Uroda; Styl życia",
-                            IsActive = true,
+                            IsActive = 1,
                             Name = "Beauty"
                         },
                         new
@@ -151,7 +151,7 @@ namespace BookingServices.Persistance.Migrations
                             CreatedAt = new DateTime(2023, 9, 24, 14, 48, 40, 997, DateTimeKind.Local).AddTicks(7556),
                             CreatedBy = 1,
                             Description = "Rozrywka, zabawa",
-                            IsActive = true,
+                            IsActive = 1,
                             Name = "Fun"
                         });
                 });
@@ -224,7 +224,7 @@ namespace BookingServices.Persistance.Migrations
                             CreatedAt = new DateTime(2023, 9, 24, 14, 48, 40, 997, DateTimeKind.Local).AddTicks(9842),
                             CreatedBy = 1,
                             EndOfService = new DateTime(2023, 9, 26, 19, 0, 0, 997, DateTimeKind.Local).AddTicks(9835),
-                            IsActive = true,
+                            IsActive = 1,
                             IsAvailable = true,
                             PerformerId = 1,
                             ProductId = 3,
@@ -237,7 +237,7 @@ namespace BookingServices.Persistance.Migrations
                             CreatedAt = new DateTime(2023, 9, 24, 14, 48, 40, 997, DateTimeKind.Local).AddTicks(9858),
                             CreatedBy = 1,
                             EndOfService = new DateTime(2023, 9, 27, 17, 0, 0, 997, DateTimeKind.Local).AddTicks(9852),
-                            IsActive = true,
+                            IsActive = 1,
                             IsAvailable = true,
                             PerformerId = 2,
                             ProductId = 1,
@@ -250,7 +250,7 @@ namespace BookingServices.Persistance.Migrations
                             CreatedAt = new DateTime(2023, 9, 24, 14, 48, 40, 997, DateTimeKind.Local).AddTicks(9874),
                             CreatedBy = 1,
                             EndOfService = new DateTime(2023, 9, 28, 16, 0, 0, 997, DateTimeKind.Local).AddTicks(9868),
-                            IsActive = true,
+                            IsActive = 1,
                             IsAvailable = true,
                             PerformerId = 4,
                             ProductId = 4,
@@ -263,7 +263,7 @@ namespace BookingServices.Persistance.Migrations
                             CreatedAt = new DateTime(2023, 9, 24, 14, 48, 40, 997, DateTimeKind.Local).AddTicks(9890),
                             CreatedBy = 1,
                             EndOfService = new DateTime(2023, 9, 25, 16, 0, 0, 997, DateTimeKind.Local).AddTicks(9884),
-                            IsActive = true,
+                            IsActive = 1,
                             IsAvailable = true,
                             PerformerId = 3,
                             ProductId = 2,
@@ -315,7 +315,7 @@ namespace BookingServices.Persistance.Migrations
                             Id = 1,
                             CreatedAt = new DateTime(2023, 9, 24, 14, 48, 40, 997, DateTimeKind.Local).AddTicks(9212),
                             CreatedBy = 1,
-                            IsActive = true,
+                            IsActive = 1,
                             Phone = "200300400",
                             ProviderId = 2
                         },
@@ -324,7 +324,7 @@ namespace BookingServices.Persistance.Migrations
                             Id = 2,
                             CreatedAt = new DateTime(2023, 9, 24, 14, 48, 40, 997, DateTimeKind.Local).AddTicks(9223),
                             CreatedBy = 1,
-                            IsActive = true,
+                            IsActive = 1,
                             Phone = "500666444",
                             ProviderId = 1
                         },
@@ -333,7 +333,7 @@ namespace BookingServices.Persistance.Migrations
                             Id = 3,
                             CreatedAt = new DateTime(2023, 9, 24, 14, 48, 40, 997, DateTimeKind.Local).AddTicks(9226),
                             CreatedBy = 1,
-                            IsActive = true,
+                            IsActive = 1,
                             Phone = "505606707",
                             ProviderId = 1
                         },
@@ -342,7 +342,7 @@ namespace BookingServices.Persistance.Migrations
                             Id = 4,
                             CreatedAt = new DateTime(2023, 9, 24, 14, 48, 40, 997, DateTimeKind.Local).AddTicks(9230),
                             CreatedBy = 1,
-                            IsActive = true,
+                            IsActive = 1,
                             Phone = "200300400",
                             ProviderId = 3
                         });
@@ -397,7 +397,7 @@ namespace BookingServices.Persistance.Migrations
                             CreatedAt = new DateTime(2023, 9, 24, 14, 48, 40, 997, DateTimeKind.Local).AddTicks(8748),
                             CreatedBy = 1,
                             Description = "Beauty",
-                            IsActive = true,
+                            IsActive = 1,
                             Name = "Idealny Makeup",
                             ProviderId = 1
                         },
@@ -407,7 +407,7 @@ namespace BookingServices.Persistance.Migrations
                             CreatedAt = new DateTime(2023, 9, 24, 14, 48, 40, 997, DateTimeKind.Local).AddTicks(8760),
                             CreatedBy = 1,
                             Description = "Bez draśnięcia",
-                            IsActive = true,
+                            IsActive = 1,
                             Name = "Golenie jak złoto",
                             ProviderId = 1
                         },
@@ -417,7 +417,7 @@ namespace BookingServices.Persistance.Migrations
                             CreatedAt = new DateTime(2023, 9, 24, 14, 48, 40, 997, DateTimeKind.Local).AddTicks(8764),
                             CreatedBy = 1,
                             Description = "Będzie Pani zadowolona",
-                            IsActive = true,
+                            IsActive = 1,
                             Name = "Kolor za zeta",
                             ProviderId = 2
                         },
@@ -427,7 +427,7 @@ namespace BookingServices.Persistance.Migrations
                             CreatedAt = new DateTime(2023, 9, 24, 14, 48, 40, 997, DateTimeKind.Local).AddTicks(8767),
                             CreatedBy = 1,
                             Description = "Full wypas",
-                            IsActive = true,
+                            IsActive = 1,
                             Name = "Jazda na całego",
                             ProviderId = 3
                         });
@@ -527,7 +527,7 @@ namespace BookingServices.Persistance.Migrations
                             CreatedAt = new DateTime(2023, 9, 24, 14, 48, 40, 997, DateTimeKind.Local).AddTicks(7964),
                             CreatedBy = 1,
                             IndustryId = 1,
-                            IsActive = true,
+                            IsActive = 1,
                             Name = "Prześwietny Salon Art-Design"
                         },
                         new
@@ -536,7 +536,7 @@ namespace BookingServices.Persistance.Migrations
                             CreatedAt = new DateTime(2023, 9, 24, 14, 48, 40, 997, DateTimeKind.Local).AddTicks(7972),
                             CreatedBy = 1,
                             IndustryId = 1,
-                            IsActive = true,
+                            IsActive = 1,
                             Name = "Colormix"
                         },
                         new
@@ -545,7 +545,7 @@ namespace BookingServices.Persistance.Migrations
                             CreatedAt = new DateTime(2023, 9, 24, 14, 48, 40, 997, DateTimeKind.Local).AddTicks(7975),
                             CreatedBy = 1,
                             IndustryId = 2,
-                            IsActive = true,
+                            IsActive = 1,
                             Name = "Śmiechu warte"
                         });
                 });
@@ -589,7 +589,7 @@ namespace BookingServices.Persistance.Migrations
                             Id = 1,
                             CreatedAt = new DateTime(2023, 9, 24, 14, 48, 40, 997, DateTimeKind.Local).AddTicks(8817),
                             CreatedBy = 1,
-                            IsActive = true,
+                            IsActive = 1,
                             Phone = "500500500"
                         },
                         new
@@ -597,7 +597,7 @@ namespace BookingServices.Persistance.Migrations
                             Id = 2,
                             CreatedAt = new DateTime(2023, 9, 24, 14, 48, 40, 997, DateTimeKind.Local).AddTicks(8823),
                             CreatedBy = 1,
-                            IsActive = true,
+                            IsActive = 1,
                             Phone = "603604605"
                         });
                 });

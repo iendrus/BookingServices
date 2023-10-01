@@ -21,7 +21,7 @@ namespace BookingServices.Application.Recipients.Queries.GetRecipients
         public async Task<RecipientsVm> Handle(GetRecipientsQuery request, CancellationToken cancellationToken)
         {
             var recipientsQuery = _context.Recipients
-                .Where(x => x.IsActive == true);
+                .Where(x => x.IsActive == 1);
 
             if (request.Id != null) 
             {

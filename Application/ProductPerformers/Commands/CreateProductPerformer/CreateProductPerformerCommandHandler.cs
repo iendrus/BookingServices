@@ -34,7 +34,7 @@ namespace BookingServices.Application.ProductPerformers.Commands.CreateProductPe
         {
             bool result = await _context.Products
                 .AnyAsync(p => p.Provider.Performers.Any(p => p.Id == performerId) && p.Id == productId
-                    && p.IsActive == true, cancellationToken);
+                    && p.IsActive == 1, cancellationToken);
             return result;
         }
 

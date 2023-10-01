@@ -19,7 +19,7 @@ namespace BookingServices.Application.Industries.Queries.GetIndustryDetails
         public async Task<IndustryDetailVm> Handle(GetIndustryDetailQuery request, CancellationToken cancellationToken)
         {
 
-            var industry = _context.Industries.Where(s => s.Id == request.Id && s.IsActive == true);
+            var industry = _context.Industries.Where(s => s.Id == request.Id && s.IsActive == 1);
 
             if (industry != null)
             {

@@ -1,8 +1,9 @@
 ﻿using AutoMapper;
 using BookingServices.Application.Common.Exceptions;
 using BookingServices.Application.Common.Interfaces;
-using MediatR;
+using BookingServices.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using MediatR;
 
 
 namespace BookingServices.Application.Bookings.Commands.UpdateBooking
@@ -19,14 +20,14 @@ namespace BookingServices.Application.Bookings.Commands.UpdateBooking
         public async Task Handle(UpdateBookingCommand request, CancellationToken cancellationToken)
         {
             var booking = await _context.Bookings
-                .Where(x => x.Id == request.Id && x.IsActive == true).FirstOrDefaultAsync(cancellationToken);
+                .Where(x => x.Id == request.Id && x.IsActive == 1).FirstOrDefaultAsync(cancellationToken);
             
             if (booking == null)
             {
                 throw new IsNullException();
             }
 
-            if (!IsPossibleToChangeState((int)booking.State, request.State))
+            if (!IsPossibleToChangeState(booking.State, request.State))
             {
                 throw new Exception("Zmiana statusu niedozwolona.");
             }
@@ -37,7 +38,7 @@ namespace BookingServices.Application.Bookings.Commands.UpdateBooking
         }
 
 
-        public bool IsPossibleToChangeState(int currentState, int targetState)
+        public bool IsPossibleToChangeState(BookingState currentState, BookingState targetState)
         {
             
             if (currentState == targetState)
@@ -47,36 +48,36 @@ namespace BookingServices.Application.Bookings.Commands.UpdateBooking
             bool isPossible = false;
             switch (currentState)
             {
-                case 0:
+                case BookingState.Submitted:
                     switch (targetState)
                     {
-                        case 1:
-                        case 2: // Submited => Confirmed, Rejected
+                        case BookingState.Confirmed:
+                        case BookingState.Rejected: 
                             isPossible = true;
                             break;
                     }
                     break;
-                case 1:
+                case BookingState.Confirmed:
                     switch (targetState)
                     {
-                        case 2:
-                        case 3:  // Confirmed => Rejected, Finished
+                        case BookingState.Rejected:
+                        case BookingState.Finished:
                             isPossible = true;
                             break;
                     }
                     break;
-                case 2:
+                case BookingState.Rejected:
                     switch (targetState)
                     {
-                        case 1: // Rejected => Confirmed
+                        case BookingState.Confirmed:
                             isPossible = true;
                             break;
                     }
                     break;
-                case 3:
+                case BookingState.Finished:
                     switch (targetState)
                     {
-                        case 1: // Finished => Confirmed
+                        case BookingState.Confirmed:
                             isPossible = true;
                             break;
                     }

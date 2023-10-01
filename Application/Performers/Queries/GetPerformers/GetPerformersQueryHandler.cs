@@ -21,7 +21,7 @@ namespace BookingServices.Application.Performers.Queries.GetPerformers
         public async Task<PerformersVm> Handle(GetPerformersQuery request, CancellationToken cancellationToken)
         {
             var performersQuery = _context.Performers
-                .Where(x => x.IsActive == true);
+                .Where(x => x.IsActive == 1);
 
             if (request.ProviderId != null)
             {

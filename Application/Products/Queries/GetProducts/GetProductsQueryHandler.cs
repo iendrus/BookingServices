@@ -20,7 +20,7 @@ namespace BookingServices.Application.Products.Queries.GetProducts
         public async Task<ProductsVm> Handle(GetProductsQuery request, CancellationToken cancellationToken)
         {
             var productsQuery = _context.Products
-                .Where(x => x.IsActive == true);
+                .Where(x => x.IsActive == 1);
 
 
             if (!string.IsNullOrEmpty(request.Name))

@@ -18,7 +18,7 @@ namespace BookingServices.Application.Performers.Commands.UpdatePerformer
         public async Task Handle(UpdatePerformerCommand request, CancellationToken cancellationToken)
         {
             var performer = await _context.Performers
-                .Where(x => x.Id == request.Id && x.IsActive == true).FirstOrDefaultAsync(cancellationToken);
+                .Where(x => x.Id == request.Id && x.IsActive == 1).FirstOrDefaultAsync(cancellationToken);
             if (performer == null)
             {
                 throw new IsNullException();

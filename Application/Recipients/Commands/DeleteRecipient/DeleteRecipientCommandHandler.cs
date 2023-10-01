@@ -22,7 +22,7 @@ namespace BookingServices.Application.Recipients.Commands.DeleteRecipient
         public async Task Handle(DeleteRecipientCommand request, CancellationToken cancellationToken)
         {
             var recipient = await _context.Recipients
-               .Where(s => s.Id == request.Id && s.IsActive == true).FirstOrDefaultAsync(cancellationToken);
+               .Where(s => s.Id == request.Id && s.IsActive == 1).FirstOrDefaultAsync(cancellationToken);
 
             if (recipient == null)
             {

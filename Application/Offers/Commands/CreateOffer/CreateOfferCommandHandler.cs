@@ -46,7 +46,7 @@ namespace BookingServices.Application.Offers.Commands.CreateOffer
         private async Task<bool> IsThePerformerHavaTimeAvailable(int performerId, DateTime timeFrom, DateTime timeTo, CancellationToken cancellationToken)
         {
             bool result = await _context.Offers
-                .AnyAsync(pp => (pp.PerformerId == performerId && pp.IsActive == true)
+                .AnyAsync(pp => (pp.PerformerId == performerId && pp.IsActive == 1)
                 && ((pp.StartOfService < timeTo && pp.StartOfService > timeFrom)
                 || (pp.EndOfService < timeTo && pp.EndOfService > timeFrom)
                 || (pp.StartOfService <= timeFrom && pp.EndOfService >= timeTo)),

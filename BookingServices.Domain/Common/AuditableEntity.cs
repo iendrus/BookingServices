@@ -14,6 +14,6 @@ namespace BookingServices.Domain.Common
         public DateTime CreatedAt { get; set; }
         public string? ModifiedBy { get; set;}
         public DateTime? ModifiedAt { get; set; }
-        public bool IsActive { get; set; }
+        public int IsActive { get; set; }
     }
 }
