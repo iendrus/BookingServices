@@ -1,10 +1,12 @@
-﻿using BookingServices.Domain.Entities;
+﻿using AutoMapper;
+using BookingServices.Application.Common.Mappings;
+using BookingServices.Domain.Entities;
 using MediatR;
 
 
 namespace BookingServices.Application.Bookings.Queries.GetBookings
 {
-    public class GetBookingsQuery : IRequest<BookingsVm>
+    public class GetBookingsQuery : IRequest<BookingsVm> , IMapFrom<GetBookingsRequest>
     {
         public int? PerformerId { get; set; }
         public int? ProviderId { get; set; }
@@ -14,8 +16,13 @@ namespace BookingServices.Application.Bookings.Queries.GetBookings
         public string? RecipientPhoneNumber { get; set; }
         public string? ProviderName { get; set; }
         public string? ProductName { get; set; }
-        public BookingState State { get; set; }
+        public BookingState? State { get; set; }
         public DateTime? StartOfServiceFrom { get; set; }
         public DateTime? StartOfServiceTo { get; set; }
+
+        public void Mapping(Profile profile)
+        {
+            profile.CreateMap<GetBookingsRequest, GetBookingsQuery>();
+        }
     }
 }

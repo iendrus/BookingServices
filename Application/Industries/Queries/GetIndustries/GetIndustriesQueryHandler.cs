@@ -1,10 +1,8 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using BookingServices.Application.Common.Interfaces;
-using BookingServices.Application.Providers.Queries.GetProviders;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using System;
 
 
 namespace BookingServices.Application.Industries.Queries.GetIndustries
@@ -13,11 +11,12 @@ namespace BookingServices.Application.Industries.Queries.GetIndustries
     {
         private readonly IBookingServicesDbContext _context;
         private readonly IMapper _mapper;
-        public GetIndustriesQueryHandler(IBookingServicesDbContext bookingServicesDbContext, IMapper mapper)
+        private readonly IcurrentUserService _userService;
+        public GetIndustriesQueryHandler(IBookingServicesDbContext bookingServicesDbContext, IMapper mapper,IcurrentUserService userService)
         {
             _context = bookingServicesDbContext;
             _mapper = mapper;
-
+            _userService = userService;
         }
         public async Task<IndustriesVm> Handle(GetIndustriesQuery request, CancellationToken cancellationToken)
         {

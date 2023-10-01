@@ -11,15 +11,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookingServices.Infrastructure", "Infrastructure\BookingServices.Infrastructure.csproj", "{E7E1CF57-6180-40B2-BA6D-95E69FA7640B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookingServices.Application", "Application\BookingServices.Application.csproj", "{9CA915AC-5957-4BC3-9B81-EC27355B64A2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookingServices.Application", "Application\BookingServices.Application.csproj", "{9CA915AC-5957-4BC3-9B81-EC27355B64A2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookingServices.Common", "BookingServices.Common\BookingServices.Common.csproj", "{1767CC51-407E-45CB-AC3F-E0627C4A4B39}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookingServices.Common", "BookingServices.Common\BookingServices.Common.csproj", "{1767CC51-407E-45CB-AC3F-E0627C4A4B39}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookingServices.Domain", "BookingServices.Domain\BookingServices.Domain.csproj", "{03634622-CBDE-498F-83DD-2EF7F0DB5DAF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookingServices.Domain", "BookingServices.Domain\BookingServices.Domain.csproj", "{03634622-CBDE-498F-83DD-2EF7F0DB5DAF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{C774D086-3A96-48F4-897A-BF4271847FF6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookingServices.Persistance", "BookingServices.Persistance\BookingServices.Persistance.csproj", "{EC617861-2AC2-436D-9DD9-B75E99585532}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookingServices.Persistance", "BookingServices.Persistance\BookingServices.Persistance.csproj", "{EC617861-2AC2-436D-9DD9-B75E99585532}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

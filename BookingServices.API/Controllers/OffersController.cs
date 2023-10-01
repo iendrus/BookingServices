@@ -3,12 +3,14 @@ using BookingServices.Application.Offers.Commands.DeleteOffer;
 using BookingServices.Application.Offers.Commands.UpdateOffer;
 using BookingServices.Application.Offers.Queries.GetOfferDetail;
 using BookingServices.Application.Offers.Queries.GetOffers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookingServices.API.Controllers
 {
     [Route("api/offers")]
     [ApiController]
+    [Authorize(Roles = "Admin,Staff1")]
 
     public class OffersController : BaseController
     {

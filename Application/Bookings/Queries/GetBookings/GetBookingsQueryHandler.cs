@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using BookingServices.Application.Common.Interfaces;
+using BookingServices.Domain.ValueObjects;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -42,12 +43,15 @@ namespace BookingServices.Application.Bookings.Queries.GetBookings
 
             if (!string.IsNullOrEmpty(request.RecipientEmailAddress))
             {
-                bookingsQuery = bookingsQuery.Where(x => x.Recipient.Email.ToString().Equals(request.ProviderName));
+                var email = Email.For(request.RecipientEmailAddress);
+                bookingsQuery = bookingsQuery
+                    .Where(x => x.Recipient.Email.UserName == email.UserName && x.Recipient.Email.DomainName ==
+                email.DomainName);
             }
 
             if (!string.IsNullOrEmpty(request.RecipientPhoneNumber))
             {
-                bookingsQuery = bookingsQuery.Where(x => x.Recipient.Phone.Equals(request.ProviderName));
+                bookingsQuery = bookingsQuery.Where(x => x.Recipient.Phone.Equals(request.RecipientPhoneNumber));
             }
 
             if (!string.IsNullOrEmpty(request.ProviderName))

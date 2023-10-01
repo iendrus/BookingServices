@@ -1,17 +1,25 @@
-﻿using BookingServices.Application.Bookings.Commands.CreateBooking;
+﻿using AutoMapper;
+using BookingServices.Application.Bookings.Commands.CreateBooking;
 using BookingServices.Application.Bookings.Commands.DeleteBooking;
 using BookingServices.Application.Bookings.Commands.UpdateBooking;
 using BookingServices.Application.Bookings.Queries.GetBookingDetail;
 using BookingServices.Application.Bookings.Queries.GetBookings;
-using BookingServices.Domain.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookingServices.API.Controllers
 {
     [Route("api/bookings")]
     [ApiController]
+    //[Authorize]
     public class BookingsController : BaseController
-    {
+
+   {
+        private readonly IMapper _mapper;
+        public BookingsController(IMapper mapper)
+        {
+            _mapper = mapper;
+        }
         /// <summary>
         /// Returns the Booking details by Id
         /// </summary>
@@ -25,43 +33,15 @@ namespace BookingServices.API.Controllers
         }
 
 
-        /// <summary>
-        /// Returns the Bookings list
-        /// </summary>
-        /// <param name="performerId"></param>
-        /// <param name="providerId"></param>
-        /// <param name="productId"></param>
-        /// <param name="recipientId"></param>
-        /// <param name="recipientEmailAddress"></param>
-        /// <param name="recipientPhoneNumber"></param>
-        /// <param name="providerName"></param>
-        /// <param name="productName"></param>
-        /// <param name="state"></param>
-        /// <param name="startOfServiceFrom"></param>
-        /// <param name="startOfServiceTo"></param>
-        /// <returns></returns>
         [HttpGet]
-        public async Task<ActionResult<BookingsVm>> GetBookings(int? performerId, int? providerId,
-            int? productId, int? recipientId, string? recipientEmailAddress, string? recipientPhoneNumber, 
-            string? providerName, string? productName, BookingState state, DateTime? startOfServiceFrom,
-            DateTime? startOfServiceTo)
+        public async Task<ActionResult<BookingsVm>> GetBookings([FromQuery] GetBookingsRequest request)
         {
-            var vm = await Mediator.Send(new GetBookingsQuery()
-            {
-                PerformerId = performerId,
-                ProviderId = providerId,
-                ProductId = productId,
-                RecipientId = recipientId,
-                RecipientEmailAddress = recipientEmailAddress,
-                RecipientPhoneNumber = recipientPhoneNumber,
-                ProviderName = providerName,
-                ProductName = productName,
-                State = state,
-                StartOfServiceFrom = startOfServiceFrom,
-                StartOfServiceTo = startOfServiceTo,
-            });
+            var query = new GetBookingsQuery();
+            _mapper.Map(request, query);
+            var vm = await Mediator.Send(query);
             return vm;
         }
+
 
         /// <summary>
         /// Creates a new Booking

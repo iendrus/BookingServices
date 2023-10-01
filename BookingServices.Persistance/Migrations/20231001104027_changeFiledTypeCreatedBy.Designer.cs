@@ -12,15 +12,15 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookingServices.Persistance.Migrations
 {
     [DbContext(typeof(BookingServicesDbContext))]
-    [Migration("20230911101254_Initial")]
-    partial class Initial
+    [Migration("20231001104027_changeFiledTypeCreatedBy")]
+    partial class changeFiledTypeCreatedBy
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.8")
+                .HasAnnotation("ProductVersion", "7.0.11")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -40,17 +40,20 @@ namespace BookingServices.Persistance.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("CreatedBy")
-                        .HasColumnType("int");
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
-                    b.Property<bool?>("IsActive")
+                    b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
                     b.Property<DateTime?>("ModifiedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("ModifiedBy")
-                        .HasColumnType("int");
+                    b.Property<string>("ModifiedBy")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<int>("OfferId")
                         .HasColumnType("int");
@@ -72,6 +75,30 @@ namespace BookingServices.Persistance.Migrations
                     b.HasIndex("State");
 
                     b.ToTable("Bookings");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Cost = 150m,
+                            CreatedAt = new DateTime(2023, 10, 1, 12, 40, 26, 688, DateTimeKind.Local).AddTicks(1360),
+                            CreatedBy = "BobSmith@email.com",
+                            IsActive = true,
+                            OfferId = 1,
+                            RecipientId = 2,
+                            State = 0
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Cost = 100m,
+                            CreatedAt = new DateTime(2023, 10, 1, 12, 40, 26, 688, DateTimeKind.Local).AddTicks(1367),
+                            CreatedBy = "BobSmith@email.com",
+                            IsActive = true,
+                            OfferId = 2,
+                            RecipientId = 1,
+                            State = 1
+                        });
                 });
 
             modelBuilder.Entity("BookingServices.Domain.Entities.Industry", b =>
@@ -85,20 +112,23 @@ namespace BookingServices.Persistance.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("CreatedBy")
-                        .HasColumnType("int");
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool?>("IsActive")
+                    b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
                     b.Property<DateTime?>("ModifiedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("ModifiedBy")
-                        .HasColumnType("int");
+                    b.Property<string>("ModifiedBy")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -115,8 +145,8 @@ namespace BookingServices.Persistance.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2023, 9, 11, 12, 12, 54, 310, DateTimeKind.Local).AddTicks(7226),
-                            CreatedBy = 1,
+                            CreatedAt = new DateTime(2023, 10, 1, 12, 40, 26, 687, DateTimeKind.Local).AddTicks(8917),
+                            CreatedBy = "BobSmith@email.com",
                             Description = "Uroda; Styl życia",
                             IsActive = true,
                             Name = "Beauty"
@@ -124,8 +154,8 @@ namespace BookingServices.Persistance.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2023, 9, 11, 12, 12, 54, 310, DateTimeKind.Local).AddTicks(7292),
-                            CreatedBy = 1,
+                            CreatedAt = new DateTime(2023, 10, 1, 12, 40, 26, 687, DateTimeKind.Local).AddTicks(8977),
+                            CreatedBy = "BobSmith@email.com",
                             Description = "Rozrywka, zabawa",
                             IsActive = true,
                             Name = "Fun"
@@ -147,14 +177,16 @@ namespace BookingServices.Persistance.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("CreatedBy")
-                        .HasColumnType("int");
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<DateTime>("EndOfService")
                         .HasPrecision(0)
                         .HasColumnType("datetime2");
 
-                    b.Property<bool?>("IsActive")
+                    b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
                     b.Property<bool>("IsAvailable")
@@ -163,8 +195,9 @@ namespace BookingServices.Persistance.Migrations
                     b.Property<DateTime?>("ModifiedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("ModifiedBy")
-                        .HasColumnType("int");
+                    b.Property<string>("ModifiedBy")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<int>("PerformerId")
                         .HasColumnType("int");
@@ -191,6 +224,60 @@ namespace BookingServices.Persistance.Migrations
                     b.HasIndex("StartOfService");
 
                     b.ToTable("Offers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Cost = 150m,
+                            CreatedAt = new DateTime(2023, 10, 1, 12, 40, 26, 688, DateTimeKind.Local).AddTicks(1262),
+                            CreatedBy = "BobSmith@email.com",
+                            EndOfService = new DateTime(2023, 10, 3, 17, 0, 0, 688, DateTimeKind.Local).AddTicks(1255),
+                            IsActive = true,
+                            IsAvailable = true,
+                            PerformerId = 1,
+                            ProductId = 3,
+                            StartOfService = new DateTime(2023, 10, 3, 16, 0, 0, 688, DateTimeKind.Local).AddTicks(1235)
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Cost = 100m,
+                            CreatedAt = new DateTime(2023, 10, 1, 12, 40, 26, 688, DateTimeKind.Local).AddTicks(1279),
+                            CreatedBy = "BobSmith@email.com",
+                            EndOfService = new DateTime(2023, 10, 4, 15, 0, 0, 688, DateTimeKind.Local).AddTicks(1272),
+                            IsActive = true,
+                            IsAvailable = true,
+                            PerformerId = 2,
+                            ProductId = 1,
+                            StartOfService = new DateTime(2023, 10, 4, 14, 0, 0, 688, DateTimeKind.Local).AddTicks(1266)
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Cost = 200m,
+                            CreatedAt = new DateTime(2023, 10, 1, 12, 40, 26, 688, DateTimeKind.Local).AddTicks(1297),
+                            CreatedBy = "BobSmith@email.com",
+                            EndOfService = new DateTime(2023, 10, 5, 14, 0, 0, 688, DateTimeKind.Local).AddTicks(1290),
+                            IsActive = true,
+                            IsAvailable = true,
+                            PerformerId = 4,
+                            ProductId = 4,
+                            StartOfService = new DateTime(2023, 10, 5, 13, 0, 0, 688, DateTimeKind.Local).AddTicks(1283)
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Cost = 60m,
+                            CreatedAt = new DateTime(2023, 10, 1, 12, 40, 26, 688, DateTimeKind.Local).AddTicks(1313),
+                            CreatedBy = "BobSmith@email.com",
+                            EndOfService = new DateTime(2023, 10, 2, 14, 0, 0, 688, DateTimeKind.Local).AddTicks(1306),
+                            IsActive = true,
+                            IsAvailable = true,
+                            PerformerId = 3,
+                            ProductId = 2,
+                            StartOfService = new DateTime(2023, 10, 2, 13, 0, 0, 688, DateTimeKind.Local).AddTicks(1300)
+                        });
                 });
 
             modelBuilder.Entity("BookingServices.Domain.Entities.Performer", b =>
@@ -204,17 +291,20 @@ namespace BookingServices.Persistance.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("CreatedBy")
-                        .HasColumnType("int");
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
-                    b.Property<bool?>("IsActive")
+                    b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
                     b.Property<DateTime?>("ModifiedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("ModifiedBy")
-                        .HasColumnType("int");
+                    b.Property<string>("ModifiedBy")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("Phone")
                         .HasMaxLength(20)
@@ -235,8 +325,8 @@ namespace BookingServices.Persistance.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2023, 9, 11, 12, 12, 54, 310, DateTimeKind.Local).AddTicks(9390),
-                            CreatedBy = 1,
+                            CreatedAt = new DateTime(2023, 10, 1, 12, 40, 26, 688, DateTimeKind.Local).AddTicks(646),
+                            CreatedBy = "BobSmith@email.com",
                             IsActive = true,
                             Phone = "200300400",
                             ProviderId = 2
@@ -244,8 +334,8 @@ namespace BookingServices.Persistance.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2023, 9, 11, 12, 12, 54, 310, DateTimeKind.Local).AddTicks(9405),
-                            CreatedBy = 1,
+                            CreatedAt = new DateTime(2023, 10, 1, 12, 40, 26, 688, DateTimeKind.Local).AddTicks(719),
+                            CreatedBy = "BobSmith@email.com",
                             IsActive = true,
                             Phone = "500666444",
                             ProviderId = 1
@@ -253,8 +343,8 @@ namespace BookingServices.Persistance.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2023, 9, 11, 12, 12, 54, 310, DateTimeKind.Local).AddTicks(9412),
-                            CreatedBy = 1,
+                            CreatedAt = new DateTime(2023, 10, 1, 12, 40, 26, 688, DateTimeKind.Local).AddTicks(724),
+                            CreatedBy = "BobSmith@email.com",
                             IsActive = true,
                             Phone = "505606707",
                             ProviderId = 1
@@ -262,8 +352,8 @@ namespace BookingServices.Persistance.Migrations
                         new
                         {
                             Id = 4,
-                            CreatedAt = new DateTime(2023, 9, 11, 12, 12, 54, 310, DateTimeKind.Local).AddTicks(9419),
-                            CreatedBy = 1,
+                            CreatedAt = new DateTime(2023, 10, 1, 12, 40, 26, 688, DateTimeKind.Local).AddTicks(728),
+                            CreatedBy = "BobSmith@email.com",
                             IsActive = true,
                             Phone = "200300400",
                             ProviderId = 3
@@ -281,20 +371,23 @@ namespace BookingServices.Persistance.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("CreatedBy")
-                        .HasColumnType("int");
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool?>("IsActive")
+                    b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
                     b.Property<DateTime?>("ModifiedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("ModifiedBy")
-                        .HasColumnType("int");
+                    b.Property<string>("ModifiedBy")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -316,8 +409,8 @@ namespace BookingServices.Persistance.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2023, 9, 11, 12, 12, 54, 310, DateTimeKind.Local).AddTicks(8789),
-                            CreatedBy = 1,
+                            CreatedAt = new DateTime(2023, 10, 1, 12, 40, 26, 688, DateTimeKind.Local).AddTicks(175),
+                            CreatedBy = "BobSmith@email.com",
                             Description = "Beauty",
                             IsActive = true,
                             Name = "Idealny Makeup",
@@ -326,8 +419,8 @@ namespace BookingServices.Persistance.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2023, 9, 11, 12, 12, 54, 310, DateTimeKind.Local).AddTicks(8806),
-                            CreatedBy = 1,
+                            CreatedAt = new DateTime(2023, 10, 1, 12, 40, 26, 688, DateTimeKind.Local).AddTicks(188),
+                            CreatedBy = "BobSmith@email.com",
                             Description = "Bez draśnięcia",
                             IsActive = true,
                             Name = "Golenie jak złoto",
@@ -336,8 +429,8 @@ namespace BookingServices.Persistance.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2023, 9, 11, 12, 12, 54, 310, DateTimeKind.Local).AddTicks(8813),
-                            CreatedBy = 1,
+                            CreatedAt = new DateTime(2023, 10, 1, 12, 40, 26, 688, DateTimeKind.Local).AddTicks(191),
+                            CreatedBy = "BobSmith@email.com",
                             Description = "Będzie Pani zadowolona",
                             IsActive = true,
                             Name = "Kolor za zeta",
@@ -346,8 +439,8 @@ namespace BookingServices.Persistance.Migrations
                         new
                         {
                             Id = 4,
-                            CreatedAt = new DateTime(2023, 9, 11, 12, 12, 54, 310, DateTimeKind.Local).AddTicks(8820),
-                            CreatedBy = 1,
+                            CreatedAt = new DateTime(2023, 10, 1, 12, 40, 26, 688, DateTimeKind.Local).AddTicks(195),
+                            CreatedBy = "BobSmith@email.com",
                             Description = "Full wypas",
                             IsActive = true,
                             Name = "Jazda na całego",
@@ -403,8 +496,10 @@ namespace BookingServices.Persistance.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("CreatedBy")
-                        .HasColumnType("int");
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
@@ -412,14 +507,15 @@ namespace BookingServices.Persistance.Migrations
                     b.Property<int>("IndustryId")
                         .HasColumnType("int");
 
-                    b.Property<bool?>("IsActive")
+                    b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
                     b.Property<DateTime?>("ModifiedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("ModifiedBy")
-                        .HasColumnType("int");
+                    b.Property<string>("ModifiedBy")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -446,8 +542,8 @@ namespace BookingServices.Persistance.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2023, 9, 11, 12, 12, 54, 310, DateTimeKind.Local).AddTicks(7910),
-                            CreatedBy = 1,
+                            CreatedAt = new DateTime(2023, 10, 1, 12, 40, 26, 687, DateTimeKind.Local).AddTicks(9354),
+                            CreatedBy = "BobSmith@email.com",
                             IndustryId = 1,
                             IsActive = true,
                             Name = "Prześwietny Salon Art-Design"
@@ -455,8 +551,8 @@ namespace BookingServices.Persistance.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2023, 9, 11, 12, 12, 54, 310, DateTimeKind.Local).AddTicks(7924),
-                            CreatedBy = 1,
+                            CreatedAt = new DateTime(2023, 10, 1, 12, 40, 26, 687, DateTimeKind.Local).AddTicks(9363),
+                            CreatedBy = "BobSmith@email.com",
                             IndustryId = 1,
                             IsActive = true,
                             Name = "Colormix"
@@ -464,8 +560,8 @@ namespace BookingServices.Persistance.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2023, 9, 11, 12, 12, 54, 310, DateTimeKind.Local).AddTicks(7931),
-                            CreatedBy = 1,
+                            CreatedAt = new DateTime(2023, 10, 1, 12, 40, 26, 687, DateTimeKind.Local).AddTicks(9366),
+                            CreatedBy = "BobSmith@email.com",
                             IndustryId = 2,
                             IsActive = true,
                             Name = "Śmiechu warte"
@@ -483,17 +579,20 @@ namespace BookingServices.Persistance.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("CreatedBy")
-                        .HasColumnType("int");
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
-                    b.Property<bool?>("IsActive")
+                    b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
                     b.Property<DateTime?>("ModifiedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("ModifiedBy")
-                        .HasColumnType("int");
+                    b.Property<string>("ModifiedBy")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("Phone")
                         .HasMaxLength(20)
@@ -509,19 +608,217 @@ namespace BookingServices.Persistance.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2023, 9, 11, 12, 12, 54, 310, DateTimeKind.Local).AddTicks(8885),
-                            CreatedBy = 1,
+                            CreatedAt = new DateTime(2023, 10, 1, 12, 40, 26, 688, DateTimeKind.Local).AddTicks(244),
+                            CreatedBy = "BobSmith@email.com",
                             IsActive = true,
                             Phone = "500500500"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2023, 9, 11, 12, 12, 54, 310, DateTimeKind.Local).AddTicks(8896),
-                            CreatedBy = 1,
+                            CreatedAt = new DateTime(2023, 10, 1, 12, 40, 26, 688, DateTimeKind.Local).AddTicks(250),
+                            CreatedBy = "BobSmith@email.com",
                             IsActive = true,
                             Phone = "603604605"
                         });
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedName")
+                        .IsUnique()
+                        .HasDatabaseName("RoleNameIndex")
+                        .HasFilter("[NormalizedName] IS NOT NULL");
+
+                    b.ToTable("AspNetRoles", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RoleId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetRoleClaims", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasDatabaseName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasDatabaseName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.ToTable("AspNetUsers", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserClaims", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+                {
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ProviderKey")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ProviderDisplayName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("LoginProvider", "ProviderKey");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserLogins", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("RoleId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetUserRoles", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UserId", "LoginProvider", "Name");
+
+                    b.ToTable("AspNetUserTokens", (string)null);
                 });
 
             modelBuilder.Entity("BookingServices.Domain.Entities.Booking", b =>
@@ -529,13 +826,13 @@ namespace BookingServices.Persistance.Migrations
                     b.HasOne("BookingServices.Domain.Entities.Offer", "Offer")
                         .WithMany("Bookings")
                         .HasForeignKey("OfferId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("BookingServices.Domain.Entities.Recipient", "Recipient")
                         .WithMany("Bookings")
                         .HasForeignKey("RecipientId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Offer");
@@ -567,7 +864,7 @@ namespace BookingServices.Persistance.Migrations
                     b.HasOne("BookingServices.Domain.Entities.Provider", "Provider")
                         .WithMany("Performers")
                         .HasForeignKey("ProviderId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.OwnsOne("BookingServices.Domain.ValueObjects.Email", "Email", b1 =>
@@ -684,7 +981,7 @@ namespace BookingServices.Persistance.Migrations
                     b.HasOne("BookingServices.Domain.Entities.Provider", "Provider")
                         .WithMany("Products")
                         .HasForeignKey("ProviderId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Provider");
@@ -714,7 +1011,7 @@ namespace BookingServices.Persistance.Migrations
                     b.HasOne("BookingServices.Domain.Entities.Industry", "Industry")
                         .WithMany("Providers")
                         .HasForeignKey("IndustryId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.OwnsOne("BookingServices.Domain.ValueObjects.PersonName", "ContactPerson", b1 =>
@@ -960,6 +1257,57 @@ namespace BookingServices.Persistance.Migrations
                         .IsRequired();
 
                     b.Navigation("FullName")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 

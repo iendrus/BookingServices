@@ -3,13 +3,15 @@ using BookingServices.Application.Industries.Commands.DeleteIndustry;
 using BookingServices.Application.Industries.Commands.UpdateIndustry;
 using BookingServices.Application.Industries.Queries.GetIndustries;
 using BookingServices.Application.Industries.Queries.GetIndustryDetails;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookingServices.API.Controllers
 {
     [Route("api/industries")]
     [ApiController]
+    [Authorize(Roles = "Admin")]
+
     public class IndustriesController : BaseController
     {
 
@@ -83,7 +85,6 @@ namespace BookingServices.API.Controllers
             await Mediator.Send(command);
             return NoContent();
         }
-
 
     }
 }

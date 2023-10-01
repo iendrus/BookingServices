@@ -45,5 +45,6 @@ namespace BookingServices.Domain.ValueObjects
             yield return UserName;
             yield return DomainName;
         }
+
     }
 }

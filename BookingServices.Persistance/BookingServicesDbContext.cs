@@ -1,19 +1,22 @@
 ﻿using BookingServices.Application.Common.Interfaces;
 using BookingServices.Domain.Common;
 using BookingServices.Domain.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
-using System.Threading;
 
 
 namespace BookingServices.Persistance
 {
-    public class BookingServicesDbContext : DbContext, IBookingServicesDbContext
+    public class BookingServicesDbContext : IdentityDbContext, IBookingServicesDbContext
     {
         private readonly IDateTime _dateTime;
-        public BookingServicesDbContext(DbContextOptions<BookingServicesDbContext> options, IDateTime dateTime) : base(options)
+        private readonly IcurrentUserService _userService;
+        public BookingServicesDbContext(DbContextOptions<BookingServicesDbContext> options, IDateTime dateTime, 
+            IcurrentUserService userService) : base(options)
         {
             _dateTime = dateTime;
+            _userService = userService;
         }
 
         public DbSet<Product> Products { get; set; }
@@ -26,13 +29,27 @@ namespace BookingServices.Persistance
         public DbSet<ProductPerformer> ProductPerformers { get; set; }
 
 
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
 
         {
+            base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+            SetRestrictOnDeleteBehavior(modelBuilder);
             modelBuilder.SeedData();
+        }
 
+        private void SetRestrictOnDeleteBehavior(ModelBuilder modelBuilder)
+        {
+            foreach (var entityType in modelBuilder.Model.GetEntityTypes())
+            {
+                if (typeof(AuditableEntity).IsAssignableFrom(entityType.ClrType))
+                {
+                    foreach (var foreignKey in entityType.GetForeignKeys())
+                    {
+                        foreignKey.DeleteBehavior = DeleteBehavior.Restrict;
+                    }
+                }
+            }
         }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
@@ -42,16 +59,16 @@ namespace BookingServices.Persistance
                 switch (entry.State)
                 {
                     case EntityState.Added:
-                        entry.Entity.CreatedBy = 1;
+                        entry.Entity.CreatedBy = _userService.Email;
                         entry.Entity.CreatedAt = _dateTime.Now;
                         entry.Entity.IsActive = true;
                         break;
                     case EntityState.Modified:
-                        entry.Entity.ModifiedBy = 1;
+                        entry.Entity.ModifiedBy = _userService.Email;
                         entry.Entity.ModifiedAt = _dateTime.Now;
                         break;
                     case EntityState.Deleted:
-                        entry.Entity.ModifiedBy = 1;
+                        entry.Entity.ModifiedBy = _userService.Email;
                         entry.Entity.ModifiedAt = _dateTime.Now;
                         entry.Entity.IsActive = false;
                         entry.State = EntityState.Modified;

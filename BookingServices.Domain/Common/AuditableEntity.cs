@@ -10,9 +10,9 @@ namespace BookingServices.Domain.Common
     public class AuditableEntity
     {
         public int Id { get; set; }
-        public int CreatedBy { get; set; }
+        public string CreatedBy { get; set; }
         public DateTime CreatedAt { get; set; }
-        public int? ModifiedBy { get; set;}
+        public string? ModifiedBy { get; set;}
         public DateTime? ModifiedAt { get; set; }
         public bool IsActive { get; set; }
     }
