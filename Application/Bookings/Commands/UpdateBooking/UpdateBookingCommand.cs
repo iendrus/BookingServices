@@ -13,9 +13,11 @@ namespace BookingServices.Application.Bookings.Commands.UpdateBooking
 
         public void Mapping(Profile profile)
         {
-            profile.CreateMap<UpdateBookingCommand, Booking>();
-
+            profile.CreateMap<UpdateBookingCommand, Booking>()
+                .ForMember(dest => dest.RecipientId, opt => opt.Ignore())
+                .ForMember(dest => dest.OfferId, opt => opt.Ignore())
+                .IgnoreAuditableAndTypeOfClassMembers()
+                .IgnoreAllPropertiesWithAnInaccessibleSetter();
         }
-
     }
 }

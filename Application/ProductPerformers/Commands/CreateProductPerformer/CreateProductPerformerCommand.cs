@@ -13,9 +13,9 @@ namespace BookingServices.Application.ProductPerformers.Commands.CreateProductPe
 
         public void Mapping(Profile profile)
         {
-            profile.CreateMap<CreateProductPerformerCommand, ProductPerformer>();
-
+            profile.CreateMap<CreateProductPerformerCommand, ProductPerformer>()
+                .IgnoreAuditableAndTypeOfClassMembers()
+                .IgnoreAllPropertiesWithAnInaccessibleSetter();
         }
-
     }
 }

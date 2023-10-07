@@ -17,8 +17,10 @@ namespace BookingServices.Application.Recipients.Commands.UpdateRecipient
         public void Mapping(Profile profile)
         {
             profile.CreateMap<UpdateRecipientCommand, Recipient>()
-                 .ForMember(s => s.FullName, m => m.MapFrom(src => new PersonName(src.FirstName, src.LastName)))
-                 .ForMember(s => s.Email, m => m.MapFrom(src => Email.For(src.EmailAddress)));
+                .ForMember(s => s.FullName, m => m.MapFrom(src => new PersonName(src.FirstName, src.LastName)))
+                .ForMember(s => s.Email, m => m.MapFrom(src => Email.For(src.EmailAddress)))
+                .IgnoreAuditableAndTypeOfClassMembers()
+                .IgnoreAllPropertiesWithAnInaccessibleSetter();
         }
 
     }

@@ -10,7 +10,7 @@ namespace BookingServices.Application.Recipients.Queries.GetRecipientDetail
     {
         public string FullName { get; set; }
         public string EmailAddress { get; set; }
-        public string PhoneNumber { get; set; } 
+        public string Phone { get; set; } 
 
         public void Mapping(Profile profile)
         {

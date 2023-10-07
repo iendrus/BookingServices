@@ -16,9 +16,10 @@ namespace BookingServices.Application.Offers.Commands.UpdateOffer
 
         public void Mapping(Profile profile)
         {
-            profile.CreateMap<UpdateOfferCommand, Offer>();
-
+            profile.CreateMap<UpdateOfferCommand, Offer>()
+                .ForMember(dest => dest.IsAvailable, opt => opt.Ignore())
+                .IgnoreAuditableAndTypeOfClassMembers()
+                .IgnoreAllPropertiesWithAnInaccessibleSetter();
         }
-
     }
 }

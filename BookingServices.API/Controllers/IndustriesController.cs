@@ -10,7 +10,7 @@ namespace BookingServices.API.Controllers
 {
     [Route("api/industries")]
     [ApiController]
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin, Staff1, Staff2")]
 
     public class IndustriesController : BaseController
     {

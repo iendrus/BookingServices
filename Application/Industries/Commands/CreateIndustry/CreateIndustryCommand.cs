@@ -1,10 +1,9 @@
 ﻿using AutoMapper;
 using BookingServices.Application.Common.Mappings;
 using BookingServices.Application.Industries.Queries.GetIndustryDetails;
-using BookingServices.Application.Providers.Commands.CreateProvider;
 using BookingServices.Domain.Entities;
 using MediatR;
-using System;
+
 
 
 namespace BookingServices.Application.Industries.Commands.CreateIndustry
@@ -16,8 +15,9 @@ namespace BookingServices.Application.Industries.Commands.CreateIndustry
 
         public void Mapping(Profile profile)
         {
-            profile.CreateMap<CreateIndustryCommand, Industry>();
+            profile.CreateMap<CreateIndustryCommand, Industry>()
+                .IgnoreAuditableAndTypeOfClassMembers()
+                .IgnoreAllPropertiesWithAnInaccessibleSetter();
         }
-
     }
 }

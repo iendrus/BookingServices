@@ -42,7 +42,7 @@ builder.Services.AddScoped(typeof(IcurrentUserService), typeof(CurrentUserServic
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("MyAllowSpecificOrigins", policy => policy.WithOrigins("https://localhost:5001"));
-    // options.AddPolicy("MyAllowSpecificOrigins", policy => policy.AllowAnyOrigin()); // stosujemy, jeœli chcemy upubliczniæ API
+   //  options.AddPolicy("MyAllowSpecificOrigins", policy => policy.AllowAnyOrigin()); // stosujemy, jeœli chcemy upubliczniæ API
 
 });
 

@@ -25,9 +25,11 @@ namespace BookingServices.Application.Providers.Commands.CreateProvider
         public void Mapping(Profile profile)
         {
             profile.CreateMap<CreateProviderCommand, Provider>()
-                 .ForMember(s => s.Email, m => m.MapFrom(src => Email.For(src.EmailAddress)))
-                 .ForMember(s => s.ContactPerson, m => m.MapFrom(src => new PersonName(src.ContactFirstName, src.ContactLastName)))
-                 .ForMember(s => s.Address, m => m.MapFrom(src => new Address(src.Street, src.City, src.ZipCode, src.Number)));
+                .ForMember(s => s.Email, m => m.MapFrom(src => Email.For(src.EmailAddress)))
+                .ForMember(s => s.ContactPerson, m => m.MapFrom(src => new PersonName(src.ContactFirstName, src.ContactLastName)))
+                .ForMember(s => s.Address, m => m.MapFrom(src => new Address(src.Street, src.City, src.ZipCode, src.Number)))
+                .IgnoreAuditableAndTypeOfClassMembers()
+                .IgnoreAllPropertiesWithAnInaccessibleSetter();
         }
     }
 }

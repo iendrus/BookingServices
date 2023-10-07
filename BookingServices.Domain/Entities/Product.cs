@@ -9,8 +9,8 @@ namespace BookingServices.Domain.Entities
         public string? Description { get; set; }
         public int ProviderId { get; set; }
         public Provider Provider { get; set; }
-        public List<ProductPerformer> ProductPerformers { get; private set; } = new List<ProductPerformer>();
-        public List<Offer> Offers { get; private set; } = new List<Offer>();
+        public List<ProductPerformer> ProductPerformers { get; private set; } = new ();
+        public List<Offer> Offers { get; private set; } = new ();
 
     }
 }

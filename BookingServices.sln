@@ -21,6 +21,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentatio
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookingServices.Persistance", "BookingServices.Persistance\BookingServices.Persistance.csproj", "{EC617861-2AC2-436D-9DD9-B75E99585532}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{8186D2D4-D529-4711-BBA2-F71407628B31}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.UnitTests", "Application.UnitTests\Application.UnitTests.csproj", "{12D0F4AB-ADF9-4414-A0DA-F1459AD72249}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +55,10 @@ Global
 		{EC617861-2AC2-436D-9DD9-B75E99585532}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EC617861-2AC2-436D-9DD9-B75E99585532}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EC617861-2AC2-436D-9DD9-B75E99585532}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12D0F4AB-ADF9-4414-A0DA-F1459AD72249}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12D0F4AB-ADF9-4414-A0DA-F1459AD72249}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12D0F4AB-ADF9-4414-A0DA-F1459AD72249}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12D0F4AB-ADF9-4414-A0DA-F1459AD72249}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -62,6 +70,7 @@ Global
 		{1767CC51-407E-45CB-AC3F-E0627C4A4B39} = {4AD2D2E8-A374-4ADB-B2D8-9863DE7B2745}
 		{03634622-CBDE-498F-83DD-2EF7F0DB5DAF} = {4AD2D2E8-A374-4ADB-B2D8-9863DE7B2745}
 		{EC617861-2AC2-436D-9DD9-B75E99585532} = {7F3AFE83-476E-45FD-9B7A-D0D73A0E4D73}
+		{12D0F4AB-ADF9-4414-A0DA-F1459AD72249} = {8186D2D4-D529-4711-BBA2-F71407628B31}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DF372CCB-984B-43EB-BC97-31D72A74329F}

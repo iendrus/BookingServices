@@ -11,7 +11,7 @@ namespace BookingServices.API.Controllers
 {
     [Route("api/bookings")]
     [ApiController]
-    //[Authorize]
+    [Authorize (Roles ="Staff1,Staff2,Admin")]
     public class BookingsController : BaseController
 
    {
@@ -32,7 +32,11 @@ namespace BookingServices.API.Controllers
             return vm;
         }
 
-
+        /// <summary>
+        /// Returns a list of Bookings by specified parameters or all if parameters are not defined
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         [HttpGet]
         public async Task<ActionResult<BookingsVm>> GetBookings([FromQuery] GetBookingsRequest request)
         {

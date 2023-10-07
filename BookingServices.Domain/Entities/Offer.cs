@@ -13,6 +13,6 @@ namespace BookingServices.Domain.Entities
         public DateTime EndOfService { get; set; }
         public Product Product { get; set; } 
         public Performer Performer { get; set; }
-        public List<Booking> Bookings { get; private set; } = new List<Booking>();
+        public List<Booking> Bookings { get; private set; } = new ();
     }
 }

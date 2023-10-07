@@ -11,7 +11,6 @@ namespace BookingServices.Domain.Entities
         public decimal Cost { get; set; }
         public Offer Offer { get; set; }
         public Recipient Recipient { get; set; }
-
     }
 
 

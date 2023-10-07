@@ -8,7 +8,7 @@ namespace BookingServices.Domain.Entities
         public PersonName FullName { get; set; }
         public Email Email { get; set; }
         public string? Phone { get; set; }
-        public List<Booking> Bookings { get; private set; } = new List<Booking>();
+        public List<Booking> Bookings { get; private set; } = new ();
 
     }
 }

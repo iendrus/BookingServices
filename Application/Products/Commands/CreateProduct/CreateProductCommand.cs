@@ -14,8 +14,9 @@ namespace BookingServices.Application.Products.Commands.CreateProduct
 
         public void Mapping(Profile profile)
         {
-            profile.CreateMap<CreateProductCommand, Product>();
+            profile.CreateMap<CreateProductCommand, Product>()
+                .IgnoreAuditableAndTypeOfClassMembers()
+                .IgnoreAllPropertiesWithAnInaccessibleSetter();
         }
-
     }
 }

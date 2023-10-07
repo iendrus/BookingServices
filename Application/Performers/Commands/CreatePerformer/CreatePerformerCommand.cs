@@ -1,10 +1,8 @@
 ﻿using AutoMapper;
 using BookingServices.Application.Common.Mappings;
-using BookingServices.Application.Performers.Queries.GetPerformerDetail;
 using BookingServices.Domain.Entities;
 using BookingServices.Domain.ValueObjects;
 using MediatR;
-using System.Reflection.Metadata;
 
 namespace BookingServices.Application.Performers.Commands.CreatePerformer
 {
@@ -20,7 +18,9 @@ namespace BookingServices.Application.Performers.Commands.CreatePerformer
         {
             profile.CreateMap<CreatePerformerCommand, Performer>()
                  .ForMember(s => s.FullName, m => m.MapFrom(src => new PersonName(src.FirstName, src.LastName)))
-                 .ForMember(s => s.Email, m => m.MapFrom(src => Email.For(src.EmailAddress)));
+                 .ForMember(s => s.Email, m => m.MapFrom(src => Email.For(src.EmailAddress)))
+                 .IgnoreAuditableAndTypeOfClassMembers()
+                 .IgnoreAllPropertiesWithAnInaccessibleSetter();
         }
     }
 }
