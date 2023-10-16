@@ -15,6 +15,10 @@ namespace BookingServices.Domain.ValueObjects
             LastName = lastName;
         }
 
+        public PersonName()
+        {
+                    
+        }
         public override string ToString()
         {
             return $"{FirstName} {LastName}";

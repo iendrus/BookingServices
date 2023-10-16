@@ -26,6 +26,7 @@ namespace BookingServices.Application.Bookings.Queries.GetBookingDetail
             {
                 throw new IsNullException();
             }
+
             var bookingVm = await booking
                 .AsNoTracking().ProjectTo<BookingDatailVm>(_mapper.ConfigurationProvider)
                 .FirstOrDefaultAsync(cancellationToken);

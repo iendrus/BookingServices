@@ -1,24 +1,35 @@
-﻿using BookingServices.Persistance;
+﻿using AutoMapper;
+using BookingServices.Application.Common.Interfaces;
+using BookingServices.Application.Common.Mappings;
+using BookingServices.Persistance;
+using Microsoft.EntityFrameworkCore;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Application.UnitTests.Common
 {
-    class CommandTestBase : IDisposable
+    public class CommandTestBase : IDisposable
     {
         protected readonly BookingServicesDbContext _context;
         protected readonly Mock<BookingServicesDbContext> _contextMock;
+        protected readonly IMapper _mapper;
+
         public CommandTestBase()
         {
-            //_contextMock = BookingServicesDbContextFactory;
+            _contextMock = DbContextFactory.Create();
+            _context = _contextMock.Object;
+
+            var configurationProvider = new MapperConfiguration(cfg =>
+            {
+                cfg.AddProfile<MappingProfile>();
+            });
+
+            _mapper = configurationProvider.CreateMapper();
         }
+
         public void Dispose()
         {
-            throw new NotImplementedException();
+            DbContextFactory.Destroy(_context);
         }
     }
 }

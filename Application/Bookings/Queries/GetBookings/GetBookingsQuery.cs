@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BookingServices.Application.Common.Mappings;
+using BookingServices.Application.Common.QueryParams;
 using BookingServices.Domain.Entities;
 using MediatR;
 

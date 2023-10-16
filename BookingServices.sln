@@ -23,7 +23,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookingServices.Persistance
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{8186D2D4-D529-4711-BBA2-F71407628B31}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.UnitTests", "Application.UnitTests\Application.UnitTests.csproj", "{12D0F4AB-ADF9-4414-A0DA-F1459AD72249}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application.UnitTests", "Application.UnitTests\Application.UnitTests.csproj", "{12D0F4AB-ADF9-4414-A0DA-F1459AD72249}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
